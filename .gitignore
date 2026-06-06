@@ -45,6 +45,8 @@ next-env.d.ts
 .impeccable/
 CLAUDE.md
 AGENTS.md
+PRODUCT.md
+lib/sourcing/README.md
 
 # graphify (generated knowledge graph artifacts)
 graphify-out/
