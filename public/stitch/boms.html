@@ -138,278 +138,7 @@ aside [data-tooltip]::after{
     </div>
 
     <!-- BOM Cards Grid -->
-    <div id="bom-grid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-lg">
-
-      <!-- Card 1 -->
-      <div class="bom-card bg-surface-container-lowest border border-outline-variant border-l-[3px] border-l-blue-400 rounded-lg overflow-hidden hover:shadow-md transition-shadow" data-name="Motor Controller Rev2">
-        <div class="px-lg py-md border-b border-outline-variant bg-surface-container-low flex items-center justify-between">
-          <div class="flex items-center gap-sm">
-            <span class="material-symbols-outlined text-primary" data-icon="electric_meter">electric_meter</span>
-            <h3 class="font-headline-md text-headline-md text-on-surface">Motor Controller Rev2</h3>
-          </div>
-          <span class="px-sm py-xs rounded-full font-label-caps text-label-caps bg-primary/10 text-primary">Optimized</span>
-        </div>
-        <div class="p-lg space-y-sm">
-          <div class="flex justify-between">
-            <span class="font-body-sm text-body-sm text-on-surface-variant">Parts</span>
-            <span class="font-label-mono text-label-mono text-on-surface">84 line items</span>
-          </div>
-          <div class="flex justify-between">
-            <span class="font-body-sm text-body-sm text-on-surface-variant">Est. Cost</span>
-            <span class="font-label-mono text-label-mono text-primary font-bold">$1,243.60</span>
-          </div>
-          <div class="flex justify-between">
-            <span class="font-body-sm text-body-sm text-on-surface-variant">Modified</span>
-            <span class="font-body-sm text-body-sm text-on-surface-variant">May 30, 2026</span>
-          </div>
-          <div class="flex justify-between">
-            <span class="font-body-sm text-body-sm text-on-surface-variant">Savings</span>
-            <span class="font-label-caps text-label-caps text-green-600">↓ 18% vs single-vendor</span>
-          </div>
-        </div>
-        <div class="px-lg pb-sm">
-          <button data-tooltip="Show or hide BOM details" onclick="toggleCardDetails('mctrl')" class="flex items-center gap-xs font-label-caps text-[10px] text-outline uppercase hover:text-primary transition-colors w-full justify-start mb-sm">
-            <span class="material-symbols-outlined" id="card-ch-mctrl" style="font-size:14px;transition:transform 0.2s">expand_more</span>Details
-          </button>
-          <div id="card-det-mctrl" class="hidden">
-            <div class="flex flex-wrap gap-xs mb-sm"><span class="px-sm py-xs bg-surface-container rounded font-label-mono text-label-mono text-xs">Digi-Key  47 parts</span><span class="px-sm py-xs bg-surface-container rounded font-label-mono text-label-mono text-xs">Mouser  37 parts</span></div>
-            <p class="font-label-caps text-[10px] text-outline uppercase mb-xs">Top spend</p>
-            <div class="flex justify-between py-xs border-b border-outline-variant/20 last:border-0"><span class="font-label-mono text-[11px] text-on-surface-variant">DRV8434S</span><span class="font-label-mono text-[11px] text-on-surface">$41.64</span></div><div class="flex justify-between py-xs border-b border-outline-variant/20 last:border-0"><span class="font-label-mono text-[11px] text-on-surface-variant">IRF7843PBF</span><span class="font-label-mono text-[11px] text-on-surface">$23.12</span></div><div class="flex justify-between py-xs border-b border-outline-variant/20 last:border-0"><span class="font-label-mono text-[11px] text-on-surface-variant">STM32F405RGT6</span><span class="font-label-mono text-[11px] text-on-surface">$15.64</span></div>
-            <div class="flex justify-between mt-sm"><span class="font-body-sm text-body-sm text-on-surface-variant">Source file</span><span class="font-label-mono text-[11px] text-on-surface">motor_ctrl_rev2.xlsx</span></div>
-          </div>
-        </div>
-        <div class="px-lg pb-md flex gap-sm">
-          <button data-tooltip="Open this BOM" onclick="window.top.location.href='/bom?id=mctrl'" class="flex-1 bg-primary text-on-primary py-xs rounded font-label-caps text-label-caps hover:bg-on-primary-fixed-variant transition-all text-center">Open</button>
-          <button data-tooltip="Duplicate this BOM" onclick="showToast('BOM duplicated.')" class="px-md py-xs bg-surface-container border border-outline-variant rounded font-label-caps text-label-caps hover:bg-surface-container-high transition-all">Duplicate</button>
-          <button data-tooltip="Delete this BOM" onclick="deleteCard(this)" class="px-md py-xs border border-error/30 text-error rounded font-label-caps text-label-caps hover:bg-error/10 transition-all">Delete</button>
-        </div>
-      </div>
-
-      <!-- Card 2 -->
-      <div class="bom-card bg-surface-container-lowest border border-outline-variant border-l-[3px] border-l-violet-400 rounded-lg overflow-hidden hover:shadow-md transition-shadow" data-name="IoT Sensor Node">
-        <div class="px-lg py-md border-b border-outline-variant bg-surface-container-low flex items-center justify-between">
-          <div class="flex items-center gap-sm">
-            <span class="material-symbols-outlined text-primary" data-icon="sensors">sensors</span>
-            <h3 class="font-headline-md text-headline-md text-on-surface">IoT Sensor Node</h3>
-          </div>
-          <span class="px-sm py-xs rounded-full font-label-caps text-label-caps bg-primary/10 text-primary">Optimized</span>
-        </div>
-        <div class="p-lg space-y-sm">
-          <div class="flex justify-between">
-            <span class="font-body-sm text-body-sm text-on-surface-variant">Parts</span>
-            <span class="font-label-mono text-label-mono text-on-surface">42 line items</span>
-          </div>
-          <div class="flex justify-between">
-            <span class="font-body-sm text-body-sm text-on-surface-variant">Est. Cost</span>
-            <span class="font-label-mono text-label-mono text-primary font-bold">$318.90</span>
-          </div>
-          <div class="flex justify-between">
-            <span class="font-body-sm text-body-sm text-on-surface-variant">Modified</span>
-            <span class="font-body-sm text-body-sm text-on-surface-variant">May 28, 2026</span>
-          </div>
-          <div class="flex justify-between">
-            <span class="font-body-sm text-body-sm text-on-surface-variant">Savings</span>
-            <span class="font-label-caps text-label-caps text-green-600">↓ 23% vs single-vendor</span>
-          </div>
-        </div>
-        <div class="px-lg pb-sm">
-          <button data-tooltip="Show or hide BOM details" onclick="toggleCardDetails('iot')" class="flex items-center gap-xs font-label-caps text-[10px] text-outline uppercase hover:text-primary transition-colors w-full justify-start mb-sm">
-            <span class="material-symbols-outlined" id="card-ch-iot" style="font-size:14px;transition:transform 0.2s">expand_more</span>Details
-          </button>
-          <div id="card-det-iot" class="hidden">
-            <div class="flex flex-wrap gap-xs mb-sm"><span class="px-sm py-xs bg-surface-container rounded font-label-mono text-label-mono text-xs">LCSC  42 parts</span></div>
-            <p class="font-label-caps text-[10px] text-outline uppercase mb-xs">Top spend</p>
-            <div class="flex justify-between py-xs border-b border-outline-variant/20 last:border-0"><span class="font-label-mono text-[11px] text-on-surface-variant">BME688</span><span class="font-label-mono text-[11px] text-on-surface">$29.00</span></div><div class="flex justify-between py-xs border-b border-outline-variant/20 last:border-0"><span class="font-label-mono text-[11px] text-on-surface-variant">ESP32-S3-MINI-1</span><span class="font-label-mono text-[11px] text-on-surface">$21.00</span></div><div class="flex justify-between py-xs border-b border-outline-variant/20 last:border-0"><span class="font-label-mono text-[11px] text-on-surface-variant">SHT40-AD1B</span><span class="font-label-mono text-[11px] text-on-surface">$10.50</span></div>
-            <div class="flex justify-between mt-sm"><span class="font-body-sm text-body-sm text-on-surface-variant">Source file</span><span class="font-label-mono text-[11px] text-on-surface">iot_sensor.csv</span></div>
-          </div>
-        </div>
-        <div class="px-lg pb-md flex gap-sm">
-          <button data-tooltip="Open this BOM" onclick="window.top.location.href='/bom?id=iot'" class="flex-1 bg-primary text-on-primary py-xs rounded font-label-caps text-label-caps hover:bg-on-primary-fixed-variant transition-all text-center">Open</button>
-          <button data-tooltip="Duplicate this BOM" onclick="showToast('BOM duplicated.')" class="px-md py-xs bg-surface-container border border-outline-variant rounded font-label-caps text-label-caps hover:bg-surface-container-high transition-all">Duplicate</button>
-          <button data-tooltip="Delete this BOM" onclick="deleteCard(this)" class="px-md py-xs border border-error/30 text-error rounded font-label-caps text-label-caps hover:bg-error/10 transition-all">Delete</button>
-        </div>
-      </div>
-
-      <!-- Card 3 -->
-      <div class="bom-card bg-surface-container-lowest border border-outline-variant border-l-[3px] border-l-emerald-400 rounded-lg overflow-hidden hover:shadow-md transition-shadow" data-name="Power Supply Board">
-        <div class="px-lg py-md border-b border-outline-variant bg-surface-container-low flex items-center justify-between">
-          <div class="flex items-center gap-sm">
-            <span class="material-symbols-outlined text-primary" data-icon="bolt">bolt</span>
-            <h3 class="font-headline-md text-headline-md text-on-surface">Power Supply Board</h3>
-          </div>
-          <span class="px-sm py-xs rounded-full font-label-caps text-label-caps bg-primary/10 text-primary">Optimized</span>
-        </div>
-        <div class="p-lg space-y-sm">
-          <div class="flex justify-between">
-            <span class="font-body-sm text-body-sm text-on-surface-variant">Parts</span>
-            <span class="font-label-mono text-label-mono text-on-surface">59 line items</span>
-          </div>
-          <div class="flex justify-between">
-            <span class="font-body-sm text-body-sm text-on-surface-variant">Est. Cost</span>
-            <span class="font-label-mono text-label-mono text-primary font-bold">$587.40</span>
-          </div>
-          <div class="flex justify-between">
-            <span class="font-body-sm text-body-sm text-on-surface-variant">Modified</span>
-            <span class="font-body-sm text-body-sm text-on-surface-variant">May 25, 2026</span>
-          </div>
-          <div class="flex justify-between">
-            <span class="font-body-sm text-body-sm text-on-surface-variant">Savings</span>
-            <span class="font-label-caps text-label-caps text-green-600">↓ 19% vs single-vendor</span>
-          </div>
-        </div>
-        <div class="px-lg pb-sm">
-          <button data-tooltip="Show or hide BOM details" onclick="toggleCardDetails('psu')" class="flex items-center gap-xs font-label-caps text-[10px] text-outline uppercase hover:text-primary transition-colors w-full justify-start mb-sm">
-            <span class="material-symbols-outlined" id="card-ch-psu" style="font-size:14px;transition:transform 0.2s">expand_more</span>Details
-          </button>
-          <div id="card-det-psu" class="hidden">
-            <div class="flex flex-wrap gap-xs mb-sm"><span class="px-sm py-xs bg-surface-container rounded font-label-mono text-label-mono text-xs">Digi-Key  59 parts</span></div>
-            <p class="font-label-caps text-[10px] text-outline uppercase mb-xs">Top spend</p>
-            <div class="flex justify-between py-xs border-b border-outline-variant/20 last:border-0"><span class="font-label-mono text-[11px] text-on-surface-variant">LT3080EDD</span><span class="font-label-mono text-[11px] text-on-surface">$22.68</span></div><div class="flex justify-between py-xs border-b border-outline-variant/20 last:border-0"><span class="font-label-mono text-[11px] text-on-surface-variant">LM2596S-5.0</span><span class="font-label-mono text-[11px] text-on-surface">$11.36</span></div><div class="flex justify-between py-xs border-b border-outline-variant/20 last:border-0"><span class="font-label-mono text-[11px] text-on-surface-variant">IHLP2020BZER</span><span class="font-label-mono text-[11px] text-on-surface">$7.12</span></div>
-            <div class="flex justify-between mt-sm"><span class="font-body-sm text-body-sm text-on-surface-variant">Source file</span><span class="font-label-mono text-[11px] text-on-surface">psu_board.xlsx</span></div>
-          </div>
-        </div>
-        <div class="px-lg pb-md flex gap-sm">
-          <button data-tooltip="Open this BOM" onclick="window.top.location.href='/bom?id=psu'" class="flex-1 bg-primary text-on-primary py-xs rounded font-label-caps text-label-caps hover:bg-on-primary-fixed-variant transition-all text-center">Open</button>
-          <button data-tooltip="Duplicate this BOM" onclick="showToast('BOM duplicated.')" class="px-md py-xs bg-surface-container border border-outline-variant rounded font-label-caps text-label-caps hover:bg-surface-container-high transition-all">Duplicate</button>
-          <button data-tooltip="Delete this BOM" onclick="deleteCard(this)" class="px-md py-xs border border-error/30 text-error rounded font-label-caps text-label-caps hover:bg-error/10 transition-all">Delete</button>
-        </div>
-      </div>
-
-      <!-- Card 4 -->
-      <div class="bom-card bg-surface-container-lowest border border-outline-variant border-l-[3px] border-l-amber-400 rounded-lg overflow-hidden hover:shadow-md transition-shadow" data-name="Wireless Audio Module">
-        <div class="px-lg py-md border-b border-outline-variant bg-surface-container-low flex items-center justify-between">
-          <div class="flex items-center gap-sm">
-            <span class="material-symbols-outlined text-primary" data-icon="headphones">headphones</span>
-            <h3 class="font-headline-md text-headline-md text-on-surface">Wireless Audio Module</h3>
-          </div>
-          <span class="px-sm py-xs rounded-full font-label-caps text-label-caps bg-primary/10 text-primary">Optimized</span>
-        </div>
-        <div class="p-lg space-y-sm">
-          <div class="flex justify-between">
-            <span class="font-body-sm text-body-sm text-on-surface-variant">Parts</span>
-            <span class="font-label-mono text-label-mono text-on-surface">71 line items</span>
-          </div>
-          <div class="flex justify-between">
-            <span class="font-body-sm text-body-sm text-on-surface-variant">Est. Cost</span>
-            <span class="font-label-mono text-label-mono text-primary font-bold">$892.10</span>
-          </div>
-          <div class="flex justify-between">
-            <span class="font-body-sm text-body-sm text-on-surface-variant">Modified</span>
-            <span class="font-body-sm text-body-sm text-on-surface-variant">May 20, 2026</span>
-          </div>
-          <div class="flex justify-between">
-            <span class="font-body-sm text-body-sm text-on-surface-variant">Savings</span>
-            <span class="font-label-caps text-label-caps text-green-600">↓ 15% vs single-vendor</span>
-          </div>
-        </div>
-        <div class="px-lg pb-sm">
-          <button data-tooltip="Show or hide BOM details" onclick="toggleCardDetails('waudio')" class="flex items-center gap-xs font-label-caps text-[10px] text-outline uppercase hover:text-primary transition-colors w-full justify-start mb-sm">
-            <span class="material-symbols-outlined" id="card-ch-waudio" style="font-size:14px;transition:transform 0.2s">expand_more</span>Details
-          </button>
-          <div id="card-det-waudio" class="hidden">
-            <div class="flex flex-wrap gap-xs mb-sm"><span class="px-sm py-xs bg-surface-container rounded font-label-mono text-label-mono text-xs">Arrow  71 parts</span><span class="px-sm py-xs bg-surface-container rounded font-label-mono text-label-mono text-xs">Newark  12 parts</span></div>
-            <p class="font-label-caps text-[10px] text-outline uppercase mb-xs">Top spend</p>
-            <div class="flex justify-between py-xs border-b border-outline-variant/20 last:border-0"><span class="font-label-mono text-[11px] text-on-surface-variant">nRF52840-QIAA</span><span class="font-label-mono text-[11px] text-on-surface">$26.70</span></div><div class="flex justify-between py-xs border-b border-outline-variant/20 last:border-0"><span class="font-label-mono text-[11px] text-on-surface-variant">PCM5102APWR</span><span class="font-label-mono text-[11px] text-on-surface">$8.10</span></div><div class="flex justify-between py-xs border-b border-outline-variant/20 last:border-0"><span class="font-label-mono text-[11px] text-on-surface-variant">TPA3118D2DAPR</span><span class="font-label-mono text-[11px] text-on-surface">$8.85</span></div>
-            <div class="flex justify-between mt-sm"><span class="font-body-sm text-body-sm text-on-surface-variant">Source file</span><span class="font-label-mono text-[11px] text-on-surface">wireless_audio.csv</span></div>
-          </div>
-        </div>
-        <div class="px-lg pb-md flex gap-sm">
-          <button data-tooltip="Open this BOM" onclick="window.top.location.href='/bom?id=waudio'" class="flex-1 bg-primary text-on-primary py-xs rounded font-label-caps text-label-caps hover:bg-on-primary-fixed-variant transition-all text-center">Open</button>
-          <button data-tooltip="Duplicate this BOM" onclick="showToast('BOM duplicated.')" class="px-md py-xs bg-surface-container border border-outline-variant rounded font-label-caps text-label-caps hover:bg-surface-container-high transition-all">Duplicate</button>
-          <button data-tooltip="Delete this BOM" onclick="deleteCard(this)" class="px-md py-xs border border-error/30 text-error rounded font-label-caps text-label-caps hover:bg-error/10 transition-all">Delete</button>
-        </div>
-      </div>
-
-      <!-- Card 5 — Draft -->
-      <div class="bom-card bg-surface-container-lowest border border-outline-variant border-l-[3px] border-l-rose-400 rounded-lg overflow-hidden hover:shadow-md transition-shadow" data-name="BLDC Driver v3">
-        <div class="px-lg py-md border-b border-outline-variant bg-surface-container-low flex items-center justify-between">
-          <div class="flex items-center gap-sm">
-            <span class="material-symbols-outlined text-on-surface-variant" data-icon="settings_input_component">settings_input_component</span>
-            <h3 class="font-headline-md text-headline-md text-on-surface">BLDC Driver v3</h3>
-          </div>
-          <span class="px-sm py-xs rounded-full font-label-caps text-label-caps bg-surface-container-high text-on-surface-variant">Draft</span>
-        </div>
-        <div class="p-lg space-y-sm">
-          <div class="flex justify-between">
-            <span class="font-body-sm text-body-sm text-on-surface-variant">Parts</span>
-            <span class="font-label-mono text-label-mono text-on-surface">33 line items</span>
-          </div>
-          <div class="flex justify-between">
-            <span class="font-body-sm text-body-sm text-on-surface-variant">Est. Cost</span>
-            <span class="font-label-mono text-label-mono text-on-surface-variant">Not optimized</span>
-          </div>
-          <div class="flex justify-between">
-            <span class="font-body-sm text-body-sm text-on-surface-variant">Modified</span>
-            <span class="font-body-sm text-body-sm text-on-surface-variant">Jun 1, 2026</span>
-          </div>
-          <div class="flex justify-between">
-            <span class="font-body-sm text-body-sm text-on-surface-variant">Status</span>
-            <span class="font-label-caps text-label-caps text-on-surface-variant">Awaiting optimization</span>
-          </div>
-        </div>
-        <div class="px-lg pb-sm">
-          <button data-tooltip="Show or hide BOM details" onclick="toggleCardDetails('bldc')" class="flex items-center gap-xs font-label-caps text-[10px] text-outline uppercase hover:text-primary transition-colors w-full justify-start mb-sm">
-            <span class="material-symbols-outlined" id="card-ch-bldc" style="font-size:14px;transition:transform 0.2s">expand_more</span>Details
-          </button>
-          <div id="card-det-bldc" class="hidden">
-            <div class="flex flex-wrap gap-xs mb-sm"><span class="px-sm py-xs bg-surface-container rounded font-label-mono text-label-mono text-xs">Draft — not yet optimized</span></div>
-            <p class="font-label-caps text-[10px] text-outline uppercase mb-xs">Top spend</p>
-            
-            <div class="flex justify-between mt-sm"><span class="font-body-sm text-body-sm text-on-surface-variant">Source file</span><span class="font-label-mono text-[11px] text-on-surface">bldc_v3.xlsx</span></div>
-          </div>
-        </div>
-        <div class="px-lg pb-md flex gap-sm">
-          <button data-tooltip="Open this BOM" onclick="window.top.location.href='/bom?id=bldc'" class="flex-1 bg-primary text-on-primary py-xs rounded font-label-caps text-label-caps hover:bg-on-primary-fixed-variant transition-all text-center">Open</button>
-          <button data-tooltip="Duplicate this BOM" onclick="showToast('BOM duplicated.')" class="px-md py-xs bg-surface-container border border-outline-variant rounded font-label-caps text-label-caps hover:bg-surface-container-high transition-all">Duplicate</button>
-          <button data-tooltip="Delete this BOM" onclick="deleteCard(this)" class="px-md py-xs border border-error/30 text-error rounded font-label-caps text-label-caps hover:bg-error/10 transition-all">Delete</button>
-        </div>
-      </div>
-
-      <!-- Card 6 — Draft -->
-      <div class="bom-card bg-surface-container-lowest border border-outline-variant border-l-[3px] border-l-cyan-400 rounded-lg overflow-hidden hover:shadow-md transition-shadow" data-name="RF Frontend Board">
-        <div class="px-lg py-md border-b border-outline-variant bg-surface-container-low flex items-center justify-between">
-          <div class="flex items-center gap-sm">
-            <span class="material-symbols-outlined text-on-surface-variant" data-icon="wifi_tethering">wifi_tethering</span>
-            <h3 class="font-headline-md text-headline-md text-on-surface">RF Frontend Board</h3>
-          </div>
-          <span class="px-sm py-xs rounded-full font-label-caps text-label-caps bg-surface-container-high text-on-surface-variant">Draft</span>
-        </div>
-        <div class="p-lg space-y-sm">
-          <div class="flex justify-between">
-            <span class="font-body-sm text-body-sm text-on-surface-variant">Parts</span>
-            <span class="font-label-mono text-label-mono text-on-surface">58 line items</span>
-          </div>
-          <div class="flex justify-between">
-            <span class="font-body-sm text-body-sm text-on-surface-variant">Est. Cost</span>
-            <span class="font-label-mono text-label-mono text-on-surface-variant">Not optimized</span>
-          </div>
-          <div class="flex justify-between">
-            <span class="font-body-sm text-body-sm text-on-surface-variant">Modified</span>
-            <span class="font-body-sm text-body-sm text-on-surface-variant">May 31, 2026</span>
-          </div>
-          <div class="flex justify-between">
-            <span class="font-body-sm text-body-sm text-on-surface-variant">Status</span>
-            <span class="font-label-caps text-label-caps text-on-surface-variant">Awaiting optimization</span>
-          </div>
-        </div>
-        <div class="px-lg pb-sm">
-          <button data-tooltip="Show or hide BOM details" onclick="toggleCardDetails('rf')" class="flex items-center gap-xs font-label-caps text-[10px] text-outline uppercase hover:text-primary transition-colors w-full justify-start mb-sm">
-            <span class="material-symbols-outlined" id="card-ch-rf" style="font-size:14px;transition:transform 0.2s">expand_more</span>Details
-          </button>
-          <div id="card-det-rf" class="hidden">
-            <div class="flex flex-wrap gap-xs mb-sm"><span class="px-sm py-xs bg-surface-container rounded font-label-mono text-label-mono text-xs">Draft — not yet optimized</span></div>
-            <p class="font-label-caps text-[10px] text-outline uppercase mb-xs">Top spend</p>
-            
-            <div class="flex justify-between mt-sm"><span class="font-body-sm text-body-sm text-on-surface-variant">Source file</span><span class="font-label-mono text-[11px] text-on-surface">rf_frontend.csv</span></div>
-          </div>
-        </div>
-        <div class="px-lg pb-md flex gap-sm">
-          <button data-tooltip="Open this BOM" onclick="window.top.location.href='/bom?id=rf'" class="flex-1 bg-primary text-on-primary py-xs rounded font-label-caps text-label-caps hover:bg-on-primary-fixed-variant transition-all text-center">Open</button>
-          <button data-tooltip="Duplicate this BOM" onclick="showToast('BOM duplicated.')" class="px-md py-xs bg-surface-container border border-outline-variant rounded font-label-caps text-label-caps hover:bg-surface-container-high transition-all">Duplicate</button>
-          <button data-tooltip="Delete this BOM" onclick="deleteCard(this)" class="px-md py-xs border border-error/30 text-error rounded font-label-caps text-label-caps hover:bg-error/10 transition-all">Delete</button>
-        </div>
-      </div>
-
+    <div id="bom-grid" class="hidden grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-lg">
     </div>
 
     <!-- ── List / Spreadsheet View ─────────────────────────────────── -->
@@ -418,7 +147,7 @@ aside [data-tooltip]::after{
         <table class="w-full text-left border-collapse" id="bom-table">
           <thead>
             <tr class="bg-surface-container-low border-b border-outline-variant">
-              <th class="w-8 px-md py-sm"></th><!-- expand chevron -->
+              <th class="w-8 px-md py-sm"></th>
               <th class="px-md py-sm font-label-caps text-label-caps text-on-surface-variant uppercase cursor-pointer select-none hover:text-primary" onclick="sortTable('name')">
                 <div class="flex items-center gap-xs">Project <span class="material-symbols-outlined sort-icon" style="font-size:14px;" data-col="name">unfold_more</span></div>
               </th>
@@ -440,209 +169,13 @@ aside [data-tooltip]::after{
               <th class="px-md py-sm font-label-caps text-label-caps text-on-surface-variant uppercase">Actions</th>
             </tr>
           </thead>
-          <tbody id="list-tbody">
-            <!-- Row 1 -->
-            <tr class="list-row border-b border-outline-variant/50 hover:bg-surface-container-low transition-colors cursor-pointer" data-name="Motor Controller Rev2" data-parts="84" data-cost="1243.60" data-status="optimized" data-modified="2026-05-30" data-savings="18">
-              <td class="px-md py-sm text-center">
-                <span class="material-symbols-outlined text-on-surface-variant chevron transition-transform duration-200" style="font-size:16px;">chevron_right</span>
-              </td>
-              <td class="px-md py-sm">
-                <div class="flex items-center gap-sm">
-                  <span class="material-symbols-outlined text-primary" style="font-size:16px;" data-icon="electric_meter">electric_meter</span>
-                  <span class="font-body-sm text-body-sm font-medium text-on-surface">Motor Controller Rev2</span>
-                </div>
-              </td>
-              <td class="px-md py-sm"><span class="px-sm py-xs rounded-full font-label-caps text-label-caps bg-primary/10 text-primary">Optimized</span></td>
-              <td class="px-md py-sm text-right font-label-mono text-label-mono text-on-surface">84</td>
-              <td class="px-md py-sm text-right font-label-mono text-label-mono text-primary font-bold">$1,243.60</td>
-              <td class="px-md py-sm font-label-caps text-label-caps text-green-600">↓ 18%</td>
-              <td class="px-md py-sm font-body-sm text-body-sm text-on-surface-variant">May 30, 2026</td>
-              <td class="px-md py-sm" onclick="event.stopPropagation()">
-                <div class="flex gap-sm">
-                  <button data-tooltip="Open this BOM" onclick="window.top.location.href='/bom?id=mctrl'" class="px-sm py-xs bg-primary text-on-primary rounded font-label-caps text-label-caps hover:bg-on-primary-fixed-variant transition-all">Open</button>
-                  <button data-tooltip="Duplicate this BOM" onclick="showToast('BOM duplicated.')" class="px-sm py-xs border border-outline-variant rounded font-label-caps text-label-caps text-on-surface-variant hover:bg-surface-container transition-all">Dup</button>
-                  <button data-tooltip="Delete this BOM" onclick="deleteListRow(this)" class="px-sm py-xs border border-error/30 text-error rounded font-label-caps text-label-caps hover:bg-error/10 transition-all">Del</button>
-                </div>
-              </td>
-            </tr>
-            <tr class="expand-row hidden border-b border-outline-variant" data-for="Motor Controller Rev2">
-              <td colspan="8" class="p-0">
-                <div class="bg-surface-container-low px-[52px] py-md">
-                  <p class="font-label-caps text-label-caps text-on-surface-variant uppercase mb-sm">BOM Preview — first 5 rows</p>
-                  <table class="w-full text-sm border border-outline-variant rounded overflow-hidden">
-                    <thead><tr class="bg-surface-container border-b border-outline-variant">
-                      <th class="px-md py-xs font-label-caps text-label-caps text-on-surface-variant text-left uppercase">Row</th>
-                      <th class="px-md py-xs font-label-caps text-label-caps text-on-surface-variant text-left uppercase">MPN</th>
-                      <th class="px-md py-xs font-label-caps text-label-caps text-on-surface-variant text-left uppercase">Description</th>
-                      <th class="px-md py-xs font-label-caps text-label-caps text-on-surface-variant text-right uppercase">Qty</th>
-                      <th class="px-md py-xs font-label-caps text-label-caps text-on-surface-variant text-left uppercase">Distributor</th>
-                      <th class="px-md py-xs font-label-caps text-label-caps text-on-surface-variant text-right uppercase">Unit $</th>
-                      <th class="px-md py-xs font-label-caps text-label-caps text-on-surface-variant text-right uppercase">Ext. $</th>
-                    </tr></thead>
-                    <tbody>
-                      <tr class="border-b border-outline-variant/40 hover:bg-surface-container"><td class="px-md py-xs font-label-mono text-label-mono text-on-surface-variant">1</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface">DRV8302DCAR</td><td class="px-md py-xs font-body-sm text-body-sm text-on-surface-variant">3-ph gate driver IC</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface text-right">2</td><td class="px-md py-xs font-label-caps text-label-caps text-on-surface-variant">Digi-Key</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface text-right">$8.42</td><td class="px-md py-xs font-label-mono text-label-mono text-primary font-bold text-right">$16.84</td></tr>
-                      <tr class="border-b border-outline-variant/40 hover:bg-surface-container"><td class="px-md py-xs font-label-mono text-label-mono text-on-surface-variant">2</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface">CSD18532Q5B</td><td class="px-md py-xs font-body-sm text-body-sm text-on-surface-variant">N-ch MOSFET 60V 100A</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface text-right">6</td><td class="px-md py-xs font-label-caps text-label-caps text-on-surface-variant">Mouser</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface text-right">$2.18</td><td class="px-md py-xs font-label-mono text-label-mono text-primary font-bold text-right">$13.08</td></tr>
-                      <tr class="border-b border-outline-variant/40 hover:bg-surface-container"><td class="px-md py-xs font-label-mono text-label-mono text-on-surface-variant">3</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface">STM32G474RET6</td><td class="px-md py-xs font-body-sm text-body-sm text-on-surface-variant">MCU 32-bit 170MHz</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface text-right">1</td><td class="px-md py-xs font-label-caps text-label-caps text-on-surface-variant">Digi-Key</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface text-right">$14.20</td><td class="px-md py-xs font-label-mono text-label-mono text-primary font-bold text-right">$14.20</td></tr>
-                      <tr class="border-b border-outline-variant/40 hover:bg-surface-container"><td class="px-md py-xs font-label-mono text-label-mono text-on-surface-variant">4</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface">GD25Q128CSIG</td><td class="px-md py-xs font-body-sm text-body-sm text-on-surface-variant">128Mb SPI Flash</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface text-right">1</td><td class="px-md py-xs font-label-caps text-label-caps text-on-surface-variant">LCSC</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface text-right">$0.84</td><td class="px-md py-xs font-label-mono text-label-mono text-primary font-bold text-right">$0.84</td></tr>
-                      <tr class="hover:bg-surface-container"><td class="px-md py-xs font-label-mono text-label-mono text-on-surface-variant">5</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface">TJA1051T/3</td><td class="px-md py-xs font-body-sm text-body-sm text-on-surface-variant">CAN bus transceiver</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface text-right">1</td><td class="px-md py-xs font-label-caps text-label-caps text-on-surface-variant">Mouser</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface text-right">$1.62</td><td class="px-md py-xs font-label-mono text-label-mono text-primary font-bold text-right">$1.62</td></tr>
-                    </tbody>
-                  </table>
-                  <p class="font-label-caps text-label-caps text-on-surface-variant mt-sm">…and 79 more rows</p>
-                </div>
-              </td>
-            </tr>
-            <!-- Row 2 -->
-            <tr class="list-row border-b border-outline-variant/50 hover:bg-surface-container-low transition-colors cursor-pointer" data-name="IoT Sensor Node" data-parts="42" data-cost="318.90" data-status="optimized" data-modified="2026-05-28" data-savings="23">
-              <td class="px-md py-sm text-center"><span class="material-symbols-outlined text-on-surface-variant chevron transition-transform duration-200" style="font-size:16px;">chevron_right</span></td>
-              <td class="px-md py-sm"><div class="flex items-center gap-sm"><span class="material-symbols-outlined text-primary" style="font-size:16px;" data-icon="sensors">sensors</span><span class="font-body-sm text-body-sm font-medium text-on-surface">IoT Sensor Node</span></div></td>
-              <td class="px-md py-sm"><span class="px-sm py-xs rounded-full font-label-caps text-label-caps bg-primary/10 text-primary">Optimized</span></td>
-              <td class="px-md py-sm text-right font-label-mono text-label-mono text-on-surface">42</td>
-              <td class="px-md py-sm text-right font-label-mono text-label-mono text-primary font-bold">$318.90</td>
-              <td class="px-md py-sm font-label-caps text-label-caps text-green-600">↓ 23%</td>
-              <td class="px-md py-sm font-body-sm text-body-sm text-on-surface-variant">May 28, 2026</td>
-              <td class="px-md py-sm" onclick="event.stopPropagation()"><div class="flex gap-sm"><button data-tooltip="Open this BOM" onclick="window.top.location.href='/bom?id=iot'" class="px-sm py-xs bg-primary text-on-primary rounded font-label-caps text-label-caps hover:bg-on-primary-fixed-variant transition-all">Open</button><button data-tooltip="Open this BOM" onclick="showToast('BOM duplicated.')" class="px-sm py-xs border border-outline-variant rounded font-label-caps text-label-caps text-on-surface-variant hover:bg-surface-container transition-all">Dup</button><button data-tooltip="Open this BOM" onclick="deleteListRow(this)" class="px-sm py-xs border border-error/30 text-error rounded font-label-caps text-label-caps hover:bg-error/10 transition-all">Del</button></div></td>
-            </tr>
-            <tr class="expand-row hidden border-b border-outline-variant" data-for="IoT Sensor Node">
-              <td colspan="8" class="p-0">
-                <div class="bg-surface-container-low px-[52px] py-md">
-                  <p class="font-label-caps text-label-caps text-on-surface-variant uppercase mb-sm">BOM Preview — first 5 rows</p>
-                  <table class="w-full text-sm border border-outline-variant rounded overflow-hidden">
-                    <thead><tr class="bg-surface-container border-b border-outline-variant"><th class="px-md py-xs font-label-caps text-label-caps text-on-surface-variant text-left uppercase">Row</th><th class="px-md py-xs font-label-caps text-label-caps text-on-surface-variant text-left uppercase">MPN</th><th class="px-md py-xs font-label-caps text-label-caps text-on-surface-variant text-left uppercase">Description</th><th class="px-md py-xs font-label-caps text-label-caps text-on-surface-variant text-right uppercase">Qty</th><th class="px-md py-xs font-label-caps text-label-caps text-on-surface-variant text-left uppercase">Distributor</th><th class="px-md py-xs font-label-caps text-label-caps text-on-surface-variant text-right uppercase">Unit $</th><th class="px-md py-xs font-label-caps text-label-caps text-on-surface-variant text-right uppercase">Ext. $</th></tr></thead>
-                    <tbody>
-                      <tr class="border-b border-outline-variant/40 hover:bg-surface-container"><td class="px-md py-xs font-label-mono text-label-mono text-on-surface-variant">1</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface">ESP32-S3-WROOM-1</td><td class="px-md py-xs font-body-sm text-body-sm text-on-surface-variant">WiFi+BT module</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface text-right">1</td><td class="px-md py-xs font-label-caps text-label-caps text-on-surface-variant">LCSC</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface text-right">$3.20</td><td class="px-md py-xs font-label-mono text-label-mono text-primary font-bold text-right">$3.20</td></tr>
-                      <tr class="border-b border-outline-variant/40 hover:bg-surface-container"><td class="px-md py-xs font-label-mono text-label-mono text-on-surface-variant">2</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface">BME680</td><td class="px-md py-xs font-body-sm text-body-sm text-on-surface-variant">Env. sensor temp/hum/press/gas</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface text-right">1</td><td class="px-md py-xs font-label-caps text-label-caps text-on-surface-variant">Digi-Key</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface text-right">$8.10</td><td class="px-md py-xs font-label-mono text-label-mono text-primary font-bold text-right">$8.10</td></tr>
-                      <tr class="border-b border-outline-variant/40 hover:bg-surface-container"><td class="px-md py-xs font-label-mono text-label-mono text-on-surface-variant">3</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface">ICM-42688-P</td><td class="px-md py-xs font-body-sm text-body-sm text-on-surface-variant">6-axis IMU</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface text-right">1</td><td class="px-md py-xs font-label-caps text-label-caps text-on-surface-variant">Mouser</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface text-right">$5.44</td><td class="px-md py-xs font-label-mono text-label-mono text-primary font-bold text-right">$5.44</td></tr>
-                      <tr class="border-b border-outline-variant/40 hover:bg-surface-container"><td class="px-md py-xs font-label-mono text-label-mono text-on-surface-variant">4</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface">BQ25180YBGR</td><td class="px-md py-xs font-body-sm text-body-sm text-on-surface-variant">1-cell LiPo charger</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface text-right">1</td><td class="px-md py-xs font-label-caps text-label-caps text-on-surface-variant">Digi-Key</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface text-right">$1.90</td><td class="px-md py-xs font-label-mono text-label-mono text-primary font-bold text-right">$1.90</td></tr>
-                      <tr class="hover:bg-surface-container"><td class="px-md py-xs font-label-mono text-label-mono text-on-surface-variant">5</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface">W25Q64JVSSIQ</td><td class="px-md py-xs font-body-sm text-body-sm text-on-surface-variant">64Mb SPI Flash</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface text-right">1</td><td class="px-md py-xs font-label-caps text-label-caps text-on-surface-variant">LCSC</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface text-right">$0.62</td><td class="px-md py-xs font-label-mono text-label-mono text-primary font-bold text-right">$0.62</td></tr>
-                    </tbody>
-                  </table>
-                  <p class="font-label-caps text-label-caps text-on-surface-variant mt-sm">…and 37 more rows</p>
-                </div>
-              </td>
-            </tr>
-            <!-- Row 3 -->
-            <tr class="list-row border-b border-outline-variant/50 hover:bg-surface-container-low transition-colors cursor-pointer" data-name="Power Supply Board" data-parts="59" data-cost="587.40" data-status="optimized" data-modified="2026-05-25" data-savings="19">
-              <td class="px-md py-sm text-center"><span class="material-symbols-outlined text-on-surface-variant chevron transition-transform duration-200" style="font-size:16px;">chevron_right</span></td>
-              <td class="px-md py-sm"><div class="flex items-center gap-sm"><span class="material-symbols-outlined text-primary" style="font-size:16px;" data-icon="bolt">bolt</span><span class="font-body-sm text-body-sm font-medium text-on-surface">Power Supply Board</span></div></td>
-              <td class="px-md py-sm"><span class="px-sm py-xs rounded-full font-label-caps text-label-caps bg-primary/10 text-primary">Optimized</span></td>
-              <td class="px-md py-sm text-right font-label-mono text-label-mono text-on-surface">59</td>
-              <td class="px-md py-sm text-right font-label-mono text-label-mono text-primary font-bold">$587.40</td>
-              <td class="px-md py-sm font-label-caps text-label-caps text-green-600">↓ 19%</td>
-              <td class="px-md py-sm font-body-sm text-body-sm text-on-surface-variant">May 25, 2026</td>
-              <td class="px-md py-sm" onclick="event.stopPropagation()"><div class="flex gap-sm"><button data-tooltip="Open this BOM" onclick="window.top.location.href='/bom?id=psu'" class="px-sm py-xs bg-primary text-on-primary rounded font-label-caps text-label-caps hover:bg-on-primary-fixed-variant transition-all">Open</button><button data-tooltip="Open this BOM" onclick="showToast('BOM duplicated.')" class="px-sm py-xs border border-outline-variant rounded font-label-caps text-label-caps text-on-surface-variant hover:bg-surface-container transition-all">Dup</button><button data-tooltip="Open this BOM" onclick="deleteListRow(this)" class="px-sm py-xs border border-error/30 text-error rounded font-label-caps text-label-caps hover:bg-error/10 transition-all">Del</button></div></td>
-            </tr>
-            <tr class="expand-row hidden border-b border-outline-variant" data-for="Power Supply Board">
-              <td colspan="8" class="p-0">
-                <div class="bg-surface-container-low px-[52px] py-md">
-                  <p class="font-label-caps text-label-caps text-on-surface-variant uppercase mb-sm">BOM Preview — first 5 rows</p>
-                  <table class="w-full text-sm border border-outline-variant rounded overflow-hidden">
-                    <thead><tr class="bg-surface-container border-b border-outline-variant"><th class="px-md py-xs font-label-caps text-label-caps text-on-surface-variant text-left uppercase">Row</th><th class="px-md py-xs font-label-caps text-label-caps text-on-surface-variant text-left uppercase">MPN</th><th class="px-md py-xs font-label-caps text-label-caps text-on-surface-variant text-left uppercase">Description</th><th class="px-md py-xs font-label-caps text-label-caps text-on-surface-variant text-right uppercase">Qty</th><th class="px-md py-xs font-label-caps text-label-caps text-on-surface-variant text-left uppercase">Distributor</th><th class="px-md py-xs font-label-caps text-label-caps text-on-surface-variant text-right uppercase">Unit $</th><th class="px-md py-xs font-label-caps text-label-caps text-on-surface-variant text-right uppercase">Ext. $</th></tr></thead>
-                    <tbody>
-                      <tr class="border-b border-outline-variant/40 hover:bg-surface-container"><td class="px-md py-xs font-label-mono text-label-mono text-on-surface-variant">1</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface">LT3080EDD</td><td class="px-md py-xs font-body-sm text-body-sm text-on-surface-variant">LDO linear reg. 1.1A</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface text-right">3</td><td class="px-md py-xs font-label-caps text-label-caps text-on-surface-variant">Digi-Key</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface text-right">$6.30</td><td class="px-md py-xs font-label-mono text-label-mono text-primary font-bold text-right">$18.90</td></tr>
-                      <tr class="border-b border-outline-variant/40 hover:bg-surface-container"><td class="px-md py-xs font-label-mono text-label-mono text-on-surface-variant">2</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface">LM5164DDAR</td><td class="px-md py-xs font-body-sm text-body-sm text-on-surface-variant">100V synchronous buck</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface text-right">2</td><td class="px-md py-xs font-label-caps text-label-caps text-on-surface-variant">Mouser</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface text-right">$4.15</td><td class="px-md py-xs font-label-mono text-label-mono text-primary font-bold text-right">$8.30</td></tr>
-                      <tr class="border-b border-outline-variant/40 hover:bg-surface-container"><td class="px-md py-xs font-label-mono text-label-mono text-on-surface-variant">3</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface">GRM31CR61H106KA12L</td><td class="px-md py-xs font-body-sm text-body-sm text-on-surface-variant">10µF 50V MLCC cap</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface text-right">20</td><td class="px-md py-xs font-label-caps text-label-caps text-on-surface-variant">LCSC</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface text-right">$0.18</td><td class="px-md py-xs font-label-mono text-label-mono text-primary font-bold text-right">$3.60</td></tr>
-                      <tr class="border-b border-outline-variant/40 hover:bg-surface-container"><td class="px-md py-xs font-label-mono text-label-mono text-on-surface-variant">4</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface">CRCW08051K00FKEA</td><td class="px-md py-xs font-body-sm text-body-sm text-on-surface-variant">1kΩ 0805 resistor</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface text-right">50</td><td class="px-md py-xs font-label-caps text-label-caps text-on-surface-variant">LCSC</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface text-right">$0.03</td><td class="px-md py-xs font-label-mono text-label-mono text-primary font-bold text-right">$1.50</td></tr>
-                      <tr class="hover:bg-surface-container"><td class="px-md py-xs font-label-mono text-label-mono text-on-surface-variant">5</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface">B320A-13-F</td><td class="px-md py-xs font-body-sm text-body-sm text-on-surface-variant">Schottky diode 2A 20V</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface text-right">8</td><td class="px-md py-xs font-label-caps text-label-caps text-on-surface-variant">Digi-Key</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface text-right">$0.42</td><td class="px-md py-xs font-label-mono text-label-mono text-primary font-bold text-right">$3.36</td></tr>
-                    </tbody>
-                  </table>
-                  <p class="font-label-caps text-label-caps text-on-surface-variant mt-sm">…and 54 more rows</p>
-                </div>
-              </td>
-            </tr>
-            <!-- Row 4 -->
-            <tr class="list-row border-b border-outline-variant/50 hover:bg-surface-container-low transition-colors cursor-pointer" data-name="Wireless Audio Module" data-parts="71" data-cost="892.10" data-status="optimized" data-modified="2026-05-20" data-savings="15">
-              <td class="px-md py-sm text-center"><span class="material-symbols-outlined text-on-surface-variant chevron transition-transform duration-200" style="font-size:16px;">chevron_right</span></td>
-              <td class="px-md py-sm"><div class="flex items-center gap-sm"><span class="material-symbols-outlined text-primary" style="font-size:16px;" data-icon="headphones">headphones</span><span class="font-body-sm text-body-sm font-medium text-on-surface">Wireless Audio Module</span></div></td>
-              <td class="px-md py-sm"><span class="px-sm py-xs rounded-full font-label-caps text-label-caps bg-primary/10 text-primary">Optimized</span></td>
-              <td class="px-md py-sm text-right font-label-mono text-label-mono text-on-surface">71</td>
-              <td class="px-md py-sm text-right font-label-mono text-label-mono text-primary font-bold">$892.10</td>
-              <td class="px-md py-sm font-label-caps text-label-caps text-green-600">↓ 15%</td>
-              <td class="px-md py-sm font-body-sm text-body-sm text-on-surface-variant">May 20, 2026</td>
-              <td class="px-md py-sm" onclick="event.stopPropagation()"><div class="flex gap-sm"><button data-tooltip="Open this BOM" onclick="window.top.location.href='/bom?id=waudio'" class="px-sm py-xs bg-primary text-on-primary rounded font-label-caps text-label-caps hover:bg-on-primary-fixed-variant transition-all">Open</button><button data-tooltip="Open this BOM" onclick="showToast('BOM duplicated.')" class="px-sm py-xs border border-outline-variant rounded font-label-caps text-label-caps text-on-surface-variant hover:bg-surface-container transition-all">Dup</button><button data-tooltip="Open this BOM" onclick="deleteListRow(this)" class="px-sm py-xs border border-error/30 text-error rounded font-label-caps text-label-caps hover:bg-error/10 transition-all">Del</button></div></td>
-            </tr>
-            <tr class="expand-row hidden border-b border-outline-variant" data-for="Wireless Audio Module">
-              <td colspan="8" class="p-0">
-                <div class="bg-surface-container-low px-[52px] py-md">
-                  <p class="font-label-caps text-label-caps text-on-surface-variant uppercase mb-sm">BOM Preview — first 5 rows</p>
-                  <table class="w-full text-sm border border-outline-variant rounded overflow-hidden">
-                    <thead><tr class="bg-surface-container border-b border-outline-variant"><th class="px-md py-xs font-label-caps text-label-caps text-on-surface-variant text-left uppercase">Row</th><th class="px-md py-xs font-label-caps text-label-caps text-on-surface-variant text-left uppercase">MPN</th><th class="px-md py-xs font-label-caps text-label-caps text-on-surface-variant text-left uppercase">Description</th><th class="px-md py-xs font-label-caps text-label-caps text-on-surface-variant text-right uppercase">Qty</th><th class="px-md py-xs font-label-caps text-label-caps text-on-surface-variant text-left uppercase">Distributor</th><th class="px-md py-xs font-label-caps text-label-caps text-on-surface-variant text-right uppercase">Unit $</th><th class="px-md py-xs font-label-caps text-label-caps text-on-surface-variant text-right uppercase">Ext. $</th></tr></thead>
-                    <tbody>
-                      <tr class="border-b border-outline-variant/40 hover:bg-surface-container"><td class="px-md py-xs font-label-mono text-label-mono text-on-surface-variant">1</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface">ES8388</td><td class="px-md py-xs font-body-sm text-body-sm text-on-surface-variant">Audio codec 24-bit</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface text-right">1</td><td class="px-md py-xs font-label-caps text-label-caps text-on-surface-variant">LCSC</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface text-right">$1.82</td><td class="px-md py-xs font-label-mono text-label-mono text-primary font-bold text-right">$1.82</td></tr>
-                      <tr class="border-b border-outline-variant/40 hover:bg-surface-container"><td class="px-md py-xs font-label-mono text-label-mono text-on-surface-variant">2</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface">nRF52840-QIAA</td><td class="px-md py-xs font-body-sm text-body-sm text-on-surface-variant">BT 5.0 SoC</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface text-right">1</td><td class="px-md py-xs font-label-caps text-label-caps text-on-surface-variant">Digi-Key</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface text-right">$7.48</td><td class="px-md py-xs font-label-mono text-label-mono text-primary font-bold text-right">$7.48</td></tr>
-                      <tr class="border-b border-outline-variant/40 hover:bg-surface-container"><td class="px-md py-xs font-label-mono text-label-mono text-on-surface-variant">3</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface">TPA3116D2DADR</td><td class="px-md py-xs font-body-sm text-body-sm text-on-surface-variant">100W class-D amp</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface text-right">2</td><td class="px-md py-xs font-label-caps text-label-caps text-on-surface-variant">Mouser</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface text-right">$3.24</td><td class="px-md py-xs font-label-mono text-label-mono text-primary font-bold text-right">$6.48</td></tr>
-                      <tr class="border-b border-outline-variant/40 hover:bg-surface-container"><td class="px-md py-xs font-label-mono text-label-mono text-on-surface-variant">4</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface">SY8120IABC</td><td class="px-md py-xs font-body-sm text-body-sm text-on-surface-variant">3A sync buck converter</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface text-right">1</td><td class="px-md py-xs font-label-caps text-label-caps text-on-surface-variant">LCSC</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface text-right">$0.44</td><td class="px-md py-xs font-label-mono text-label-mono text-primary font-bold text-right">$0.44</td></tr>
-                      <tr class="hover:bg-surface-container"><td class="px-md py-xs font-label-mono text-label-mono text-on-surface-variant">5</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface">W8960G</td><td class="px-md py-xs font-body-sm text-body-sm text-on-surface-variant">Low-power audio codec</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface text-right">1</td><td class="px-md py-xs font-label-caps text-label-caps text-on-surface-variant">LCSC</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface text-right">$1.10</td><td class="px-md py-xs font-label-mono text-label-mono text-primary font-bold text-right">$1.10</td></tr>
-                    </tbody>
-                  </table>
-                  <p class="font-label-caps text-label-caps text-on-surface-variant mt-sm">…and 66 more rows</p>
-                </div>
-              </td>
-            </tr>
-            <!-- Row 5 — Draft -->
-            <tr class="list-row border-b border-outline-variant/50 hover:bg-surface-container-low transition-colors cursor-pointer" data-name="BLDC Driver v3" data-parts="33" data-cost="0" data-status="draft" data-modified="2026-06-01" data-savings="0">
-              <td class="px-md py-sm text-center"><span class="material-symbols-outlined text-on-surface-variant chevron transition-transform duration-200" style="font-size:16px;">chevron_right</span></td>
-              <td class="px-md py-sm"><div class="flex items-center gap-sm"><span class="material-symbols-outlined text-on-surface-variant" style="font-size:16px;" data-icon="settings_input_component">settings_input_component</span><span class="font-body-sm text-body-sm font-medium text-on-surface">BLDC Driver v3</span></div></td>
-              <td class="px-md py-sm"><span class="px-sm py-xs rounded-full font-label-caps text-label-caps bg-surface-container-high text-on-surface-variant">Draft</span></td>
-              <td class="px-md py-sm text-right font-label-mono text-label-mono text-on-surface">33</td>
-              <td class="px-md py-sm text-right font-label-mono text-label-mono text-on-surface-variant">—</td>
-              <td class="px-md py-sm font-label-caps text-label-caps text-on-surface-variant">—</td>
-              <td class="px-md py-sm font-body-sm text-body-sm text-on-surface-variant">Jun 1, 2026</td>
-              <td class="px-md py-sm" onclick="event.stopPropagation()"><div class="flex gap-sm"><button data-tooltip="Open this BOM" onclick="window.top.location.href='/bom?id=bldc'" class="px-sm py-xs bg-primary text-on-primary rounded font-label-caps text-label-caps hover:bg-on-primary-fixed-variant transition-all">Open</button><button data-tooltip="Open this BOM" onclick="showToast('BOM duplicated.')" class="px-sm py-xs border border-outline-variant rounded font-label-caps text-label-caps text-on-surface-variant hover:bg-surface-container transition-all">Dup</button><button data-tooltip="Open this BOM" onclick="deleteListRow(this)" class="px-sm py-xs border border-error/30 text-error rounded font-label-caps text-label-caps hover:bg-error/10 transition-all">Del</button></div></td>
-            </tr>
-            <tr class="expand-row hidden border-b border-outline-variant" data-for="BLDC Driver v3">
-              <td colspan="8" class="p-0">
-                <div class="bg-surface-container-low px-[52px] py-md">
-                  <p class="font-label-caps text-label-caps text-on-surface-variant uppercase mb-sm">BOM Preview — first 5 rows (draft — not yet optimized)</p>
-                  <table class="w-full text-sm border border-outline-variant rounded overflow-hidden">
-                    <thead><tr class="bg-surface-container border-b border-outline-variant"><th class="px-md py-xs font-label-caps text-label-caps text-on-surface-variant text-left uppercase">Row</th><th class="px-md py-xs font-label-caps text-label-caps text-on-surface-variant text-left uppercase">MPN</th><th class="px-md py-xs font-label-caps text-label-caps text-on-surface-variant text-left uppercase">Description</th><th class="px-md py-xs font-label-caps text-label-caps text-on-surface-variant text-right uppercase">Qty</th><th class="px-md py-xs font-label-caps text-label-caps text-on-surface-variant text-left uppercase">Distributor</th><th class="px-md py-xs font-label-caps text-label-caps text-on-surface-variant text-right uppercase">Unit $</th><th class="px-md py-xs font-label-caps text-label-caps text-on-surface-variant text-right uppercase">Ext. $</th></tr></thead>
-                    <tbody>
-                      <tr class="border-b border-outline-variant/40 hover:bg-surface-container"><td class="px-md py-xs font-label-mono text-label-mono text-on-surface-variant">1</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface">DRV10987SMDT</td><td class="px-md py-xs font-body-sm text-body-sm text-on-surface-variant">Sensorless BLDC driver</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface text-right">1</td><td class="px-md py-xs font-label-caps text-label-caps text-on-surface-variant">—</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface-variant text-right">—</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface-variant text-right">—</td></tr>
-                      <tr class="border-b border-outline-variant/40 hover:bg-surface-container"><td class="px-md py-xs font-label-mono text-label-mono text-on-surface-variant">2</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface">RP2040</td><td class="px-md py-xs font-body-sm text-body-sm text-on-surface-variant">Dual-core ARM MCU</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface text-right">1</td><td class="px-md py-xs font-label-caps text-label-caps text-on-surface-variant">—</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface-variant text-right">—</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface-variant text-right">—</td></tr>
-                      <tr class="border-b border-outline-variant/40 hover:bg-surface-container"><td class="px-md py-xs font-label-mono text-label-mono text-on-surface-variant">3</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface">INA226AIDGSR</td><td class="px-md py-xs font-body-sm text-body-sm text-on-surface-variant">Current/power monitor</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface text-right">3</td><td class="px-md py-xs font-label-caps text-label-caps text-on-surface-variant">—</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface-variant text-right">—</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface-variant text-right">—</td></tr>
-                      <tr class="border-b border-outline-variant/40 hover:bg-surface-container"><td class="px-md py-xs font-label-mono text-label-mono text-on-surface-variant">4</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface">IRLZ44NPBF</td><td class="px-md py-xs font-body-sm text-body-sm text-on-surface-variant">Logic-level N-MOSFET</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface text-right">6</td><td class="px-md py-xs font-label-caps text-label-caps text-on-surface-variant">—</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface-variant text-right">—</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface-variant text-right">—</td></tr>
-                      <tr class="hover:bg-surface-container"><td class="px-md py-xs font-label-mono text-label-mono text-on-surface-variant">5</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface">AMC1311BDWVR</td><td class="px-md py-xs font-body-sm text-body-sm text-on-surface-variant">Isolated gate driver</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface text-right">6</td><td class="px-md py-xs font-label-caps text-label-caps text-on-surface-variant">—</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface-variant text-right">—</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface-variant text-right">—</td></tr>
-                    </tbody>
-                  </table>
-                  <p class="font-label-caps text-label-caps text-on-surface-variant mt-sm">…and 28 more rows</p>
-                </div>
-              </td>
-            </tr>
-            <!-- Row 6 — Draft -->
-            <tr class="list-row border-b border-outline-variant/50 hover:bg-surface-container-low transition-colors cursor-pointer" data-name="RF Frontend Board" data-parts="58" data-cost="0" data-status="draft" data-modified="2026-05-31" data-savings="0">
-              <td class="px-md py-sm text-center"><span class="material-symbols-outlined text-on-surface-variant chevron transition-transform duration-200" style="font-size:16px;">chevron_right</span></td>
-              <td class="px-md py-sm"><div class="flex items-center gap-sm"><span class="material-symbols-outlined text-on-surface-variant" style="font-size:16px;" data-icon="wifi_tethering">wifi_tethering</span><span class="font-body-sm text-body-sm font-medium text-on-surface">RF Frontend Board</span></div></td>
-              <td class="px-md py-sm"><span class="px-sm py-xs rounded-full font-label-caps text-label-caps bg-surface-container-high text-on-surface-variant">Draft</span></td>
-              <td class="px-md py-sm text-right font-label-mono text-label-mono text-on-surface">58</td>
-              <td class="px-md py-sm text-right font-label-mono text-label-mono text-on-surface-variant">—</td>
-              <td class="px-md py-sm font-label-caps text-label-caps text-on-surface-variant">—</td>
-              <td class="px-md py-sm font-body-sm text-body-sm text-on-surface-variant">May 31, 2026</td>
-              <td class="px-md py-sm" onclick="event.stopPropagation()"><div class="flex gap-sm"><button data-tooltip="Open this BOM" onclick="window.top.location.href='/bom?id=rf'" class="px-sm py-xs bg-primary text-on-primary rounded font-label-caps text-label-caps hover:bg-on-primary-fixed-variant transition-all">Open</button><button data-tooltip="Open this BOM" onclick="showToast('BOM duplicated.')" class="px-sm py-xs border border-outline-variant rounded font-label-caps text-label-caps text-on-surface-variant hover:bg-surface-container transition-all">Dup</button><button data-tooltip="Open this BOM" onclick="deleteListRow(this)" class="px-sm py-xs border border-error/30 text-error rounded font-label-caps text-label-caps hover:bg-error/10 transition-all">Del</button></div></td>
-            </tr>
-            <tr class="expand-row hidden" data-for="RF Frontend Board">
-              <td colspan="8" class="p-0">
-                <div class="bg-surface-container-low px-[52px] py-md">
-                  <p class="font-label-caps text-label-caps text-on-surface-variant uppercase mb-sm">BOM Preview — first 5 rows (draft — not yet optimized)</p>
-                  <table class="w-full text-sm border border-outline-variant rounded overflow-hidden">
-                    <thead><tr class="bg-surface-container border-b border-outline-variant"><th class="px-md py-xs font-label-caps text-label-caps text-on-surface-variant text-left uppercase">Row</th><th class="px-md py-xs font-label-caps text-label-caps text-on-surface-variant text-left uppercase">MPN</th><th class="px-md py-xs font-label-caps text-label-caps text-on-surface-variant text-left uppercase">Description</th><th class="px-md py-xs font-label-caps text-label-caps text-on-surface-variant text-right uppercase">Qty</th><th class="px-md py-xs font-label-caps text-label-caps text-on-surface-variant text-left uppercase">Distributor</th><th class="px-md py-xs font-label-caps text-label-caps text-on-surface-variant text-right uppercase">Unit $</th><th class="px-md py-xs font-label-caps text-label-caps text-on-surface-variant text-right uppercase">Ext. $</th></tr></thead>
-                    <tbody>
-                      <tr class="border-b border-outline-variant/40 hover:bg-surface-container"><td class="px-md py-xs font-label-mono text-label-mono text-on-surface-variant">1</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface">RF5110G</td><td class="px-md py-xs font-body-sm text-body-sm text-on-surface-variant">PA module 0.1–6 GHz</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface text-right">2</td><td class="px-md py-xs font-label-caps text-label-caps text-on-surface-variant">—</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface-variant text-right">—</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface-variant text-right">—</td></tr>
-                      <tr class="border-b border-outline-variant/40 hover:bg-surface-container"><td class="px-md py-xs font-label-mono text-label-mono text-on-surface-variant">2</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface">SKY13335-381LF</td><td class="px-md py-xs font-body-sm text-body-sm text-on-surface-variant">SPDT RF switch</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface text-right">4</td><td class="px-md py-xs font-label-caps text-label-caps text-on-surface-variant">—</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface-variant text-right">—</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface-variant text-right">—</td></tr>
-                      <tr class="border-b border-outline-variant/40 hover:bg-surface-container"><td class="px-md py-xs font-label-mono text-label-mono text-on-surface-variant">3</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface">ADL5521ACPZ</td><td class="px-md py-xs font-body-sm text-body-sm text-on-surface-variant">LNA 0.4–4 GHz</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface text-right">2</td><td class="px-md py-xs font-label-caps text-label-caps text-on-surface-variant">—</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface-variant text-right">—</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface-variant text-right">—</td></tr>
-                      <tr class="border-b border-outline-variant/40 hover:bg-surface-container"><td class="px-md py-xs font-label-mono text-label-mono text-on-surface-variant">4</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface">HMC241QS16E</td><td class="px-md py-xs font-body-sm text-body-sm text-on-surface-variant">GaAs SP4T switch</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface text-right">1</td><td class="px-md py-xs font-label-caps text-label-caps text-on-surface-variant">—</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface-variant text-right">—</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface-variant text-right">—</td></tr>
-                      <tr class="hover:bg-surface-container"><td class="px-md py-xs font-label-mono text-label-mono text-on-surface-variant">5</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface">PE4302</td><td class="px-md py-xs font-body-sm text-body-sm text-on-surface-variant">6-bit digital attenuator</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface text-right">2</td><td class="px-md py-xs font-label-caps text-label-caps text-on-surface-variant">—</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface-variant text-right">—</td><td class="px-md py-xs font-label-mono text-label-mono text-on-surface-variant text-right">—</td></tr>
-                    </tbody>
-                  </table>
-                  <p class="font-label-caps text-label-caps text-on-surface-variant mt-sm">…and 53 more rows</p>
-                </div>
-              </td>
-            </tr>
-          </tbody>
+          <tbody id="list-tbody"></tbody>
         </table>
       </div>
     </div>
 
-    <!-- Empty state (hidden) -->
-    <div id="empty-state" class="hidden flex-col items-center justify-center py-[120px] text-center">
+    <!-- Empty state -->
+    <div id="empty-state" class="flex flex-col items-center justify-center py-[120px] text-center">
       <span class="material-symbols-outlined text-outline mb-lg" style="font-size:48px;">inventory_2</span>
       <p class="font-headline-md text-headline-md text-on-surface mb-sm">No BOM projects yet</p>
       <p class="font-body-lg text-body-lg text-on-surface-variant mb-xl">Upload a BOM to get started.</p>
@@ -869,5 +402,55 @@ aside [data-tooltip]::after{
       });
     });
   })();
+  // Auth gate
+  (function() {
+    if (!localStorage.getItem('kitted_user')) {
+      window.top.location.href = '/onboarding';
+    }
+  })();
+
+  // Load saved BOMs from localStorage
+  (function() {
+    var COLORS = ['#60a5fa','#a78bfa','#34d399','#fbbf24','#f87171','#22d3ee'];
+    var boms = JSON.parse(localStorage.getItem('kitted_boms') || '[]');
+    if (!boms.length) return;
+    var grid = document.getElementById('bom-grid');
+    var tbody = document.getElementById('list-tbody');
+    boms.forEach(function(bom, idx) {
+      var color = COLORS[idx % COLORS.length];
+      var dateStr = bom.date ? new Date(bom.date).toLocaleDateString('en-US', {month:'short', day:'numeric', year:'numeric'}) : '';
+      var partsCount = bom.parts ? bom.parts.length : 0;
+      // Grid card
+      var card = document.createElement('div');
+      card.className = 'bom-card bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden hover:shadow-md transition-shadow';
+      card.style.borderLeft = '3px solid ' + color;
+      card.dataset.name = bom.name;
+      card.innerHTML = '<div class="p-md"><div class="flex items-start justify-between mb-sm"><div><h3 class="font-headline-md text-headline-md text-on-surface">' + bom.name + '</h3><p class="font-label-caps text-[10px] text-on-surface-variant mt-xs">' + partsCount + ' PARTS &bull; ' + dateStr + '</p></div><span class="px-sm py-xs rounded-full font-label-caps text-label-caps bg-green-50 text-green-700 text-[10px]">Saved</span></div></div><div class="px-md pb-md flex gap-sm"><button onclick="deleteBomById(' + bom.id + ', this)" class="px-md py-xs border border-error/30 text-error rounded font-label-caps text-label-caps hover:bg-error/10 transition-all ml-auto">Delete</button></div>';
+      grid.appendChild(card);
+      // List row
+      if (tbody) {
+        var tr = document.createElement('tr');
+        tr.className = 'list-row border-b border-outline-variant/50 hover:bg-surface-container-low transition-colors cursor-pointer';
+        tr.dataset.name = bom.name;
+        tr.dataset.parts = partsCount;
+        tr.dataset.cost = '0';
+        tr.dataset.status = 'saved';
+        tr.dataset.modified = bom.date ? bom.date.split('T')[0] : '';
+        tr.dataset.savings = '0';
+        tr.innerHTML = '<td class="w-8 px-xs py-md"></td><td class="px-md py-md font-body-sm text-body-sm text-on-surface">' + bom.name + '</td><td class="px-md py-md"><span class="px-sm py-xs rounded-full font-label-caps text-label-caps bg-green-50 text-green-700 text-[10px]">Saved</span></td><td class="px-md py-md text-right font-label-mono text-label-mono">' + partsCount + '</td><td class="px-md py-md text-right font-label-mono text-label-mono">—</td><td class="px-md py-md">—</td><td class="px-md py-md font-body-sm text-body-sm text-on-surface-variant">' + dateStr + '</td><td class="px-md py-md"><button onclick="deleteBomById(' + bom.id + ', this.closest('tr'))" class="font-label-caps text-label-caps text-error hover:underline">Delete</button></td>';
+        tbody.appendChild(tr);
+      }
+    });
+    checkEmpty();
+  })();
+
+  function deleteBomById(id, el) {
+    var boms = JSON.parse(localStorage.getItem('kitted_boms') || '[]');
+    boms = boms.filter(function(b) { return b.id !== id; });
+    localStorage.setItem('kitted_boms', JSON.stringify(boms));
+    if (el) el.closest('.bom-card, tr') && el.closest('.bom-card, tr').remove();
+    checkEmpty();
+  }
+
 </script>
 </body></html>

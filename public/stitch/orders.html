@@ -159,38 +159,15 @@ aside [data-tooltip]::after{
           </tr>
         </thead>
         <tbody id="orders-tbody">
-          <tr class="order-row cursor-pointer cursor-pointer cursor-pointer cursor-pointer cursor-pointer cursor-pointer cursor-pointer cursor-pointer border-b border-outline-variant/40 hover:bg-surface-container-low transition-colors" onclick="toggleOrder(this)" onclick="toggleOrder(this)" onclick="toggleOrder(this)" onclick="toggleOrder(this)" onclick="toggleOrder(this)" onclick="toggleOrder(this)" onclick="toggleOrder(this)" onclick="toggleOrder(this)" data-status="delivered"><td class="w-8 px-xs py-md text-center"><span class="material-symbols-outlined text-outline select-none order-chevron" style="font-size:18px;transition:transform 0.2s">chevron_right</span></td><td class="w-8 px-xs py-md text-center"><span class="material-symbols-outlined text-outline select-none order-chevron" style="font-size:18px;transition:transform 0.2s">chevron_right</span></td><td class="w-8 px-xs py-md text-center"><span class="material-symbols-outlined text-outline select-none order-chevron" style="font-size:18px;transition:transform 0.2s">chevron_right</span></td><td class="w-8 px-xs py-md text-center"><span class="material-symbols-outlined text-outline select-none order-chevron" style="font-size:18px;transition:transform 0.2s">chevron_right</span></td><td class="w-8 px-xs py-md text-center"><span class="material-symbols-outlined text-outline select-none order-chevron" style="font-size:18px;transition:transform 0.2s">chevron_right</span></td><td class="w-8 px-xs py-md text-center"><span class="material-symbols-outlined text-outline select-none order-chevron" style="font-size:18px;transition:transform 0.2s">chevron_right</span></td><td class="w-8 px-xs py-md text-center"><span class="material-symbols-outlined text-outline select-none order-chevron" style="font-size:18px;transition:transform 0.2s">chevron_right</span></td><td class="w-8 px-xs py-md text-center"><span class="material-symbols-outlined text-outline select-none order-chevron" style="font-size:18px;transition:transform 0.2s">chevron_right</span></td>
-            <td class="px-lg py-md distributor-dk pl-[21px]"><span class="font-label-mono text-label-mono text-on-surface">#ORD-2841</span></td>
-            <td class="px-lg py-md"><span class="font-body-sm text-body-sm text-on-surface">Motor Controller Rev2</span></td>
-            <td class="px-lg py-md"><span class="font-label-caps text-label-caps text-on-surface-variant">Digi-Key</span></td>
-            <td class="px-lg py-md"><span class="font-body-sm text-body-sm text-on-surface-variant">May 28, 2026</span></td>
-            <td class="px-lg py-md text-right"><span class="font-label-mono text-label-mono text-on-surface">47</span></td>
-            <td class="px-lg py-md text-right"><span class="font-label-mono text-label-mono text-on-surface font-bold">$834.20</span></td>
-            <td class="px-lg py-md"><span class="px-sm py-xs rounded-full font-label-caps text-label-caps bg-green-50 text-green-700">Delivered</span></td>
-            <td class="px-lg py-md"><button data-tooltip="View order details" onclick="showToast('Order details — coming soon.')" class="font-label-caps text-label-caps text-primary hover:underline">View</button></td>
+          <tr id="orders-empty-row">
+            <td colspan="9" class="py-[80px] text-center">
+              <span class="material-symbols-outlined text-outline block mb-md" style="font-size:40px">local_shipping</span>
+              <p class="font-headline-md text-headline-md text-on-surface mb-sm">No orders yet</p>
+              <p class="font-body-sm text-body-sm text-on-surface-variant">Orders placed after optimizing a BOM will appear here.</p>
+            </td>
           </tr>
-  <tr class="order-expand hidden border-b border-outline-variant/40 bg-surface-container-low/40">
-    <td colspan="9" class="px-lg pt-sm pb-md">
-      <p class="font-label-caps text-[10px] text-outline uppercase tracking-wider mb-sm">Parts in this order</p>
-      <table class="w-full">
-        <thead><tr class="border-b border-outline-variant/30">
-          <th class="text-left pb-xs font-label-caps text-[10px] text-outline uppercase">MPN</th>
-          <th class="text-left pb-xs font-label-caps text-[10px] text-outline uppercase">Description</th>
-          <th class="text-right pb-xs font-label-caps text-[10px] text-outline uppercase">Qty</th>
-          <th class="text-right pb-xs font-label-caps text-[10px] text-outline uppercase">Unit $</th>
-          <th class="text-right pb-xs font-label-caps text-[10px] text-outline uppercase">Ext. $</th>
-        </tr></thead>
-        <tbody>
-<tr class="border-b border-outline-variant/20"><td class="py-xs pr-lg font-label-mono text-label-mono text-xs">DRV8434S</td><td class="py-xs pr-lg font-body-sm text-body-sm text-on-surface-variant text-xs">Stepper Gate Driver IC</td><td class="py-xs pr-lg text-right font-label-mono text-label-mono text-xs">12</td><td class="py-xs pr-lg text-right font-label-mono text-label-mono text-xs">$3.47</td><td class="py-xs text-right font-label-mono text-label-mono text-xs">$41.64</td></tr>
-<tr class="border-b border-outline-variant/20"><td class="py-xs pr-lg font-label-mono text-label-mono text-xs">IRF7843PBF</td><td class="py-xs pr-lg font-body-sm text-body-sm text-on-surface-variant text-xs">N-Ch MOSFET 30V 161A</td><td class="py-xs pr-lg text-right font-label-mono text-label-mono text-xs">8</td><td class="py-xs pr-lg text-right font-label-mono text-label-mono text-xs">$2.89</td><td class="py-xs text-right font-label-mono text-label-mono text-xs">$23.12</td></tr>
-<tr class="border-b border-outline-variant/20"><td class="py-xs pr-lg font-label-mono text-label-mono text-xs">GRM188R71C104KA01D</td><td class="py-xs pr-lg font-body-sm text-body-sm text-on-surface-variant text-xs">100nF MLCC 16V X7R 0402</td><td class="py-xs pr-lg text-right font-label-mono text-label-mono text-xs">24</td><td class="py-xs pr-lg text-right font-label-mono text-label-mono text-xs">$0.08</td><td class="py-xs text-right font-label-mono text-label-mono text-xs">$1.92</td></tr>
-<tr class="border-b border-outline-variant/20"><td class="py-xs pr-lg font-label-mono text-label-mono text-xs">SMBJ5.0A-TP</td><td class="py-xs pr-lg font-body-sm text-body-sm text-on-surface-variant text-xs">TVS Diode 5V 600W SMB</td><td class="py-xs pr-lg text-right font-label-mono text-label-mono text-xs">4</td><td class="py-xs pr-lg text-right font-label-mono text-label-mono text-xs">$0.62</td><td class="py-xs text-right font-label-mono text-label-mono text-xs">$2.48</td></tr>
-<tr class=""><td class="py-xs pr-lg font-label-mono text-label-mono text-xs">ERJ-3GEYJ103V</td><td class="py-xs pr-lg font-body-sm text-body-sm text-on-surface-variant text-xs">10kΩ Resistor 1/10W 0402</td><td class="py-xs pr-lg text-right font-label-mono text-label-mono text-xs">50</td><td class="py-xs pr-lg text-right font-label-mono text-label-mono text-xs">$0.02</td><td class="py-xs text-right font-label-mono text-label-mono text-xs">$1.00</td></tr>
         </tbody>
       </table>
-      <button data-tooltip="Show all parts in this order" class="mt-sm font-label-caps text-label-caps text-xs text-primary hover:underline" onclick="showToast('Full part list — coming soon.')">Show all 47 parts →</button>
-    </td>
-  </tr>
 
           <tr class="order-row border-b border-outline-variant/40 hover:bg-surface-container-low transition-colors" data-status="shipped">
             <td class="px-lg py-md distributor-mouser pl-[21px]"><span class="font-label-mono text-label-mono text-on-surface">#ORD-2840</span></td>
@@ -525,5 +502,21 @@ aside [data-tooltip]::after{
       });
     });
   })();
+  // Auth gate
+  (function() {
+    if (!localStorage.getItem('kitted_user')) {
+      window.top.location.href = '/onboarding';
+    }
+  })();
+
+  // Hide empty row when real orders exist (future use)
+  (function() {
+    var orders = JSON.parse(localStorage.getItem('kitted_orders') || '[]');
+    if (orders.length) {
+      var emptyRow = document.getElementById('orders-empty-row');
+      if (emptyRow) emptyRow.remove();
+    }
+  })();
+
 </script>
 </body></html>

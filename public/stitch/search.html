@@ -19,6 +19,7 @@
         .distributor-border-lcsc { border-left: 3px solid #FC6A03; }
         .hide-scrollbar::-webkit-scrollbar { display: none; }
         .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        @keyframes spin { to { transform: rotate(360deg); } }
     
 /* custom tooltips */
 header [data-tooltip]::after{bottom:auto;top:calc(100% + 7px);}
@@ -210,225 +211,11 @@ aside [data-tooltip]::after{
 </div>
 <div class="flex items-center gap-sm">
 <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-<span class="font-label-mono text-label-mono text-on-surface-variant">2,481 results found</span>
+<span class="font-label-mono text-label-mono text-on-surface-variant" id="results-count">Loading…</span>
 </div>
 </section>
 <!-- Results Grid -->
-<section class="space-y-xl">
-<!-- Result Card 1 -->
-<div class="bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden transition-shadow hover:shadow-md">
-<div class="px-lg py-md bg-surface-container-low border-b border-outline-variant flex items-center justify-between">
-<div class="flex items-center gap-md">
-<span class="material-symbols-outlined text-primary" data-icon="memory">memory</span>
-<h3 class="font-headline-md text-headline-md text-on-surface">Arduino Uno R3 — <span class="font-normal text-on-surface-variant">2 versions, 2 brands</span></h3>
-</div>
-<button data-tooltip="View part datasheet" class="text-primary font-label-caps text-label-caps hover:underline" onclick="window.open('https://octopart.com/search?q=Arduino+Uno+R3&currency=USD&specs=0','_blank')">View Datasheet</button>
-</div>
-<!-- Variant 1 -->
-<div class="p-lg border-b border-outline-variant/30">
-<div class="flex flex-wrap items-center justify-between mb-lg">
-<div class="flex items-center gap-md">
-<div class="w-10 h-10 rounded border border-outline-variant bg-surface-container-low flex items-center justify-center">
-<span class="material-symbols-outlined text-primary">developer_board</span>
-</div>
-<div>
-<div class="flex items-center gap-sm mb-xs">
-<span class="font-body-lg text-body-lg font-bold">Arduino Uno R3</span>
-<span class="bg-primary text-on-primary font-label-caps text-[10px] px-sm py-0.5 rounded-full uppercase">Official</span>
-</div>
-<p class="font-label-mono text-label-mono text-on-surface-variant">SKU: A000066 | ATmega328P, 5V, 16MHz</p>
-</div>
-</div>
-</div>
-<!-- Distributor Rows for Variant 1 -->
-<div class="space-y-sm">
-<div class="distributor-border-dk bg-white p-md flex items-center justify-between group hover:bg-surface-container-low transition-colors rounded-sm border border-outline-variant/30 border-l-0">
-<div class="grid grid-cols-1 md:grid-cols-4 gap-xl flex-1">
-<div class="flex items-center gap-md">
-<div class="w-8 h-8 flex items-center justify-center font-bold text-[10px] bg-[#CC0000] text-white rounded">DK</div>
-<span class="font-body-sm text-body-sm font-semibold">Digi-Key</span>
-</div>
-<div class="flex flex-col">
-<span class="font-label-caps text-[10px] text-outline uppercase">Inventory</span>
-<span class="font-body-sm text-body-sm font-medium">Stock: 4,291</span>
-</div>
-<div class="flex flex-col">
-<span class="font-label-caps text-[10px] text-outline uppercase">Logistics</span>
-<span class="font-body-sm text-body-sm">Shipping: 1-2 days</span>
-</div>
-<div class="flex flex-col">
-<span class="font-label-caps text-[10px] text-outline uppercase">Unit Price</span>
-<span class="font-body-sm text-body-sm font-semibold text-on-surface">$24.99</span>
-</div>
-</div>
-<a href="https://www.digikey.com/en/products/result?keywords=A000066" target="_blank" rel="noopener" data-tooltip="View on distributor site" class="flex items-center gap-xs border border-outline-variant px-md py-xs rounded font-label-caps text-label-caps text-on-surface-variant hover:text-primary hover:border-primary transition-all"><span class="material-symbols-outlined !text-sm">open_in_new</span></a>
-<button data-tooltip="Add this part to a BOM" class="add-btn flex items-center gap-xs bg-surface-container-lowest border border-outline-variant px-md py-xs rounded font-label-caps text-label-caps hover:bg-primary hover:text-on-primary hover:border-primary transition-all">
-<span class="material-symbols-outlined !text-sm" data-icon="add">add</span> Add
-                                </button>
-</div>
-<div class="distributor-border-mouser bg-white p-md flex items-center justify-between group hover:bg-surface-container-low transition-colors rounded-sm border border-outline-variant/30 border-l-0">
-<div class="grid grid-cols-1 md:grid-cols-4 gap-xl flex-1">
-<div class="flex items-center gap-md">
-<div class="w-8 h-8 flex items-center justify-center font-bold text-[10px] bg-[#004A99] text-white rounded">M</div>
-<span class="font-body-sm text-body-sm font-semibold">Mouser</span>
-</div>
-<div class="flex flex-col">
-<span class="font-label-caps text-[10px] text-outline uppercase">Inventory</span>
-<span class="font-body-sm text-body-sm font-medium">Stock: 1,850</span>
-</div>
-<div class="flex flex-col">
-<span class="font-label-caps text-[10px] text-outline uppercase">Logistics</span>
-<div class="flex items-center gap-sm">
-<span class="font-body-sm text-body-sm">Shipping: 2-3 days</span>
-<span class="bg-green-100 text-green-700 font-label-caps text-[10px] px-sm py-0.5 rounded-full border border-green-200 uppercase">Best Price</span>
-</div>
-</div>
-<div class="flex flex-col">
-<span class="font-label-caps text-[10px] text-outline uppercase">Unit Price</span>
-<span class="font-body-sm text-body-sm font-semibold text-green-700">$22.50</span>
-</div>
-</div>
-<a href="https://www.mouser.com/Search/Refine?Keyword=A000066" target="_blank" rel="noopener" data-tooltip="View on distributor site" class="flex items-center gap-xs border border-outline-variant px-md py-xs rounded font-label-caps text-label-caps text-on-surface-variant hover:text-primary hover:border-primary transition-all"><span class="material-symbols-outlined !text-sm">open_in_new</span></a>
-<button data-tooltip="Add this part to a BOM" class="add-btn flex items-center gap-xs bg-surface-container-lowest border border-outline-variant px-md py-xs rounded font-label-caps text-label-caps hover:bg-primary hover:text-on-primary hover:border-primary transition-all">
-<span class="material-symbols-outlined !text-sm" data-icon="add">add</span> Add
-                                </button>
-</div>
-</div>
-<div class="mt-sm">
-  <button data-tooltip="Show or hide specifications" class="flex items-center gap-xs font-label-caps text-[10px] text-outline uppercase hover:text-primary transition-colors" onclick="toggleSpecs('ard-official')">
-    <span class="material-symbols-outlined select-none" id="specs-ch-ard-official" style="font-size:14px;transition:transform 0.2s">expand_more</span>
-    Technical Specs
-  </button>
-  <div id="specs-ard-official" class="hidden mt-sm grid grid-cols-2 md:grid-cols-5 gap-sm">
-    <div class="flex flex-col"><span class="font-label-caps text-[10px] text-outline uppercase">Package</span><span class="font-body-sm text-body-sm">Through-Hole DIP</span></div>
-    <div class="flex flex-col"><span class="font-label-caps text-[10px] text-outline uppercase">Min Order</span><span class="font-body-sm text-body-sm">1 unit</span></div>
-    <div class="flex flex-col"><span class="font-label-caps text-[10px] text-outline uppercase">RoHS</span><span class="font-body-sm text-body-sm">Compliant</span></div>
-    <div class="flex flex-col"><span class="font-label-caps text-[10px] text-outline uppercase">Op. Temp</span><span class="font-body-sm text-body-sm">-40°C to 85°C</span></div>
-    <div class="flex flex-col"><span class="font-label-caps text-[10px] text-outline uppercase">Category</span><span class="font-body-sm text-body-sm">Development Board / MCU</span></div>
-  </div>
-</div>
-</div>
-<!-- Variant 2 -->
-<div class="p-lg bg-surface-container-lowest">
-<div class="flex flex-wrap items-center justify-between mb-lg">
-<div class="flex items-center gap-md">
-<div class="w-10 h-10 rounded border border-outline-variant bg-surface-container-low flex items-center justify-center">
-<span class="material-symbols-outlined text-outline" data-icon="developer_board">developer_board</span>
-</div>
-<div>
-<div class="flex items-center gap-sm mb-xs">
-<span class="font-body-lg text-body-lg font-bold">Uno R3 (Clone)</span>
-<span class="bg-secondary-container text-on-secondary-container font-label-caps text-[10px] px-sm py-0.5 rounded-full uppercase">Compatible</span>
-</div>
-<p class="font-label-mono text-label-mono text-on-surface-variant">SKU: DEV-11021 | ATmega328P, CH340G</p>
-</div>
-</div>
-</div>
-<div class="distributor-border-lcsc bg-white p-md flex items-center justify-between group hover:bg-surface-container-low transition-colors rounded-sm border border-outline-variant/30 border-l-0">
-<div class="grid grid-cols-1 md:grid-cols-4 gap-xl flex-1">
-<div class="flex items-center gap-md">
-<div class="w-8 h-8 flex items-center justify-center font-bold text-[10px] bg-[#FC6A03] text-white rounded">L</div>
-<span class="font-body-sm text-body-sm font-semibold">LCSC</span>
-</div>
-<div class="flex flex-col">
-<span class="font-label-caps text-[10px] text-outline uppercase">Inventory</span>
-<span class="font-body-sm text-body-sm font-medium">Stock: 12,400</span>
-</div>
-<div class="flex flex-col">
-<span class="font-label-caps text-[10px] text-outline uppercase">Logistics</span>
-<div class="flex items-center gap-sm">
-<span class="font-body-sm text-body-sm">Shipping: 5-7 days</span>
-<span class="bg-green-100 text-green-700 font-label-caps text-[10px] px-sm py-0.5 rounded-full border border-green-200 uppercase">Best Price</span>
-</div>
-</div>
-<div class="flex flex-col">
-<span class="font-label-caps text-[10px] text-outline uppercase">Unit Price</span>
-<span class="font-body-sm text-body-sm font-semibold text-green-700">$3.80</span>
-</div>
-</div>
-<a href="https://www.lcsc.com/search?q=DEV-11021" target="_blank" rel="noopener" data-tooltip="View on distributor site" class="flex items-center gap-xs border border-outline-variant px-md py-xs rounded font-label-caps text-label-caps text-on-surface-variant hover:text-primary hover:border-primary transition-all"><span class="material-symbols-outlined !text-sm">open_in_new</span></a>
-<button data-tooltip="Add this part to a BOM" class="add-btn flex items-center gap-xs bg-surface-container-lowest border border-outline-variant px-md py-xs rounded font-label-caps text-label-caps hover:bg-primary hover:text-on-primary hover:border-primary transition-all">
-<span class="material-symbols-outlined !text-sm" data-icon="add">add</span> Add
-                            </button>
-</div>
-<div class="mt-sm">
-  <button data-tooltip="Show or hide specifications" class="flex items-center gap-xs font-label-caps text-[10px] text-outline uppercase hover:text-primary transition-colors" onclick="toggleSpecs('ard-clone')">
-    <span class="material-symbols-outlined select-none" id="specs-ch-ard-clone" style="font-size:14px;transition:transform 0.2s">expand_more</span>
-    Technical Specs
-  </button>
-  <div id="specs-ard-clone" class="hidden mt-sm grid grid-cols-2 md:grid-cols-5 gap-sm">
-    <div class="flex flex-col"><span class="font-label-caps text-[10px] text-outline uppercase">Package</span><span class="font-body-sm text-body-sm">Through-Hole DIP</span></div>
-    <div class="flex flex-col"><span class="font-label-caps text-[10px] text-outline uppercase">Min Order</span><span class="font-body-sm text-body-sm">1 unit</span></div>
-    <div class="flex flex-col"><span class="font-label-caps text-[10px] text-outline uppercase">RoHS</span><span class="font-body-sm text-body-sm">Compliant</span></div>
-    <div class="flex flex-col"><span class="font-label-caps text-[10px] text-outline uppercase">Op. Temp</span><span class="font-body-sm text-body-sm">0°C to 70°C</span></div>
-    <div class="flex flex-col"><span class="font-label-caps text-[10px] text-outline uppercase">Category</span><span class="font-body-sm text-body-sm">Development Board (Clone)</span></div>
-  </div>
-</div>
-</div>
-</div>
-<!-- Result Card 2 -->
-<div class="bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden transition-shadow hover:shadow-md">
-<div class="px-lg py-md bg-surface-container-low border-b border-outline-variant flex items-center justify-between">
-<div class="flex items-center gap-md">
-<span class="material-symbols-outlined text-primary" data-icon="wifi">wifi</span>
-<h3 class="font-headline-md text-headline-md text-on-surface">ESP32-WROOM-32D — <span class="font-normal text-on-surface-variant">1 version, 1 brand</span></h3>
-</div>
-<button data-tooltip="View part datasheet" class="text-primary font-label-caps text-label-caps hover:underline" onclick="window.open('https://octopart.com/search?q=ESP32-WROOM-32D&currency=USD&specs=0','_blank')">View Datasheet</button>
-</div>
-<div class="p-lg">
-<div class="flex flex-wrap items-center justify-between mb-lg">
-<div class="flex items-center gap-md">
-<div class="w-10 h-10 rounded border border-outline-variant bg-surface-container-low flex items-center justify-center">
-<span class="material-symbols-outlined text-primary">memory</span>
-</div>
-<div>
-<div class="flex items-center gap-sm mb-xs">
-<span class="font-body-lg text-body-lg font-bold">ESP32-WROOM-32D</span>
-<span class="bg-primary text-on-primary font-label-caps text-[10px] px-sm py-0.5 rounded-full uppercase">Official</span>
-</div>
-<p class="font-label-mono text-label-mono text-on-surface-variant">SKU: ESP32-WROOM-32D-N4 | 4MB Flash, PCB Antenna</p>
-</div>
-</div>
-</div>
-<div class="distributor-border-dk bg-white p-md flex items-center justify-between group hover:bg-surface-container-low transition-colors rounded-sm border border-outline-variant/30 border-l-0">
-<div class="grid grid-cols-1 md:grid-cols-4 gap-xl flex-1">
-<div class="flex items-center gap-md">
-<div class="w-8 h-8 flex items-center justify-center font-bold text-[10px] bg-[#CC0000] text-white rounded">DK</div>
-<span class="font-body-sm text-body-sm font-semibold">Digi-Key</span>
-</div>
-<div class="flex flex-col">
-<span class="font-label-caps text-[10px] text-outline uppercase">Inventory</span>
-<span class="font-body-sm text-body-sm font-medium">Stock: 45,200</span>
-</div>
-<div class="flex flex-col">
-<span class="font-label-caps text-[10px] text-outline uppercase">Logistics</span>
-<span class="font-body-sm text-body-sm">Shipping: 1-2 days</span>
-</div>
-<div class="flex flex-col">
-<span class="font-label-caps text-[10px] text-outline uppercase">Unit Price</span>
-<span class="font-body-sm text-body-sm font-semibold text-on-surface">$3.50</span>
-</div>
-</div>
-<a href="https://www.digikey.com/en/products/result?keywords=ESP32-WROOM-32D-N4" target="_blank" rel="noopener" data-tooltip="View on distributor site" class="flex items-center gap-xs border border-outline-variant px-md py-xs rounded font-label-caps text-label-caps text-on-surface-variant hover:text-primary hover:border-primary transition-all"><span class="material-symbols-outlined !text-sm">open_in_new</span></a>
-<button data-tooltip="Add this part to a BOM" class="add-btn flex items-center gap-xs bg-surface-container-lowest border border-outline-variant px-md py-xs rounded font-label-caps text-label-caps hover:bg-primary hover:text-on-primary hover:border-primary transition-all">
-<span class="material-symbols-outlined !text-sm" data-icon="add">add</span> Add
-                            </button>
-</div>
-</div>
-<div class="mt-sm">
-  <button data-tooltip="Show or hide specifications" class="flex items-center gap-xs font-label-caps text-[10px] text-outline uppercase hover:text-primary transition-colors" onclick="toggleSpecs('esp32-wroom')">
-    <span class="material-symbols-outlined select-none" id="specs-ch-esp32-wroom" style="font-size:14px;transition:transform 0.2s">expand_more</span>
-    Technical Specs
-  </button>
-  <div id="specs-esp32-wroom" class="hidden mt-sm grid grid-cols-2 md:grid-cols-5 gap-sm">
-    <div class="flex flex-col"><span class="font-label-caps text-[10px] text-outline uppercase">Package</span><span class="font-body-sm text-body-sm">SMD 18×25.5mm</span></div>
-    <div class="flex flex-col"><span class="font-label-caps text-[10px] text-outline uppercase">Min Order</span><span class="font-body-sm text-body-sm">1 unit</span></div>
-    <div class="flex flex-col"><span class="font-label-caps text-[10px] text-outline uppercase">RoHS</span><span class="font-body-sm text-body-sm">Compliant</span></div>
-    <div class="flex flex-col"><span class="font-label-caps text-[10px] text-outline uppercase">Op. Temp</span><span class="font-body-sm text-body-sm">-40°C to 85°C</span></div>
-    <div class="flex flex-col"><span class="font-label-caps text-[10px] text-outline uppercase">Category</span><span class="font-body-sm text-body-sm">Wi-Fi + BLE Module</span></div>
-  </div>
-</div>
-</div>
+<section class="space-y-xl" id="results-grid">
 </section>
 </div>
 </main>
@@ -633,8 +420,10 @@ aside [data-tooltip]::after{
 
         searchInput.addEventListener('keydown', (e) => {
             if (e.key === 'Enter') {
-                pushHistory(searchInput.value);
+                const q = searchInput.value.trim();
+                pushHistory(q);
                 closeHistory();
+                performSearch(q);
             }
         });
 
@@ -685,10 +474,147 @@ aside [data-tooltip]::after{
         // ── Trending chips ────────────────────────────────────────────────
         document.querySelectorAll('.flex.flex-wrap.items-center.gap-sm button').forEach(chip => {
             chip.addEventListener('click', () => {
-                searchInput.value = chip.textContent.trim();
+                const q = chip.textContent.trim();
+                searchInput.value = q;
                 searchInput.focus();
-                pushHistory(chip.textContent.trim());
+                pushHistory(q);
+                performSearch(q);
             });
         });
+
+        // ── Distributor config ────────────────────────────────────────────
+        const DIST_CONFIG = {
+          DK: { name: 'Digi-Key',     color: '#CC0000', abbr: 'DK', url: m => `https://www.digikey.com/en/products/result?keywords=${encodeURIComponent(m)}` },
+          MO: { name: 'Mouser',       color: '#004A99', abbr: 'M',  url: m => `https://www.mouser.com/Search/Refine?Keyword=${encodeURIComponent(m)}` },
+          AR: { name: 'Arrow',        color: '#FF6600', abbr: 'AR', url: m => `https://www.arrow.com/en/products/search?q=${encodeURIComponent(m)}` },
+          NW: { name: 'Newark',       color: '#003087', abbr: 'NW', url: m => `https://www.newark.com/search?st=${encodeURIComponent(m)}` },
+          LC: { name: 'LCSC',         color: '#FC6A03', abbr: 'L',  url: m => `https://www.lcsc.com/search?q=${encodeURIComponent(m)}` },
+          AZ: { name: 'Amazon',       color: '#FF9900', abbr: 'AZ', url: m => `https://www.amazon.com/s?k=${encodeURIComponent(m)}` },
+          SF: { name: 'SparkFun',     color: '#E53935', abbr: 'SF', url: m => `https://www.sparkfun.com/search/results?term=${encodeURIComponent(m)}` },
+          AD: { name: 'Adafruit',     color: '#222222', abbr: 'AD', url: m => `https://www.adafruit.com/search?q=${encodeURIComponent(m)}` },
+          RS: { name: 'RS Comp.',     color: '#CC0000', abbr: 'RS', url: m => `https://uk.rs-online.com/web/c/?searchTerm=${encodeURIComponent(m)}` },
+        };
+
+        let _specsOpen = {}, _specsIdx = 0;
+
+        function toggleSpecsDyn(uid) {
+          const panel = document.getElementById('dsp-' + uid);
+          const ch    = document.getElementById('dsp-ch-' + uid);
+          if (!panel) return;
+          _specsOpen[uid] = !_specsOpen[uid];
+          panel.classList.toggle('hidden', !_specsOpen[uid]);
+          if (ch) ch.style.transform = _specsOpen[uid] ? 'rotate(180deg)' : '';
+        }
+
+        function renderDistRow(offer, mpn) {
+          const [sid, price, stock, eta] = offer;
+          const d = DIST_CONFIG[sid] || { name: sid, color: '#666', abbr: sid, url: () => '#' };
+          return `<div class="bg-surface-container-lowest p-md flex items-center justify-between hover:bg-surface-container-low transition-colors rounded-sm border border-outline-variant/30">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-xl flex-1">
+              <div class="flex items-center gap-md">
+                <div class="w-8 h-8 flex items-center justify-center font-bold text-[10px] text-white rounded" style="background:${d.color}">${d.abbr}</div>
+                <span class="font-body-sm text-body-sm font-semibold">${d.name}</span>
+              </div>
+              <div class="flex flex-col">
+                <span class="font-label-caps text-[10px] text-outline uppercase">Inventory</span>
+                <span class="font-body-sm text-body-sm font-medium">Stock: ${stock.toLocaleString()}</span>
+              </div>
+              <div class="flex flex-col">
+                <span class="font-label-caps text-[10px] text-outline uppercase">Logistics</span>
+                <span class="font-body-sm text-body-sm">${eta}</span>
+              </div>
+              <div class="flex flex-col">
+                <span class="font-label-caps text-[10px] text-outline uppercase">Unit Price</span>
+                <span class="font-body-sm text-body-sm font-semibold text-on-surface">$${price.toFixed(2)}</span>
+              </div>
+            </div>
+            <a href="${d.url(mpn)}" target="_blank" rel="noopener" data-tooltip="View on distributor site"
+               class="flex items-center gap-xs border border-outline-variant px-md py-xs rounded font-label-caps text-label-caps text-on-surface-variant hover:text-primary hover:border-primary transition-all ml-md">
+              <span class="material-symbols-outlined !text-sm">open_in_new</span>
+            </a>
+            <button data-tooltip="Add this part to a BOM" class="add-btn flex items-center gap-xs bg-surface-container-lowest border border-outline-variant px-md py-xs rounded font-label-caps text-label-caps hover:bg-primary hover:text-on-primary hover:border-primary transition-all ml-sm">
+              <span class="material-symbols-outlined !text-sm">add</span> Add
+            </button>
+          </div>`;
+        }
+
+        function renderEntry(entry, isLast) {
+          const uid = 'e' + (++_specsIdx);
+          const badge = entry.official
+            ? `<span class="bg-primary text-on-primary font-label-caps text-[10px] px-sm py-0.5 rounded-full uppercase">Official</span>`
+            : `<span class="bg-secondary-container text-on-secondary-container font-label-caps text-[10px] px-sm py-0.5 rounded-full uppercase">Compatible</span>`;
+          const rows = (entry.offers || []).map(o => renderDistRow(o, entry.mpn)).join('');
+          return `<div class="p-lg ${isLast ? '' : 'border-b border-outline-variant/30'}">
+            <div class="flex flex-wrap items-center justify-between mb-lg">
+              <div class="flex items-center gap-md">
+                <div class="w-10 h-10 rounded border border-outline-variant bg-surface-container-low flex items-center justify-center">
+                  <span class="material-symbols-outlined ${entry.official ? 'text-primary' : 'text-outline'}">developer_board</span>
+                </div>
+                <div>
+                  <div class="flex items-center gap-sm mb-xs">
+                    <span class="font-body-lg text-body-lg font-bold">${entry.brand} ${entry.thumb}</span>
+                    ${badge}
+                  </div>
+                  <p class="font-label-mono text-label-mono text-on-surface-variant">MPN: ${entry.mpn} | ${entry.mcu} | ${entry.specs}</p>
+                </div>
+              </div>
+            </div>
+            <div class="space-y-sm">${rows}</div>
+            <div class="mt-sm">
+              <button data-tooltip="Show or hide specifications"
+                class="flex items-center gap-xs font-label-caps text-[10px] text-outline uppercase hover:text-primary transition-colors"
+                onclick="toggleSpecsDyn('${uid}')">
+                <span class="material-symbols-outlined select-none" id="dsp-ch-${uid}" style="font-size:14px;transition:transform 0.2s">expand_more</span>
+                Technical Specs
+              </button>
+              <div id="dsp-${uid}" class="hidden mt-sm grid grid-cols-2 md:grid-cols-3 gap-sm">
+                <div class="flex flex-col"><span class="font-label-caps text-[10px] text-outline uppercase">MPN</span><span class="font-body-sm text-body-sm font-mono">${entry.mpn}</span></div>
+                <div class="flex flex-col"><span class="font-label-caps text-[10px] text-outline uppercase">MCU / IC</span><span class="font-body-sm text-body-sm">${entry.mcu}</span></div>
+                <div class="flex flex-col"><span class="font-label-caps text-[10px] text-outline uppercase">Specs</span><span class="font-body-sm text-body-sm">${entry.specs}</span></div>
+              </div>
+            </div>
+          </div>`;
+        }
+
+        function renderGroup(group) {
+          const { family, entries } = group;
+          const brands = [...new Set(entries.map(e => e.brand))].length;
+          const subtitle = entries.length > 1 ? `${entries.length} variants, ${brands} brand${brands > 1 ? 's' : ''}` : '1 variant';
+          const cards = entries.map((e, i) => renderEntry(e, i === entries.length - 1)).join('');
+          const q = encodeURIComponent(family);
+          return `<div class="bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden transition-shadow hover:shadow-md">
+            <div class="px-lg py-md bg-surface-container-low border-b border-outline-variant flex items-center justify-between">
+              <div class="flex items-center gap-md">
+                <span class="material-symbols-outlined text-primary">memory</span>
+                <h3 class="font-headline-md text-headline-md text-on-surface">${family} — <span class="font-normal text-on-surface-variant">${subtitle}</span></h3>
+              </div>
+              <button data-tooltip="View part datasheet" class="text-primary font-label-caps text-label-caps hover:underline"
+                onclick="window.open('https://octopart.com/search?q=${q}&currency=USD&specs=0','_blank')">View Datasheet</button>
+            </div>
+            ${cards}
+          </div>`;
+        }
+
+        async function performSearch(q) {
+          const grid     = document.getElementById('results-grid');
+          const countEl  = document.getElementById('results-count');
+          grid.innerHTML = '<div class="flex items-center justify-center py-2xl text-on-surface-variant gap-md"><span class="material-symbols-outlined animate-spin" style="animation:spin 1s linear infinite">progress_activity</span> Searching…</div>';
+          countEl.textContent = '…';
+          try {
+            const res  = await fetch(`/api/catalog/search?q=${encodeURIComponent(q)}`);
+            const data = await res.json();
+            _specsIdx = 0; _specsOpen = {};
+            grid.innerHTML = data.groups.length
+              ? data.groups.map(renderGroup).join('')
+              : '<p class="py-2xl text-center font-body-lg text-on-surface-variant">No results found.</p>';
+            countEl.textContent = `${data.total} result${data.total !== 1 ? 's' : ''} found`;
+            grid.querySelectorAll('.add-btn').forEach(btn => btn.addEventListener('click', () => openAddModal(btn)));
+          } catch {
+            grid.innerHTML = '<p class="py-2xl text-center font-body-lg text-error">Search failed. Please try again.</p>';
+            countEl.textContent = 'Error';
+          }
+        }
+
+        performSearch('');
     </script>
 </body></html>

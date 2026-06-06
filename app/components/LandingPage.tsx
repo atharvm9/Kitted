@@ -110,8 +110,8 @@ export default function LandingPage() {
         <div className="lp-nav-links">
           <a href="#how-it-works" className="lp-nav-link">How it works</a>
           <a href="#features" className="lp-nav-link">Features</a>
-          <Link href="/optimize" className="lp-cta-btn lp-cta-btn--sm">
-            Open App <Arrow />
+          <Link href="/onboarding" className="lp-cta-btn lp-cta-btn--sm">
+            Start free <Arrow />
           </Link>
         </div>
       </nav>
@@ -131,8 +131,8 @@ export default function LandingPage() {
             and LCSC, accounting for pricing tiers, shipping, and order minimums.
           </p>
           <div className="lp-hero-actions">
-            <Link href="/optimize" className="lp-cta-btn lp-cta-btn--primary">
-              Optimize Your BOM <Arrow />
+            <Link href="/onboarding" className="lp-cta-btn lp-cta-btn--primary">
+              Start free <Arrow />
             </Link>
             <a href="#how-it-works" className="lp-ghost-btn">
               See how it works
@@ -224,8 +224,8 @@ export default function LandingPage() {
         <div className="lp-final-inner">
           <div className="lp-eyebrow font-mono">FREE TO USE</div>
           <h2 className="lp-final-heading">Your BOM is 20 minutes away from being optimized.</h2>
-          <Link href="/optimize" className="lp-cta-btn lp-cta-btn--primary lp-cta-btn--lg">
-            Open Kitted <Arrow />
+          <Link href="/onboarding" className="lp-cta-btn lp-cta-btn--primary lp-cta-btn--lg">
+            Start free — no credit card <Arrow />
           </Link>
         </div>
       </section>
