@@ -43,6 +43,8 @@ next-env.d.ts
 # claude code
 .claude/
 .impeccable/
+CLAUDE.md
+AGENTS.md
 
 # graphify (generated knowledge graph artifacts)
 graphify-out/
