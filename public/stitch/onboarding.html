@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Create Account | Kitted</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">tailwind.config = {darkMode:"class",theme:{extend:{colors:{"primary-container":"#0fc9f4","on-primary-fixed-variant":"#004e60",primary:"#00677f","error-container":"#ffdad6","surface-container-lowest":"#ffffff","on-primary":"#ffffff","on-tertiary-container":"#644300","on-secondary-container":"#386978","tertiary-fixed-dim":"#ffba43","on-secondary-fixed":"#001f27","secondary-fixed":"#b9eafc",outline:"#6c797f","on-tertiary":"#ffffff","on-surface-variant":"#3c494e","primary-fixed-dim":"#48d6ff","surface-bright":"#f5fafd","on-error-container":"#93000a","inverse-primary":"#48d6ff","primary-fixed":"#b6ebff","tertiary-fixed":"#ffddaf","inverse-on-surface":"#ecf1f5","surface-dim":"#d5dbde","on-tertiary-fixed-variant":"#614000","tertiary-container":"#f3ab26","on-secondary":"#ffffff","on-background":"#171c1f","on-primary-fixed":"#001f28","surface-container-low":"#eff4f8","outline-variant":"#bbc9cf","on-secondary-fixed-variant":"#174d5b","surface-tint":"#00677f","surface-variant":"#dee3e7","secondary-container":"#b6e7f9","on-surface":"#171c1f","surface-container":"#e9eff2",error:"#ba1a1a",background:"#f5fafd","surface-container-high":"#e3e9ec",tertiary:"#805600","on-error":"#ffffff","inverse-surface":"#2b3134",surface:"#f5fafd","surface-container-highest":"#dee3e7","on-primary-container":"#005063",secondary:"#346574","on-tertiary-fixed":"#281800"},borderRadius:{DEFAULT:"0.125rem",lg:"0.25rem",xl:"0.5rem",full:"0.75rem"},spacing:{gutter:"16px","margin-desktop":"32px",md:"16px",lg:"24px",xs:"4px","margin-mobile":"16px",xl:"48px",unit:"4px",sm:"8px"},fontFamily:{"headline-md":["Geist"],"headline-lg-mobile":["Geist"],"body-sm":["Geist"],"headline-lg":["Geist"],"label-mono":["JetBrains Mono"],"body-lg":["Geist"],"label-caps":["Geist"],display:["Geist"],headline:["Geist"],body:["Geist"],label:["JetBrains Mono"]},fontSize:{"headline-md":["20px",{lineHeight:"28px",letterSpacing:"-0.02em",fontWeight:"500"}],"headline-lg-mobile":["24px",{lineHeight:"32px",letterSpacing:"-0.02em",fontWeight:"600"}],"body-sm":["14px",{lineHeight:"20px",letterSpacing:"0em",fontWeight:"400"}],"headline-lg":["32px",{lineHeight:"40px",letterSpacing:"-0.03em",fontWeight:"600"}],"label-mono":["13px",{lineHeight:"16px",letterSpacing:"0em",fontWeight:"500"}],"body-lg":["16px",{lineHeight:"24px",letterSpacing:"-0.01em",fontWeight:"400"}],"label-caps":["12px",{lineHeight:"16px",letterSpacing:"0.05em",fontWeight:"600"}],display:["48px",{lineHeight:"1.1",letterSpacing:"-0.04em",fontWeight:"600"}]}}}};
+</script>
+<style>
+  * { font-family: 'Geist', sans-serif; box-sizing: border-box; }
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20; font-size: 20px; }
+
+  /* Left panel grid pattern */
+  .grid-bg {
+    background-color: #004e60;
+    background-image:
+      linear-gradient(rgba(0,103,127,0.4) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,103,127,0.4) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+
+  /* Step transitions */
+  .step { display: none; animation: stepIn 0.25s ease; }
+  .step.active { display: block; }
+  @keyframes stepIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Input styles */
+  .field {
+    width: 100%;
+    padding: 10px 14px;
+    background: #eff4f8;
+    border: 1px solid #bbc9cf;
+    border-radius: 6px;
+    font-size: 14px;
+    color: #171c1f;
+    outline: none;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  .field:focus { border-color: #00677f; box-shadow: 0 0 0 3px rgba(0,103,127,0.12); }
+  .field::placeholder { color: #6c797f; }
+
+  /* Toggle chip */
+  .dist-chip {
+    display: flex; align-items: center; gap: 8px;
+    padding: 8px 14px;
+    border: 1px solid #bbc9cf;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.15s;
+    background: #fff;
+    user-select: none;
+  }
+  .dist-chip.selected { border-color: #00677f; background: rgba(0,103,127,0.07); }
+  .dist-chip .check { opacity: 0; color: #00677f; transition: opacity 0.15s; }
+  .dist-chip.selected .check { opacity: 1; }
+
+  /* Progress dots */
+  .dot { width: 6px; height: 6px; border-radius: 50%; background: #bbc9cf; transition: all 0.2s; }
+  .dot.active { background: #00677f; width: 20px; border-radius: 3px; }
+  .dot.done { background: #00677f; }
+
+  /* Primary button */
+  .btn-primary {
+    width: 100%; padding: 11px 0;
+    background: #00677f; color: #fff;
+    border: none; border-radius: 6px;
+    font-size: 13px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase;
+    cursor: pointer; transition: background 0.15s;
+  }
+  .btn-primary:hover { background: #004e60; }
+  .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  .btn-ghost {
+    background: none; border: 1px solid #bbc9cf; color: #3c494e;
+    padding: 10px 0; border-radius: 6px; font-size: 13px; font-weight: 600;
+    letter-spacing: 0.04em; text-transform: uppercase; cursor: pointer;
+    transition: background 0.15s, border-color 0.15s;
+    width: 100%;
+  }
+  .btn-ghost:hover { background: #e9eff2; border-color: #6c797f; }
+
+  /* Feature list items on left panel */
+  .feat { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 20px; }
+  .feat-icon { width: 32px; height: 32px; border-radius: 6px; background: rgba(72,214,255,0.15); display: flex; align-items: center; justify-content: center; shrink: 0; }
+</style>
+</head>
+<body class="bg-background text-on-surface min-h-screen flex">
+
+<!-- Left branding panel -->
+<div class="grid-bg hidden lg:flex flex-col justify-between w-[420px] shrink-0 min-h-screen p-[48px]">
+  <div>
+    <span class="font-headline-md text-headline-md font-bold text-white tracking-tight">Kitted</span>
+  </div>
+  <div>
+    <p class="text-white/50 text-xs font-medium uppercase tracking-widest mb-md">What you get</p>
+    <div class="feat">
+      <div class="feat-icon"><span class="material-symbols-outlined text-[#48d6ff]" style="font-size:16px">electric_bolt</span></div>
+      <div>
+        <p class="text-white font-semibold text-sm leading-tight">Multi-vendor BOM optimization</p>
+        <p class="text-white/50 text-xs mt-1 leading-relaxed">Automatically split your bill of materials across Digi-Key, Mouser, Arrow, and LCSC to hit the lowest total cost.</p>
+      </div>
+    </div>
+    <div class="feat">
+      <div class="feat-icon"><span class="material-symbols-outlined text-[#48d6ff]" style="font-size:16px">search</span></div>
+      <div>
+        <p class="text-white font-semibold text-sm leading-tight">Real-time part search</p>
+        <p class="text-white/50 text-xs mt-1 leading-relaxed">Search across distributor catalogs in one place. Filter by stock, price breaks, lead time, and specs.</p>
+      </div>
+    </div>
+    <div class="feat">
+      <div class="feat-icon"><span class="material-symbols-outlined text-[#48d6ff]" style="font-size:16px">inventory_2</span></div>
+      <div>
+        <p class="text-white font-semibold text-sm leading-tight">BOM version history</p>
+        <p class="text-white/50 text-xs mt-1 leading-relaxed">Save, compare, and share BOM revisions across your team with full change tracking.</p>
+      </div>
+    </div>
+    <div class="feat">
+      <div class="feat-icon"><span class="material-symbols-outlined text-[#48d6ff]" style="font-size:16px">notifications_active</span></div>
+      <div>
+        <p class="text-white font-semibold text-sm leading-tight">Stock &amp; price alerts</p>
+        <p class="text-white/50 text-xs mt-1 leading-relaxed">Get notified before your critical components go out of stock or shift in price by more than 15%.</p>
+      </div>
+    </div>
+  </div>
+  <p class="text-white/30 text-xs">© 2026 Kitted</p>
+</div>
+
+<!-- Right form panel -->
+<div class="flex-1 flex flex-col items-center justify-center min-h-screen px-md py-xl">
+  <div class="w-full max-w-[400px]">
+
+    <!-- Progress dots -->
+    <div class="flex items-center gap-xs mb-xl" id="progress-dots">
+      <div class="dot active" id="dot-0"></div>
+      <div class="dot" id="dot-1"></div>
+      <div class="dot" id="dot-2"></div>
+      <div class="dot" id="dot-3"></div>
+    </div>
+
+    <!-- Step 1: Account -->
+    <div class="step active" id="step-0">
+      <h1 class="font-headline-lg text-headline-lg text-on-surface mb-xs">Create your account</h1>
+      <p class="font-body-sm text-body-sm text-on-surface-variant mb-lg">Already have one? <a href="#" onclick="showSignIn()" class="text-primary hover:underline">Sign in</a></p>
+
+      <div class="space-y-sm">
+        <div>
+          <label class="block font-label-caps text-label-caps text-on-surface-variant uppercase mb-xs">Full name</label>
+          <input id="f-name" type="text" placeholder="Ada Lovelace" class="field" autocomplete="name"/>
+        </div>
+        <div>
+          <label class="block font-label-caps text-label-caps text-on-surface-variant uppercase mb-xs">Work email</label>
+          <input id="f-email" type="email" placeholder="ada@company.com" class="field" autocomplete="email"/>
+        </div>
+        <div>
+          <label class="block font-label-caps text-label-caps text-on-surface-variant uppercase mb-xs">Password</label>
+          <input id="f-pass" type="password" placeholder="Min. 8 characters" class="field" autocomplete="new-password"/>
+        </div>
+      </div>
+
+      <button class="btn-primary mt-lg" onclick="nextStep(0)">Continue</button>
+    </div>
+
+    <!-- Step 2: Profile -->
+    <div class="step" id="step-1">
+      <h1 class="font-headline-lg text-headline-lg text-on-surface mb-xs">Your workspace</h1>
+      <p class="font-body-sm text-body-sm text-on-surface-variant mb-lg">Helps us tailor defaults to your workflow.</p>
+
+      <div class="space-y-sm">
+        <div>
+          <label class="block font-label-caps text-label-caps text-on-surface-variant uppercase mb-xs">Organization</label>
+          <input id="f-org" type="text" placeholder="Acme Robotics" class="field"/>
+        </div>
+        <div>
+          <label class="block font-label-caps text-label-caps text-on-surface-variant uppercase mb-xs">Your role</label>
+          <select id="f-role" class="field" style="appearance:none;background-image:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24'%3E%3Cpath fill='%236c797f' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E\");background-repeat:no-repeat;background-position:right 12px center;">
+            <option value="" disabled selected>Select role…</option>
+            <option>Hardware Engineer</option>
+            <option>Electrical Engineer</option>
+            <option>Procurement Engineer</option>
+            <option>Operations Manager</option>
+            <option>Founder / CTO</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div>
+          <label class="block font-label-caps text-label-caps text-on-surface-variant uppercase mb-xs">Team size</label>
+          <div class="grid grid-cols-4 gap-xs">
+            <label class="team-opt"><input type="radio" name="team" value="1" class="sr-only"/><span class="block text-center py-sm border border-outline-variant rounded-lg font-body-sm text-body-sm cursor-pointer hover:border-primary transition-all team-label">1</span></label>
+            <label class="team-opt"><input type="radio" name="team" value="2–10" class="sr-only"/><span class="block text-center py-sm border border-outline-variant rounded-lg font-body-sm text-body-sm cursor-pointer hover:border-primary transition-all team-label">2–10</span></label>
+            <label class="team-opt"><input type="radio" name="team" value="11–50" class="sr-only"/><span class="block text-center py-sm border border-outline-variant rounded-lg font-body-sm text-body-sm cursor-pointer hover:border-primary transition-all team-label">11–50</span></label>
+            <label class="team-opt"><input type="radio" name="team" value="50+" class="sr-only"/><span class="block text-center py-sm border border-outline-variant rounded-lg font-body-sm text-body-sm cursor-pointer hover:border-primary transition-all team-label">50+</span></label>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex gap-sm mt-lg">
+        <button class="btn-ghost" onclick="goStep(0)" style="width:80px;flex-shrink:0;">Back</button>
+        <button class="btn-primary" onclick="nextStep(1)">Continue</button>
+      </div>
+    </div>
+
+    <!-- Step 3: Distributors -->
+    <div class="step" id="step-2">
+      <h1 class="font-headline-lg text-headline-lg text-on-surface mb-xs">Connect distributors</h1>
+      <p class="font-body-sm text-body-sm text-on-surface-variant mb-lg">Select which ones you source from. You can change this anytime in Settings.</p>
+
+      <div class="space-y-xs">
+        <div class="dist-chip selected" onclick="toggleDist(this)" data-dist="Digi-Key">
+          <span class="material-symbols-outlined text-primary" style="font-size:16px">check_circle</span>
+          <span class="material-symbols-outlined check" style="font-size:16px;display:none">check</span>
+          <span class="font-body-sm text-body-sm text-on-surface flex-1">Digi-Key</span>
+          <span class="font-label-caps text-[10px] text-on-surface-variant">12M+ parts</span>
+        </div>
+        <div class="dist-chip selected" onclick="toggleDist(this)" data-dist="Mouser">
+          <span class="material-symbols-outlined text-primary" style="font-size:16px">check_circle</span>
+          <span class="material-symbols-outlined check" style="font-size:16px;display:none">check</span>
+          <span class="font-body-sm text-body-sm text-on-surface flex-1">Mouser</span>
+          <span class="font-label-caps text-[10px] text-on-surface-variant">6M+ parts</span>
+        </div>
+        <div class="dist-chip" onclick="toggleDist(this)" data-dist="Arrow">
+          <span class="material-symbols-outlined text-on-surface-variant" style="font-size:16px">radio_button_unchecked</span>
+          <span class="material-symbols-outlined check" style="font-size:16px;display:none">check</span>
+          <span class="font-body-sm text-body-sm text-on-surface flex-1">Arrow</span>
+          <span class="font-label-caps text-[10px] text-on-surface-variant">2M+ parts</span>
+        </div>
+        <div class="dist-chip" onclick="toggleDist(this)" data-dist="LCSC">
+          <span class="material-symbols-outlined text-on-surface-variant" style="font-size:16px">radio_button_unchecked</span>
+          <span class="material-symbols-outlined check" style="font-size:16px;display:none">check</span>
+          <span class="font-body-sm text-body-sm text-on-surface flex-1">LCSC</span>
+          <span class="font-label-caps text-[10px] text-on-surface-variant">900K+ parts</span>
+        </div>
+        <div class="dist-chip" onclick="toggleDist(this)" data-dist="Newark">
+          <span class="material-symbols-outlined text-on-surface-variant" style="font-size:16px">radio_button_unchecked</span>
+          <span class="material-symbols-outlined check" style="font-size:16px;display:none">check</span>
+          <span class="font-body-sm text-body-sm text-on-surface flex-1">Newark</span>
+          <span class="font-label-caps text-[10px] text-on-surface-variant">500K+ parts</span>
+        </div>
+      </div>
+
+      <div class="flex gap-sm mt-lg">
+        <button class="btn-ghost" onclick="goStep(1)" style="width:80px;flex-shrink:0;">Back</button>
+        <button class="btn-primary" onclick="nextStep(2)">Finish setup</button>
+      </div>
+    </div>
+
+    <!-- Step 4: Done -->
+    <div class="step" id="step-3">
+      <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-md">
+        <span class="material-symbols-outlined text-primary" style="font-size:24px;font-variation-settings:'FILL' 1">check_circle</span>
+      </div>
+      <h1 class="font-headline-lg text-headline-lg text-on-surface mb-xs">You're all set<span id="welcome-name"></span></h1>
+      <p class="font-body-sm text-body-sm text-on-surface-variant mb-lg" id="done-sub">Your account is ready. Start by uploading a BOM or searching for parts.</p>
+
+      <div class="space-y-sm mb-lg">
+        <div class="flex items-center gap-sm p-sm bg-surface-container rounded-lg border border-outline-variant/50">
+          <span class="material-symbols-outlined text-primary" style="font-size:18px">upload_file</span>
+          <div>
+            <p class="font-body-sm text-body-sm text-on-surface font-medium">Upload a BOM</p>
+            <p class="font-label-caps text-[10px] text-on-surface-variant">Import .xlsx or .csv to get started</p>
+          </div>
+          <a href="/optimize" target="_top" class="ml-auto font-label-caps text-label-caps text-primary hover:underline">Go →</a>
+        </div>
+        <div class="flex items-center gap-sm p-sm bg-surface-container rounded-lg border border-outline-variant/50">
+          <span class="material-symbols-outlined text-primary" style="font-size:18px">search</span>
+          <div>
+            <p class="font-body-sm text-body-sm text-on-surface font-medium">Search parts</p>
+            <p class="font-label-caps text-[10px] text-on-surface-variant">Browse distributor catalogs</p>
+          </div>
+          <a href="/search" target="_top" class="ml-auto font-label-caps text-label-caps text-primary hover:underline">Go →</a>
+        </div>
+      </div>
+
+      <button class="btn-primary" onclick="window.top.location.href='/boms'">Launch Kitted</button>
+    </div>
+
+    <!-- Sign-in mode -->
+    <div class="step" id="step-signin">
+      <h1 class="font-headline-lg text-headline-lg text-on-surface mb-xs">Welcome back</h1>
+      <p class="font-body-sm text-body-sm text-on-surface-variant mb-lg">New here? <a href="#" onclick="showSignUp()" class="text-primary hover:underline">Create an account</a></p>
+
+      <div class="space-y-sm">
+        <div>
+          <label class="block font-label-caps text-label-caps text-on-surface-variant uppercase mb-xs">Email</label>
+          <input id="si-email" type="email" placeholder="ada@company.com" class="field" autocomplete="email"/>
+        </div>
+        <div>
+          <label class="block font-label-caps text-label-caps text-on-surface-variant uppercase mb-xs">Password</label>
+          <input id="si-pass" type="password" placeholder="Your password" class="field" autocomplete="current-password"/>
+        </div>
+        <div class="text-right">
+          <a href="#" class="font-label-caps text-label-caps text-primary hover:underline">Forgot password?</a>
+        </div>
+      </div>
+
+      <button class="btn-primary mt-lg" onclick="signIn()">Sign in</button>
+
+      <p id="signin-err" class="font-body-sm text-body-sm text-error mt-sm hidden">No account found with that email.</p>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  let currentStep = 0;
+  let signInMode = false;
+
+  function goStep(n) {
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+    document.getElementById('step-' + n).classList.add('active');
+    currentStep = n;
+    updateDots();
+  }
+
+  function showSignIn() {
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+    document.getElementById('step-signin').classList.add('active');
+    signInMode = true;
+    document.getElementById('progress-dots').style.opacity = '0';
+  }
+
+  function showSignUp() {
+    goStep(0);
+    signInMode = false;
+    document.getElementById('progress-dots').style.opacity = '1';
+  }
+
+  function updateDots() {
+    for (let i = 0; i < 4; i++) {
+      const d = document.getElementById('dot-' + i);
+      d.className = 'dot' + (i < currentStep ? ' done' : i === currentStep ? ' active' : '');
+    }
+  }
+
+  function nextStep(from) {
+    if (from === 0) {
+      const name = document.getElementById('f-name').value.trim();
+      const email = document.getElementById('f-email').value.trim();
+      const pass = document.getElementById('f-pass').value;
+      if (!name || !email || pass.length < 8) {
+        shake(document.getElementById('step-0'));
+        return;
+      }
+    }
+    if (from === 2) {
+      // Collect all data and save
+      const user = {
+        name: document.getElementById('f-name').value.trim(),
+        email: document.getElementById('f-email').value.trim(),
+        org: document.getElementById('f-org').value.trim(),
+        role: document.getElementById('f-role').value,
+        distributors: [...document.querySelectorAll('.dist-chip.selected')].map(c => c.dataset.dist),
+        createdAt: Date.now()
+      };
+      localStorage.setItem('kitted_user', JSON.stringify(user));
+      const first = user.name.split(' ')[0];
+      document.getElementById('welcome-name').textContent = ', ' + first;
+      goStep(3);
+      return;
+    }
+    goStep(from + 1);
+  }
+
+  function signIn() {
+    const email = document.getElementById('si-email').value.trim();
+    const pass = document.getElementById('si-pass').value;
+    const stored = JSON.parse(localStorage.getItem('kitted_user') || 'null');
+    const err = document.getElementById('signin-err');
+    if (stored && stored.email === email) {
+      err.classList.add('hidden');
+      // Simulate success
+      const first = stored.name.split(' ')[0];
+      document.getElementById('welcome-name').textContent = ', ' + first;
+      document.getElementById('done-sub').textContent = 'Signed in as ' + stored.email + '. Good to have you back.';
+      document.getElementById('progress-dots').style.opacity = '1';
+      goStep(3);
+    } else {
+      err.classList.remove('hidden');
+      shake(document.getElementById('step-signin'));
+    }
+  }
+
+  function toggleDist(el) {
+    el.classList.toggle('selected');
+    const icon = el.querySelector('.material-symbols-outlined:first-child');
+    if (el.classList.contains('selected')) {
+      icon.textContent = 'check_circle';
+      icon.classList.remove('text-on-surface-variant');
+      icon.classList.add('text-primary');
+    } else {
+      icon.textContent = 'radio_button_unchecked';
+      icon.classList.remove('text-primary');
+      icon.classList.add('text-on-surface-variant');
+    }
+  }
+
+  function shake(el) {
+    el.style.animation = 'none';
+    el.offsetHeight; // reflow
+    el.style.animation = 'shake 0.35s ease';
+  }
+
+  // Team size radio visual
+  document.querySelectorAll('.team-opt input').forEach(input => {
+    input.addEventListener('change', () => {
+      document.querySelectorAll('.team-label').forEach(l => {
+        l.style.borderColor = '';
+        l.style.background = '';
+        l.style.color = '';
+      });
+      const lbl = input.nextElementSibling;
+      lbl.style.borderColor = '#00677f';
+      lbl.style.background = 'rgba(0,103,127,0.07)';
+      lbl.style.color = '#00677f';
+    });
+  });
+
+  // If user already signed in, skip to done
+  const existingUser = JSON.parse(localStorage.getItem('kitted_user') || 'null');
+  if (existingUser) {
+    document.getElementById('welcome-name').textContent = ', ' + existingUser.name.split(' ')[0];
+    document.getElementById('done-sub').textContent = "You're already signed in as " + existingUser.email + ".";
+    goStep(3);
+  }
+</script>
+<style>
+  @keyframes shake {
+    0%,100% { transform: translateX(0); }
+    20%      { transform: translateX(-6px); }
+    40%      { transform: translateX(6px); }
+    60%      { transform: translateX(-4px); }
+    80%      { transform: translateX(4px); }
+  }
+</style>
+</body>
+</html>

@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Kitted - Step 2: Mapping</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;700&family=Jetbrains+Mono:wght@400;500;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=JetBrains+Mono:wght@100..800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        body {
+            font-family: 'Geist', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #e5e7eb;
+            border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #d1d5db;
+        }
+    
+/* custom tooltips */
+header [data-tooltip]::after{bottom:auto;top:calc(100% + 7px);}
+nav.flex [data-tooltip]::after{bottom:auto;top:calc(100% + 7px);}
+
+[data-tooltip]{position:relative;}
+[data-tooltip]::after{
+  content:attr(data-tooltip);
+  position:absolute;
+  bottom:calc(100% + 7px);
+  left:50%;
+  transform:translateX(-50%);
+  background:#2b3134;
+  color:#ecf1f5;
+  padding:4px 9px;
+  border-radius:5px;
+  font-size:11px;
+  font-weight:500;
+  white-space:nowrap;
+  pointer-events:none;
+  opacity:0;
+  transition:opacity .12s;
+  z-index:99999;
+  font-family:'Geist',sans-serif;
+  letter-spacing:.01em;
+  box-shadow:0 2px 8px rgba(0,0,0,.18);
+}
+[data-tooltip]:hover::after{opacity:1;}
+aside [data-tooltip]::after{
+  bottom:auto;
+  top:50%;
+  left:calc(100% + 10px);
+  transform:translateY(-50%);
+}
+</style>
+<script id="tailwind-config">tailwind.config = {darkMode: "class", theme: {extend: {colors: {outline: "#6c797f", "surface-bright": "#f5fafd", "primary-fixed": "#b6ebff", error: "#ba1a1a", "tertiary-container": "#f3ab26", "surface-variant": "#dee3e7", "surface-container-low": "#eff4f8", "on-primary-container": "#005063", "on-surface-variant": "#3c494e", "surface-dim": "#d5dbde", secondary: "#346574", "on-error": "#ffffff", "surface-container-high": "#e3e9ec", "on-secondary": "#ffffff", "inverse-surface": "#2b3134", "on-tertiary-fixed-variant": "#614000", "surface-container-highest": "#dee3e7", "on-secondary-fixed-variant": "#174d5b", "tertiary-fixed": "#ffddaf", "surface-container": "#e9eff2", "surface-tint": "#00677f", "tertiary-fixed-dim": "#ffba43", "on-primary-fixed": "#001f28", "on-secondary-fixed": "#001f27", "on-primary-fixed-variant": "#004e60", "secondary-fixed-dim": "#9dcedf", "on-tertiary": "#ffffff", "on-secondary-container": "#386978", "on-tertiary-container": "#644300", "on-tertiary-fixed": "#281800", surface: "#f5fafd", primary: "#00677f", "primary-container": "#0fc9f4", background: "#f5fafd", "primary-fixed-dim": "#48d6ff", "inverse-on-surface": "#ecf1f5", "on-surface": "#171c1f", "outline-variant": "#bbc9cf", "on-error-container": "#93000a", "error-container": "#ffdad6", tertiary: "#805600", "on-background": "#171c1f", "secondary-fixed": "#b9eafc", "surface-container-lowest": "#ffffff", "on-primary": "#ffffff", "inverse-primary": "#48d6ff", "secondary-container": "#b6e7f9"}, borderRadius: {DEFAULT: "0.125rem", lg: "0.25rem", xl: "0.5rem", full: "0.75rem"}, spacing: {"margin-desktop": "32px", unit: "4px", sm: "8px", xs: "4px", md: "16px", xl: "48px", "margin-mobile": "16px", lg: "24px", gutter: "16px"}, fontFamily: {"body-lg": ["Geist"], "body-sm": ["Geist"], "label-mono": ["JetBrains Mono"], "headline-md": ["Geist"], "headline-lg-mobile": ["Geist"], "headline-lg": ["Geist"], "label-caps": ["Geist"], display: ["Geist"], headline: ["Geist"], body: ["Geist"], label: ["Jetbrains Mono"]}, fontSize: {"body-lg": ["16px", {lineHeight: "24px", letterSpacing: "-0.01em", fontWeight: "400"}], "body-sm": ["14px", {lineHeight: "20px", letterSpacing: "0em", fontWeight: "400"}], "label-mono": ["13px", {lineHeight: "16px", letterSpacing: "0em", fontWeight: "500"}], "headline-md": ["20px", {lineHeight: "28px", letterSpacing: "-0.02em", fontWeight: "500"}], "headline-lg-mobile": ["24px", {lineHeight: "32px", letterSpacing: "-0.02em", fontWeight: "600"}], "headline-lg": ["32px", {lineHeight: "40px", letterSpacing: "-0.03em", fontWeight: "600"}], "label-caps": ["12px", {lineHeight: "16px", letterSpacing: "0.05em", fontWeight: "600"}], display: ["48px", {lineHeight: "1.1", letterSpacing: "-0.04em", fontWeight: "600"}]}}}};</script>
+</head>
+<body class="bg-surface">
+<!-- SideNavBar -->
+<aside class="w-[240px] h-screen fixed left-0 top-0 bg-surface-container-lowest border-r border-outline-variant flex flex-col py-lg px-md z-50">
+  <div class="mb-xl px-sm">
+    <a data-tooltip="Go to the Kitted home page" href="/" target="_top" style="text-decoration:none;cursor:pointer;" class="font-headline-md text-headline-md font-bold text-primary">Kitted</a>
+  </div>
+  <nav class="flex-1 space-y-xs">
+    <a data-tooltip="BOM Optimizer — upload and optimize a bill of materials" class="flex items-center gap-md px-sm py-xs rounded-sm text-primary border-l-2 border-primary bg-surface-container-low transition-colors duration-200" href="/optimize" target="_top">
+      <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 20;">upload_file</span>
+      <span class="font-body-sm text-body-sm font-semibold">BOM Optimizer</span>
+    </a>
+    <a data-tooltip="Part Search — search distributor catalogs for components" class="flex items-center gap-md px-sm py-xs rounded-sm text-on-surface-variant hover:bg-surface-container transition-colors duration-200 group" href="/search" target="_top">
+      <span class="material-symbols-outlined group-hover:text-primary">search</span>
+      <span class="font-body-sm text-body-sm">Part Search</span>
+    </a>
+    <a data-tooltip="My BOMs — view and manage your saved BOM projects" class="flex items-center gap-md px-sm py-xs rounded-sm text-on-surface-variant hover:bg-surface-container transition-colors duration-200 group" href="/boms" target="_top">
+      <span class="material-symbols-outlined group-hover:text-primary">inventory_2</span>
+      <span class="font-body-sm text-body-sm">My BOMs</span>
+    </a>
+    <a data-tooltip="Orders — track your component orders" class="flex items-center gap-md px-sm py-xs rounded-sm text-on-surface-variant hover:bg-surface-container transition-colors duration-200 group" href="/orders" target="_top">
+      <span class="material-symbols-outlined group-hover:text-primary">shopping_cart</span>
+      <span class="font-body-sm text-body-sm">Orders</span>
+    </a>
+    <a data-tooltip="Settings — account and app preferences" class="flex items-center gap-md px-sm py-xs rounded-sm text-on-surface-variant hover:bg-surface-container transition-colors duration-200 group" href="/settings" target="_top">
+      <span class="material-symbols-outlined group-hover:text-primary">settings</span>
+      <span class="font-body-sm text-body-sm">Settings</span>
+    </a>
+  </nav>
+  <div class="mt-auto pt-lg border-t border-outline-variant/30 space-y-xs">
+    <button data-tooltip="Start a new BOM optimization project" class="w-full bg-primary text-on-primary py-sm px-md rounded-lg font-label-caps text-label-caps hover:bg-on-primary-fixed-variant transition-all mb-lg" onclick="window.top.location.href='/optimize'">New BOM Project</button>
+    <a class="flex items-center gap-md px-sm py-xs rounded-sm text-on-surface-variant hover:bg-surface-container transition-colors duration-200" href="#" onclick="showToast('Help Center — coming soon'); return false;">
+      <span class="material-symbols-outlined">help</span>
+      <span class="font-body-sm text-body-sm">Help Center</span>
+    </a>
+    <a class="flex items-center gap-md px-sm py-xs rounded-sm text-on-surface-variant hover:bg-surface-container transition-colors duration-200" href="#" onclick="showToast('Contact support — coming soon'); return false;">
+      <span class="material-symbols-outlined">support_agent</span>
+      <span class="font-body-sm text-body-sm">Contact Support</span>
+    </a>
+    <div id="acct-widget" class="px-sm mt-sm"><script>(function(){var u=JSON.parse(localStorage.getItem('kitted_user')||'null');var s=document.currentScript;var ini=u?(u.name||'?').split(' ').map(function(p){return p[0]||''}).join('').slice(0,2).toUpperCase():'';s.insertAdjacentHTML('afterend',u?'<div class="flex items-center gap-md py-md cursor-pointer hover:bg-surface-container rounded-sm px-xs -mx-xs transition-colors" onclick="window.top.location.href=\'\/settings\'"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0 text-on-primary font-bold text-xs">'+ini+'</div><div class="flex flex-col min-w-0"><span class="font-label-caps text-label-caps text-on-surface font-bold truncate">'+u.name+'</span><span class="text-[10px] text-on-surface-variant truncate">'+u.email+'</span></div></div>':'<a href="/onboarding" target="_top" class="flex items-center gap-md py-md px-xs -mx-xs hover:bg-surface-container rounded-sm transition-colors"><div class="w-8 h-8 rounded-full bg-surface-container border border-outline-variant flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-surface-variant" style="font-size:18px">person</span></div><div class="flex flex-col"><span class="font-label-caps text-label-caps text-primary font-bold">Sign in</span><span class="text-[10px] text-on-surface-variant">or create account</span></div></a>');})()</script></div>
+  </div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-[240px] flex flex-col min-h-screen">
+<!-- TopAppBar -->
+<header class="h-16 flex justify-between items-center px-margin-desktop bg-surface-container-lowest border-b border-outline-variant sticky top-0 z-40">
+<div class="flex items-center gap-xl">
+<span class="font-headline-md text-headline-md font-semibold text-on-surface">BOM Optimizer</span>
+<nav class="flex gap-lg">
+<a class="text-outline font-label-caps text-label-caps hover:text-primary transition-colors cursor-pointer" href="step1.html">Upload</a>
+<a class="text-primary font-label-caps text-label-caps border-b-2 border-primary pb-1 cursor-pointer" href="step2.html">Mapping</a>
+<a class="text-outline font-label-caps text-label-caps hover:text-primary transition-colors cursor-pointer" href="step3.html">Preferences</a>
+<a class="text-outline font-label-caps text-label-caps hover:text-primary transition-colors cursor-pointer" href="step4.html">Results</a>
+</nav>
+</div>
+<div class="flex items-center gap-md">
+<button data-tooltip="View notifications" class="material-symbols-outlined text-outline hover:text-primary transition-colors" data-icon="notifications">notifications</button>
+<button data-tooltip="Get help" class="material-symbols-outlined text-outline hover:text-primary transition-colors" data-icon="help_outline">help_outline</button>
+</div>
+</header>
+<!-- Content Canvas -->
+<div class="p-margin-desktop max-w-[1200px] w-full mx-auto">
+<!-- Progress Section -->
+<section class="mb-xl">
+<div class="flex items-center justify-between mb-md">
+<div>
+<h2 class="text-headline-lg font-headline-lg text-on-surface">Column Mapping</h2>
+<p class="text-body-sm text-on-surface-variant">Verify that the columns in your uploaded file match our system requirements.</p>
+</div>
+<div class="flex gap-sm">
+<button data-tooltip="Cancel and return to BOM upload" class="px-md py-sm border border-outline-variant text-on-surface font-body-sm rounded hover:bg-surface-container-high transition-colors" onclick="window.location.href='step1.html'">Cancel</button>
+<button id="btn-validate-mapping" data-tooltip="Confirm column mapping and run optimization" class="px-md py-sm bg-primary text-on-primary font-body-sm font-semibold rounded hover:opacity-90 shadow-sm transition-all flex items-center gap-sm">
+                            Validate Mapping <span class="material-symbols-outlined !text-[18px]" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Stepper -->
+<div class="flex items-center gap-0 w-full mb-xl">
+<div class="flex items-center gap-sm flex-1">
+<div class="w-6 h-6 rounded-full bg-primary text-on-primary flex items-center justify-center text-[10px] font-bold">1</div>
+<div class="h-[2px] flex-1 bg-primary"></div>
+</div>
+<div class="flex items-center gap-sm flex-1">
+<div class="w-6 h-6 rounded-full bg-primary text-on-primary flex items-center justify-center text-[10px] font-bold">2</div>
+<div class="h-[2px] flex-1 bg-outline-variant"></div>
+</div>
+<div class="flex items-center gap-sm flex-1">
+<div class="w-6 h-6 rounded-full border-2 border-outline-variant text-outline flex items-center justify-center text-[10px] font-bold">3</div>
+<div class="h-[2px] flex-1 bg-outline-variant"></div>
+</div>
+<div class="flex items-center gap-sm">
+<div class="w-6 h-6 rounded-full border-2 border-outline-variant text-outline flex items-center justify-center text-[10px] font-bold">4</div>
+</div>
+</div>
+</section>
+<!-- Mapping Bento Grid Layout -->
+<div class="grid grid-cols-12 gap-lg">
+<!-- Main Mapping Table (8 columns) -->
+<div class="col-span-12 lg:col-span-8 bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden flex flex-col">
+<div class="p-md border-b border-outline-variant bg-surface-container-low flex justify-between items-center">
+<h3 class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-widest">Field Correlation</h3>
+<span class="px-sm py-[2px] bg-primary-container text-on-primary-container text-[11px] font-bold rounded">4 REQUIRED FIELDS</span>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full border-collapse">
+<thead>
+<tr class="bg-surface-container-low/50">
+<th class="text-left px-md py-sm font-label-caps text-label-caps text-outline border-b border-outline-variant">YOUR COLUMN</th>
+<th class="text-left px-md py-sm font-label-caps text-label-caps text-outline border-b border-outline-variant">SYSTEM FIELD</th>
+<th class="w-12 border-b border-outline-variant"></th>
+</tr>
+</thead>
+<tbody class="text-body-sm">
+<tr class="group hover:bg-surface-container-low transition-colors h-12">
+<td class="px-md py-sm text-on-surface font-medium">MPN</td>
+<td class="px-md py-sm">
+<select class="w-full bg-transparent border border-outline-variant rounded px-sm py-1 focus:ring-1 focus:ring-primary focus:border-primary text-body-sm outline-none transition-all">
+<option selected="">Manufacturer Part #</option>
+<option>Quantity</option>
+<option>Description</option>
+<option>Reference Designator</option>
+<option>Ignore Column</option>
+</select>
+</td>
+<td class="px-md py-sm text-primary">
+<span class="material-symbols-outlined !text-[18px]" data-icon="check_circle" data-weight="fill">check_circle</span>
+</td>
+</tr>
+<tr class="group hover:bg-surface-container-low transition-colors h-12">
+<td class="px-md py-sm text-on-surface font-medium">Qty_Required</td>
+<td class="px-md py-sm">
+<select class="w-full bg-transparent border border-outline-variant rounded px-sm py-1 focus:ring-1 focus:ring-primary focus:border-primary text-body-sm outline-none transition-all">
+<option>Manufacturer Part #</option>
+<option selected="">Quantity</option>
+<option>Description</option>
+<option>Reference Designator</option>
+<option>Ignore Column</option>
+</select>
+</td>
+<td class="px-md py-sm text-primary">
+<span class="material-symbols-outlined !text-[18px]" data-icon="check_circle" data-weight="fill">check_circle</span>
+</td>
+</tr>
+<tr class="group hover:bg-surface-container-low transition-colors h-12 bg-surface-container-lowest">
+<td class="px-md py-sm text-on-surface font-medium">Component_Name</td>
+<td class="px-md py-sm">
+<select class="w-full bg-transparent border border-outline-variant rounded px-sm py-1 focus:ring-1 focus:ring-primary focus:border-primary text-body-sm outline-none transition-all">
+<option>Manufacturer Part #</option>
+<option>Quantity</option>
+<option selected="">Description</option>
+<option>Reference Designator</option>
+<option>Ignore Column</option>
+</select>
+</td>
+<td class="px-md py-sm text-primary">
+<span class="material-symbols-outlined !text-[18px]" data-icon="check_circle" data-weight="fill">check_circle</span>
+</td>
+</tr>
+<tr class="group hover:bg-surface-container-low transition-colors h-12">
+<td class="px-md py-sm text-on-surface font-medium">Ref_Des</td>
+<td class="px-md py-sm">
+<select class="w-full bg-transparent border border-outline-variant rounded px-sm py-1 focus:ring-1 focus:ring-primary focus:border-primary text-body-sm outline-none transition-all">
+<option>Manufacturer Part #</option>
+<option>Quantity</option>
+<option>Description</option>
+<option selected="">Reference Designator</option>
+<option>Ignore Column</option>
+</select>
+</td>
+<td class="px-md py-sm text-primary">
+<span class="material-symbols-outlined !text-[18px]" data-icon="check_circle" data-weight="fill">check_circle</span>
+</td>
+</tr>
+<tr class="group hover:bg-surface-container-low transition-colors h-12">
+<td class="px-md py-sm text-on-surface font-medium">Internal_Note</td>
+<td class="px-md py-sm">
+<select class="w-full bg-transparent border border-outline-variant rounded px-sm py-1 focus:ring-1 focus:ring-primary focus:border-primary text-body-sm outline-none transition-all">
+<option>Manufacturer Part #</option>
+<option>Quantity</option>
+<option>Description</option>
+<option>Reference Designator</option>
+<option selected="">Ignore Column</option>
+</select>
+</td>
+<td class="px-md py-sm text-outline/30">
+<span class="material-symbols-outlined !text-[18px]" data-icon="do_not_disturb_on">do_not_disturb_on</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-md mt-auto border-t border-outline-variant bg-surface-container-lowest">
+<div class="flex items-center gap-md p-md bg-secondary-container/30 rounded-lg">
+<span class="material-symbols-outlined text-secondary" data-icon="info">info</span>
+<p class="text-body-sm text-on-secondary-container">Automated matching identified 4 out of 5 columns. Please review and confirm.</p>
+</div>
+</div>
+</div>
+<!-- Preview Column (4 columns) -->
+<div class="col-span-12 lg:col-span-4 flex flex-col gap-lg">
+<!-- File Info Card -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-md">
+<h3 class="font-label-caps text-label-caps text-outline mb-md uppercase">Uploaded File</h3>
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 bg-error-container text-on-error-container flex items-center justify-center rounded">
+<span class="material-symbols-outlined" data-icon="description">description</span>
+</div>
+<div class="min-w-0">
+<p class="text-body-sm font-semibold text-on-surface truncate" id="bom-filename">BOM_Revision_A1.csv</p>
+<p class="text-[11px] text-outline" id="bom-filesize">12.4 KB • 154 Rows</p>
+</div>
+</div>
+</div>
+<!-- Data Preview Card -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden flex flex-col flex-1">
+<div class="p-md border-b border-outline-variant bg-surface-container-low">
+<h3 class="font-label-caps text-label-caps text-on-surface-variant uppercase">Data Preview (First 3 Rows)</h3>
+</div>
+<div class="p-md space-y-md custom-scrollbar overflow-y-auto">
+<div class="p-sm bg-surface-container rounded border border-outline-variant/30">
+<div class="grid grid-cols-2 gap-xs text-[11px] mb-xs">
+<span class="text-outline uppercase font-bold">MPN:</span>
+<span class="text-on-surface font-label-mono">CC0402KRX7R9BB104</span>
+</div>
+<div class="grid grid-cols-2 gap-xs text-[11px] mb-xs">
+<span class="text-outline uppercase font-bold">QTY:</span>
+<span class="text-on-surface font-label-mono">10</span>
+</div>
+<div class="grid grid-cols-2 gap-xs text-[11px]">
+<span class="text-outline uppercase font-bold">DESC:</span>
+<span class="text-on-surface truncate">CAP CER 0.1UF 50V X7R 0402</span>
+</div>
+</div>
+<div class="p-sm bg-surface-container rounded border border-outline-variant/30">
+<div class="grid grid-cols-2 gap-xs text-[11px] mb-xs">
+<span class="text-outline uppercase font-bold">MPN:</span>
+<span class="text-on-surface font-label-mono">RC0603FR-0710KL</span>
+</div>
+<div class="grid grid-cols-2 gap-xs text-[11px] mb-xs">
+<span class="text-outline uppercase font-bold">QTY:</span>
+<span class="text-on-surface font-label-mono">25</span>
+</div>
+<div class="grid grid-cols-2 gap-xs text-[11px]">
+<span class="text-outline uppercase font-bold">DESC:</span>
+<span class="text-on-surface truncate">RES 10K OHM 1% 1/10W 0603</span>
+</div>
+</div>
+<div class="p-sm bg-surface-container rounded border border-outline-variant/30">
+<div class="grid grid-cols-2 gap-xs text-[11px] mb-xs">
+<span class="text-outline uppercase font-bold">MPN:</span>
+<span class="text-on-surface font-label-mono">TPS5430DDAR</span>
+</div>
+<div class="grid grid-cols-2 gap-xs text-[11px] mb-xs">
+<span class="text-outline uppercase font-bold">QTY:</span>
+<span class="text-on-surface font-label-mono">2</span>
+</div>
+<div class="grid grid-cols-2 gap-xs text-[11px]">
+<span class="text-outline uppercase font-bold">DESC:</span>
+<span class="text-on-surface truncate">IC REG BUCK ADJ 3A 8SOPWR</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Visual Decorative Element -->
+<div class="mt-xl h-[300px] relative rounded-xl border border-outline-variant overflow-hidden bg-on-surface">
+<div class="absolute inset-0 opacity-20">
+<div class="absolute w-full h-full" style="background-image: radial-gradient(#ffffff 1px, transparent 1px); background-size: 24px 24px;"></div>
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-on-surface via-transparent to-transparent"></div>
+<div class="absolute bottom-md left-md">
+<p class="text-label-caps text-on-primary font-bold uppercase tracking-[0.2em] mb-xs">System Analysis Engine</p>
+<p class="text-body-sm text-surface-container-high max-w-md">Our algorithm automatically scans your data to suggest the best component matches based on historical procurement trends.</p>
+</div>
+</div>
+</div>
+</main>
+<script>
+function attachSelectListeners(root) {
+  (root || document).querySelectorAll('select').forEach(function(select) {
+    select.addEventListener('focus', function() { this.parentElement.parentElement.classList.add('bg-surface-container-low'); });
+    select.addEventListener('blur', function() { this.parentElement.parentElement.classList.remove('bg-surface-container-low'); });
+  });
+}
+attachSelectListeners(document);
+
+document.querySelectorAll('.bg-surface-container').forEach(function(row) {
+  row.addEventListener('mouseenter', function() {
+    row.style.transform = 'translateX(4px)';
+    row.style.borderColor = 'rgba(53, 37, 205, 0.4)';
+    row.style.transition = 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)';
+  });
+  row.addEventListener('mouseleave', function() {
+    row.style.transform = 'translateX(0)';
+    row.style.borderColor = 'rgba(119, 117, 135, 0.1)';
+  });
+});
+
+// CSV utilities
+function parseCSVLine(line) {
+  var result = [], cur = '', inQ = false;
+  for (var i = 0; i < line.length; i++) {
+    if (line[i] === '"') { inQ = !inQ; }
+    else if ((line[i] === ',' || line[i] === '\t') && !inQ) { result.push(cur.trim()); cur = ''; }
+    else { cur += line[i]; }
+  }
+  result.push(cur.trim());
+  return result;
+}
+function autoMap(header) {
+  var h = header.toLowerCase();
+  if (/mpn|part.?num|part.?no|manufacturer.?part|mfr|mfpn/.test(h)) return 'mpn';
+  if (/qty|quantity|count|pieces|pcs|req/.test(h)) return 'qty';
+  if (/desc|name|component|value|part.?name/.test(h)) return 'desc';
+  if (/ref|refdes|designat/.test(h)) return 'refdes';
+  return 'ignore';
+}
+var FIELD_OPTIONS = [
+  ['mpn','Manufacturer Part #'],['qty','Quantity'],['desc','Description'],
+  ['refdes','Reference Designator'],['ignore','Ignore Column']
+];
+function buildSelect(selected) {
+  return '<select class="w-full bg-transparent border border-outline-variant rounded px-sm py-1 focus:ring-1 focus:ring-primary focus:border-primary text-body-sm outline-none transition-all">' +
+    FIELD_OPTIONS.map(function(o) { return '<option value="'+o[0]+'"'+(o[0]===selected?' selected':'')+'>'+o[1]+'</option>'; }).join('') +
+  '</select>';
+}
+function iconForField(f) {
+  return f === 'ignore'
+    ? '<span class="material-symbols-outlined !text-[18px]">do_not_disturb_on</span>'
+    : '<span class="material-symbols-outlined !text-[18px]" data-weight="fill">check_circle</span>';
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  var csv = sessionStorage.getItem('kitted_bom_csv');
+  var filename = sessionStorage.getItem('kitted_bom_filename') || 'uploaded-file.csv';
+  if (!csv) return;
+
+  var lines = csv.split(/\r?\n/).filter(function(l) { return l.trim(); });
+  var headers = parseCSVLine(lines[0]);
+  var previewData = lines.slice(1, 4).map(parseCSVLine);
+  var rowCount = lines.length - 1;
+
+  // Update file info
+  var fnEl = document.getElementById('bom-filename');
+  var szEl = document.getElementById('bom-filesize');
+  if (fnEl) fnEl.textContent = filename;
+  if (szEl) szEl.textContent = (csv.length / 1024).toFixed(1) + ' KB • ' + rowCount + ' Rows';
+
+  // Rebuild mapping table
+  var tbody = document.querySelector('table tbody');
+  if (tbody && headers.length) {
+    tbody.innerHTML = headers.map(function(h, i) {
+      var mapped = autoMap(h);
+      return '<tr class="group hover:bg-surface-container-low transition-colors h-12" data-col-idx="'+i+'">' +
+        '<td class="px-md py-sm text-on-surface font-medium">'+h+'</td>' +
+        '<td class="px-md py-sm">'+buildSelect(mapped)+'</td>' +
+        '<td class="px-md py-sm '+(mapped==='ignore'?'text-outline/30':'text-primary')+'">'+iconForField(mapped)+'</td>' +
+      '</tr>';
+    }).join('');
+
+    attachSelectListeners(tbody);
+    tbody.querySelectorAll('select').forEach(function(sel) {
+      sel.addEventListener('change', function() {
+        var td = this.parentElement.nextElementSibling;
+        var isIgnore = this.value === 'ignore';
+        td.className = 'px-md py-sm ' + (isIgnore ? 'text-outline/30' : 'text-primary');
+        td.innerHTML = iconForField(this.value);
+      });
+    });
+  }
+
+  // Update badge and info text
+  var mapped = headers.filter(function(h) { return autoMap(h) !== 'ignore'; }).length;
+  var badge = document.querySelector('.bg-primary-container');
+  if (badge) badge.textContent = mapped + ' MAPPED FIELDS';
+  var infoP = document.querySelector('.bg-secondary-container\\/30 p');
+  if (infoP) infoP.textContent = 'Automated matching identified ' + mapped + ' of ' + headers.length + ' columns. Please review and confirm.';
+
+  // Rebuild preview cards
+  var mpnI = headers.findIndex(function(h){ return autoMap(h)==='mpn'; });
+  var qtyI = headers.findIndex(function(h){ return autoMap(h)==='qty'; });
+  var dscI = headers.findIndex(function(h){ return autoMap(h)==='desc'; });
+  var previewCont = document.querySelector('.custom-scrollbar');
+  if (previewCont && previewData.length) {
+    previewCont.innerHTML = previewData.map(function(row) {
+      return '<div class="p-sm bg-surface-container rounded border border-outline-variant/30">' +
+        (mpnI>=0?'<div class="grid grid-cols-2 gap-xs text-[11px] mb-xs"><span class="text-outline uppercase font-bold">MPN:</span><span class="text-on-surface font-label-mono">'+(row[mpnI]||'—')+'</span></div>':'') +
+        (qtyI>=0?'<div class="grid grid-cols-2 gap-xs text-[11px] mb-xs"><span class="text-outline uppercase font-bold">QTY:</span><span class="text-on-surface font-label-mono">'+(row[qtyI]||'—')+'</span></div>':'') +
+        (dscI>=0?'<div class="grid grid-cols-2 gap-xs text-[11px]"><span class="text-outline uppercase font-bold">DESC:</span><span class="text-on-surface truncate">'+(row[dscI]||'—')+'</span></div>':'') +
+      '</div>';
+    }).join('');
+  }
+
+  // Validate Mapping button
+  var validateBtn = document.getElementById('btn-validate-mapping');
+  if (validateBtn) {
+    validateBtn.addEventListener('click', function() {
+      var mapping = {};
+      document.querySelectorAll('tbody tr[data-col-idx]').forEach(function(row) {
+        var idx = parseInt(row.dataset.colIdx);
+        var sel = row.querySelector('select');
+        if (sel) mapping[idx] = sel.value;
+      });
+      sessionStorage.setItem('kitted_col_map', JSON.stringify(mapping));
+      sessionStorage.setItem('kitted_bom_headers', JSON.stringify(headers));
+      window.location.href = 'step3.html';
+    });
+  }
+});
+</script>
+<div id="kitted-toast" style="position:fixed;bottom:24px;right:24px;z-index:9999;background:#2b3134;color:#ecf1f5;padding:10px 18px;border-radius:6px;font-size:13px;font-family:Geist,sans-serif;opacity:0;pointer-events:none;transition:opacity .25s;"></div>
+<script>
+function showToast(msg){var t=document.getElementById('kitted-toast');t.textContent=msg;t.style.opacity='1';setTimeout(function(){t.style.opacity='0';},2200);}
+</script>
+</body></html>

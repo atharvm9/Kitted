@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Settings | Kitted</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;700&family=Jetbrains+Mono:wght@400;500;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">tailwind.config = {darkMode: "class", theme: {extend: {colors: {"primary-container": "#0fc9f4", "on-primary-fixed-variant": "#004e60", primary: "#00677f", "error-container": "#ffdad6", "surface-container-lowest": "#ffffff", "on-primary": "#ffffff", "on-tertiary-container": "#644300", "on-secondary-container": "#386978", "tertiary-fixed-dim": "#ffba43", "on-secondary-fixed": "#001f27", "secondary-fixed": "#b9eafc", outline: "#6c797f", "on-tertiary": "#ffffff", "on-surface-variant": "#3c494e", "primary-fixed-dim": "#48d6ff", "surface-bright": "#f5fafd", "on-error-container": "#93000a", "inverse-primary": "#48d6ff", "primary-fixed": "#b6ebff", "tertiary-fixed": "#ffddaf", "inverse-on-surface": "#ecf1f5", "surface-dim": "#d5dbde", "on-tertiary-fixed-variant": "#614000", "tertiary-container": "#f3ab26", "on-secondary": "#ffffff", "on-background": "#171c1f", "on-primary-fixed": "#001f28", "surface-container-low": "#eff4f8", "outline-variant": "#bbc9cf", "on-secondary-fixed-variant": "#174d5b", "surface-tint": "#00677f", "surface-variant": "#dee3e7", "secondary-container": "#b6e7f9", "on-surface": "#171c1f", "surface-container": "#e9eff2", error: "#ba1a1a", background: "#f5fafd", "surface-container-high": "#e3e9ec", tertiary: "#805600", "on-error": "#ffffff", "inverse-surface": "#2b3134", surface: "#f5fafd", "surface-container-highest": "#dee3e7", "on-primary-container": "#005063", secondary: "#346574", "on-tertiary-fixed": "#281800"}, borderRadius: {DEFAULT: "0.125rem", lg: "0.25rem", xl: "0.5rem", full: "0.75rem"}, spacing: {gutter: "16px", "margin-desktop": "32px", md: "16px", lg: "24px", xs: "4px", "margin-mobile": "16px", xl: "48px", unit: "4px", sm: "8px"}, fontFamily: {"headline-md": ["Geist"], "headline-lg-mobile": ["Geist"], "body-sm": ["Geist"], "headline-lg": ["Geist"], "label-mono": ["JetBrains Mono"], "body-lg": ["Geist"], "label-caps": ["Geist"], display: ["Geist"], headline: ["Geist"], body: ["Geist"], label: ["Jetbrains Mono"]}, fontSize: {"headline-md": ["20px", {lineHeight: "28px", letterSpacing: "-0.02em", fontWeight: "500"}], "headline-lg-mobile": ["24px", {lineHeight: "32px", letterSpacing: "-0.02em", fontWeight: "600"}], "body-sm": ["14px", {lineHeight: "20px", letterSpacing: "0em", fontWeight: "400"}], "headline-lg": ["32px", {lineHeight: "40px", letterSpacing: "-0.03em", fontWeight: "600"}], "label-mono": ["13px", {lineHeight: "16px", letterSpacing: "0em", fontWeight: "500"}], "body-lg": ["16px", {lineHeight: "24px", letterSpacing: "-0.01em", fontWeight: "400"}], "label-caps": ["12px", {lineHeight: "16px", letterSpacing: "0.05em", fontWeight: "600"}], display: ["48px", {lineHeight: "1.1", letterSpacing: "-0.04em", fontWeight: "600"}]}}}};
+</script>
+<style>
+  body { font-family: 'Geist', sans-serif; }
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20; font-size: 20px; }
+  .toggle { position:relative; display:inline-block; width:44px; height:24px; }
+  .toggle input { opacity:0; width:0; height:0; }
+  .toggle-slider { position:absolute; cursor:pointer; inset:0; background:#bbc9cf; border-radius:24px; transition:.2s; }
+  .toggle-slider:before { content:""; position:absolute; height:18px; width:18px; left:3px; top:3px; background:white; border-radius:50%; transition:.2s; }
+  .toggle input:checked + .toggle-slider { background:#00677f; }
+  .toggle input:checked + .toggle-slider:before { transform:translateX(20px); }
+  .api-key-field { font-family:'JetBrains Mono',monospace; letter-spacing:0.05em; }
+
+/* custom tooltips */
+header [data-tooltip]::after{bottom:auto;top:calc(100% + 7px);}
+nav.flex [data-tooltip]::after{bottom:auto;top:calc(100% + 7px);}
+
+[data-tooltip]{position:relative;}
+[data-tooltip]::after{
+  content:attr(data-tooltip);
+  position:absolute;
+  bottom:calc(100% + 7px);
+  left:50%;
+  transform:translateX(-50%);
+  background:#2b3134;
+  color:#ecf1f5;
+  padding:4px 9px;
+  border-radius:5px;
+  font-size:11px;
+  font-weight:500;
+  white-space:nowrap;
+  pointer-events:none;
+  opacity:0;
+  transition:opacity .12s;
+  z-index:99999;
+  font-family:'Geist',sans-serif;
+  letter-spacing:.01em;
+  box-shadow:0 2px 8px rgba(0,0,0,.18);
+}
+[data-tooltip]:hover::after{opacity:1;}
+aside [data-tooltip]::after{
+  bottom:auto;
+  top:50%;
+  left:calc(100% + 10px);
+  transform:translateY(-50%);
+}
+</style>
+</head>
+<body class="bg-background text-on-surface">
+
+<!-- Sidebar -->
+<aside class="w-[240px] h-screen fixed left-0 top-0 bg-surface-container-lowest border-r border-outline-variant flex flex-col py-lg px-md z-50">
+  <div class="mb-xl px-sm">
+    <a data-tooltip="Go to the Kitted home page" href="/" target="_top" style="text-decoration:none;cursor:pointer;" class="font-headline-md text-headline-md font-bold text-primary">Kitted</a>
+  </div>
+  <nav class="flex-1 space-y-xs">
+    <a data-tooltip="BOM Optimizer — upload and optimize a bill of materials" class="flex items-center gap-md px-sm py-xs rounded-sm text-on-surface-variant hover:bg-surface-container transition-colors duration-200 group" href="/optimize" target="_top">
+      <span class="material-symbols-outlined group-hover:text-primary" data-icon="upload_file">upload_file</span>
+      <span class="font-body-sm text-body-sm">BOM Optimizer</span>
+    </a>
+    <a data-tooltip="Part Search — search distributor catalogs for components" class="flex items-center gap-md px-sm py-xs rounded-sm text-on-surface-variant hover:bg-surface-container transition-colors duration-200 group" href="/search" target="_top">
+      <span class="material-symbols-outlined group-hover:text-primary" data-icon="search">search</span>
+      <span class="font-body-sm text-body-sm">Part Search</span>
+    </a>
+    <a data-tooltip="My BOMs — view and manage your saved BOM projects" class="flex items-center gap-md px-sm py-xs rounded-sm text-on-surface-variant hover:bg-surface-container transition-colors duration-200 group" href="/boms" target="_top">
+      <span class="material-symbols-outlined group-hover:text-primary" data-icon="inventory_2">inventory_2</span>
+      <span class="font-body-sm text-body-sm">My BOMs</span>
+    </a>
+    <a data-tooltip="Orders — track your component orders" class="flex items-center gap-md px-sm py-xs rounded-sm text-on-surface-variant hover:bg-surface-container transition-colors duration-200 group" href="/orders" target="_top">
+      <span class="material-symbols-outlined group-hover:text-primary" data-icon="shopping_cart">shopping_cart</span>
+      <span class="font-body-sm text-body-sm">Orders</span>
+    </a>
+    <a data-tooltip="Settings — account and app preferences" class="flex items-center gap-md px-sm py-xs rounded-sm text-primary border-l-2 border-primary bg-surface-container-low transition-colors duration-200" href="/settings" target="_top">
+      <span class="material-symbols-outlined" data-icon="settings" style="font-variation-settings:'FILL' 1;">settings</span>
+      <span class="font-body-sm text-body-sm font-semibold">Settings</span>
+    </a>
+  </nav>
+  <div class="mt-auto pt-lg border-t border-outline-variant/30 space-y-xs">
+    <button data-tooltip="Start a new BOM optimization project" class="w-full bg-primary text-on-primary py-sm px-md rounded-lg font-label-caps text-label-caps hover:bg-on-primary-fixed-variant transition-all mb-lg" onclick="window.top.location.href='/optimize'">New BOM Project</button>
+    <a class="flex items-center gap-md px-sm py-xs rounded-sm text-on-surface-variant hover:bg-surface-container transition-colors duration-200" href="#" onclick="showToast('Help Center — coming soon'); return false;">
+      <span class="material-symbols-outlined" data-icon="help">help</span>
+      <span class="font-body-sm text-body-sm">Help Center</span>
+    </a>
+    <a class="flex items-center gap-md px-sm py-xs rounded-sm text-on-surface-variant hover:bg-surface-container transition-colors duration-200" href="#" onclick="showToast('Contact support — coming soon'); return false;">
+      <span class="material-symbols-outlined" data-icon="support_agent">support_agent</span>
+      <span class="font-body-sm text-body-sm">Contact Support</span>
+    </a>
+    <div id="acct-widget" class="px-sm mt-sm"><script>(function(){var u=JSON.parse(localStorage.getItem('kitted_user')||'null');var s=document.currentScript;var ini=u?(u.name||'?').split(' ').map(function(p){return p[0]||''}).join('').slice(0,2).toUpperCase():'';s.insertAdjacentHTML('afterend',u?'<div class="flex items-center gap-md py-md cursor-pointer hover:bg-surface-container rounded-sm px-xs -mx-xs transition-colors" onclick="window.top.location.href=\'\/settings\'"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0 text-on-primary font-bold text-xs">'+ini+'</div><div class="flex flex-col min-w-0"><span class="font-label-caps text-label-caps text-on-surface font-bold truncate">'+u.name+'</span><span class="text-[10px] text-on-surface-variant truncate">'+u.email+'</span></div></div>':'<a href="/onboarding" target="_top" class="flex items-center gap-md py-md px-xs -mx-xs hover:bg-surface-container rounded-sm transition-colors"><div class="w-8 h-8 rounded-full bg-surface-container border border-outline-variant flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-surface-variant" style="font-size:18px">person</span></div><div class="flex flex-col"><span class="font-label-caps text-label-caps text-primary font-bold">Sign in</span><span class="text-[10px] text-on-surface-variant">or create account</span></div></a>');})()</script></div>
+  </div>
+</aside>
+
+<!-- Header -->
+<header class="h-16 fixed top-0 right-0 w-[calc(100%-240px)] bg-surface-container-lowest border-b border-outline-variant flex items-center justify-between px-margin-desktop z-40">
+  <span class="font-headline-md text-headline-md font-bold text-on-surface">Settings</span>
+  <button data-tooltip="Save your settings" id="save-btn" onclick="saveSettings()" class="bg-primary text-on-primary px-lg py-sm rounded font-label-caps text-label-caps hover:bg-on-primary-fixed-variant transition-all">Save Changes</button>
+</header>
+
+<!-- Main -->
+<main class="ml-[240px] pt-16 min-h-screen">
+  <div class="max-w-[800px] mx-auto px-margin-desktop py-xl space-y-xl">
+
+    <!-- Section: Account -->
+    <section class="bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden">
+      <div class="px-lg py-md border-b border-outline-variant bg-surface-container-low flex items-center gap-sm">
+        <span class="material-symbols-outlined text-primary" data-icon="manage_accounts">manage_accounts</span>
+        <h2 class="font-headline-md text-headline-md text-on-surface">Account</h2>
+      </div>
+      <div class="p-lg space-y-lg">
+        <div class="flex items-center gap-lg">
+          <div class="w-16 h-16 rounded-full bg-secondary-container flex items-center justify-center flex-shrink-0">
+            <span class="material-symbols-outlined text-secondary" style="font-size:32px;">person</span>
+          </div>
+          <div class="flex-1 space-y-sm">
+            <button data-tooltip="Upload a profile photo" onclick="showToast('Avatar upload — coming soon.')" class="font-label-caps text-label-caps text-primary hover:underline">Change avatar</button>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-md">
+          <div>
+            <label class="font-label-caps text-label-caps text-on-surface-variant uppercase block mb-xs">Full Name</label>
+            <input type="text" value="Senior Engineer" class="w-full px-md py-sm bg-surface-container-low border border-outline-variant rounded font-body-sm text-body-sm focus:outline-none focus:ring-1 focus:ring-primary"/>
+          </div>
+          <div>
+            <label class="font-label-caps text-label-caps text-on-surface-variant uppercase block mb-xs">Email</label>
+            <input type="email" value="engineer@company.com" class="w-full px-md py-sm bg-surface-container-low border border-outline-variant rounded font-body-sm text-body-sm focus:outline-none focus:ring-1 focus:ring-primary"/>
+          </div>
+          <div>
+            <label class="font-label-caps text-label-caps text-on-surface-variant uppercase block mb-xs">Organization</label>
+            <input type="text" value="Acme Hardware Inc." class="w-full px-md py-sm bg-surface-container-low border border-outline-variant rounded font-body-sm text-body-sm focus:outline-none focus:ring-1 focus:ring-primary"/>
+          </div>
+          <div>
+            <label class="font-label-caps text-label-caps text-on-surface-variant uppercase block mb-xs">Role</label>
+            <input type="text" value="Senior Hardware Engineer" class="w-full px-md py-sm bg-surface-container-low border border-outline-variant rounded font-body-sm text-body-sm focus:outline-none focus:ring-1 focus:ring-primary"/>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section: Distributor Preferences -->
+    <section class="bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden">
+      <div class="px-lg py-md border-b border-outline-variant bg-surface-container-low flex items-center gap-sm">
+        <span class="material-symbols-outlined text-primary" data-icon="store">store</span>
+        <h2 class="font-headline-md text-headline-md text-on-surface">Distributor Preferences</h2>
+      </div>
+      <div class="p-lg space-y-lg">
+        <!-- Digi-Key -->
+        <div class="border border-outline-variant rounded-lg overflow-hidden">
+          <div class="px-lg py-md bg-surface-container-low flex items-center justify-between">
+            <div class="flex items-center gap-md">
+              <div class="w-3 h-3 rounded-full bg-[#CC0000]"></div>
+              <span class="font-body-sm text-body-sm font-semibold text-on-surface">Digi-Key</span>
+            </div>
+            <label class="toggle"><input type="checkbox" checked onchange="toggleDistributor('dk', this)"/><span class="toggle-slider"></span></label>
+          </div>
+          <div class="px-lg py-md" id="dk-settings">
+            <label class="font-label-caps text-label-caps text-on-surface-variant uppercase block mb-xs">API Key</label>
+            <div class="flex gap-sm">
+              <input type="password" placeholder="dk_live_••••••••••••••••" class="api-key-field flex-1 px-md py-sm bg-surface-container-low border border-outline-variant rounded font-body-sm text-body-sm focus:outline-none focus:ring-1 focus:ring-primary"/>
+              <button data-tooltip="Save this API key" onclick="saveApiKey(this)" class="px-md py-sm bg-surface-container border border-outline-variant rounded font-label-caps text-label-caps hover:bg-surface-container-high transition-all">Save</button>
+            </div>
+          </div>
+        </div>
+        <!-- Mouser -->
+        <div class="border border-outline-variant rounded-lg overflow-hidden">
+          <div class="px-lg py-md bg-surface-container-low flex items-center justify-between">
+            <div class="flex items-center gap-md">
+              <div class="w-3 h-3 rounded-full bg-[#004A99]"></div>
+              <span class="font-body-sm text-body-sm font-semibold text-on-surface">Mouser</span>
+            </div>
+            <label class="toggle"><input type="checkbox" checked onchange="toggleDistributor('mouser', this)"/><span class="toggle-slider"></span></label>
+          </div>
+          <div class="px-lg py-md" id="mouser-settings">
+            <label class="font-label-caps text-label-caps text-on-surface-variant uppercase block mb-xs">API Key</label>
+            <div class="flex gap-sm">
+              <input type="password" placeholder="ms_live_••••••••••••••••" class="api-key-field flex-1 px-md py-sm bg-surface-container-low border border-outline-variant rounded font-body-sm text-body-sm focus:outline-none focus:ring-1 focus:ring-primary"/>
+              <button data-tooltip="Save this API key" onclick="saveApiKey(this)" class="px-md py-sm bg-surface-container border border-outline-variant rounded font-label-caps text-label-caps hover:bg-surface-container-high transition-all">Save</button>
+            </div>
+          </div>
+        </div>
+        <!-- Arrow -->
+        <div class="border border-outline-variant rounded-lg overflow-hidden">
+          <div class="px-lg py-md bg-surface-container-low flex items-center justify-between">
+            <div class="flex items-center gap-md">
+              <div class="w-3 h-3 rounded-full bg-[#FF6600]"></div>
+              <span class="font-body-sm text-body-sm font-semibold text-on-surface">Arrow</span>
+            </div>
+            <label class="toggle"><input type="checkbox" checked onchange="toggleDistributor('arrow', this)"/><span class="toggle-slider"></span></label>
+          </div>
+          <div class="px-lg py-md" id="arrow-settings">
+            <label class="font-label-caps text-label-caps text-on-surface-variant uppercase block mb-xs">API Key</label>
+            <div class="flex gap-sm">
+              <input type="password" placeholder="ar_live_••••••••••••••••" class="api-key-field flex-1 px-md py-sm bg-surface-container-low border border-outline-variant rounded font-body-sm text-body-sm focus:outline-none focus:ring-1 focus:ring-primary"/>
+              <button data-tooltip="Save this API key" onclick="saveApiKey(this)" class="px-md py-sm bg-surface-container border border-outline-variant rounded font-label-caps text-label-caps hover:bg-surface-container-high transition-all">Save</button>
+            </div>
+          </div>
+        </div>
+        <!-- Newark -->
+        <div class="border border-outline-variant rounded-lg overflow-hidden">
+          <div class="px-lg py-md bg-surface-container-low flex items-center justify-between">
+            <div class="flex items-center gap-md">
+              <div class="w-3 h-3 rounded-full bg-[#0057B8]"></div>
+              <span class="font-body-sm text-body-sm font-semibold text-on-surface">Newark</span>
+            </div>
+            <label class="toggle"><input type="checkbox" onchange="toggleDistributor('newark', this)"/><span class="toggle-slider"></span></label>
+          </div>
+          <div class="px-lg py-md hidden" id="newark-settings">
+            <label class="font-label-caps text-label-caps text-on-surface-variant uppercase block mb-xs">API Key</label>
+            <div class="flex gap-sm">
+              <input type="password" placeholder="nw_live_••••••••••••••••" class="api-key-field flex-1 px-md py-sm bg-surface-container-low border border-outline-variant rounded font-body-sm text-body-sm focus:outline-none focus:ring-1 focus:ring-primary"/>
+              <button data-tooltip="Save this API key" onclick="saveApiKey(this)" class="px-md py-sm bg-surface-container border border-outline-variant rounded font-label-caps text-label-caps hover:bg-surface-container-high transition-all">Save</button>
+            </div>
+          </div>
+        </div>
+        <!-- LCSC -->
+        <div class="border border-outline-variant rounded-lg overflow-hidden">
+          <div class="px-lg py-md bg-surface-container-low flex items-center justify-between">
+            <div class="flex items-center gap-md">
+              <div class="w-3 h-3 rounded-full bg-[#FC6A03]"></div>
+              <span class="font-body-sm text-body-sm font-semibold text-on-surface">LCSC</span>
+            </div>
+            <label class="toggle"><input type="checkbox" checked onchange="toggleDistributor('lcsc', this)"/><span class="toggle-slider"></span></label>
+          </div>
+          <div class="px-lg py-md" id="lcsc-settings">
+            <label class="font-label-caps text-label-caps text-on-surface-variant uppercase block mb-xs">API Key</label>
+            <div class="flex gap-sm">
+              <input type="password" placeholder="lc_live_••••••••••••••••" class="api-key-field flex-1 px-md py-sm bg-surface-container-low border border-outline-variant rounded font-body-sm text-body-sm focus:outline-none focus:ring-1 focus:ring-primary"/>
+              <button data-tooltip="Save this API key" onclick="saveApiKey(this)" class="px-md py-sm bg-surface-container border border-outline-variant rounded font-label-caps text-label-caps hover:bg-surface-container-high transition-all">Save</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section: Optimization Defaults -->
+    <section class="bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden">
+      <div class="px-lg py-md border-b border-outline-variant bg-surface-container-low flex items-center gap-sm">
+        <span class="material-symbols-outlined text-primary" data-icon="tune">tune</span>
+        <h2 class="font-headline-md text-headline-md text-on-surface">Optimization Defaults</h2>
+      </div>
+      <div class="p-lg space-y-lg">
+        <div>
+          <div class="flex justify-between mb-sm">
+            <label class="font-label-caps text-label-caps text-on-surface-variant uppercase">Optimization Strategy</label>
+            <span class="font-label-mono text-label-mono text-primary" id="strategy-label">Balanced</span>
+          </div>
+          <div class="flex items-center gap-md">
+            <span class="font-label-caps text-label-caps text-on-surface-variant">Cost</span>
+            <input type="range" min="0" max="100" value="50" class="flex-1 accent-primary" id="strategy-slider" oninput="updateStrategy(this.value)"/>
+            <span class="font-label-caps text-label-caps text-on-surface-variant">Speed</span>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-md">
+          <div>
+            <label class="font-label-caps text-label-caps text-on-surface-variant uppercase block mb-xs">Default Currency</label>
+            <select class="w-full px-md py-sm bg-surface-container-low border border-outline-variant rounded font-body-sm text-body-sm focus:outline-none focus:ring-1 focus:ring-primary">
+              <option>USD — US Dollar</option>
+              <option>EUR — Euro</option>
+              <option>GBP — British Pound</option>
+              <option>JPY — Japanese Yen</option>
+              <option>CAD — Canadian Dollar</option>
+            </select>
+          </div>
+          <div>
+            <label class="font-label-caps text-label-caps text-on-surface-variant uppercase block mb-xs">Default Markup %</label>
+            <div class="flex items-center gap-sm">
+              <input type="number" value="10" min="0" max="100" class="w-full px-md py-sm bg-surface-container-low border border-outline-variant rounded font-body-sm text-body-sm focus:outline-none focus:ring-1 focus:ring-primary"/>
+              <span class="font-body-sm text-body-sm text-on-surface-variant">%</span>
+            </div>
+          </div>
+          <div>
+            <label class="font-label-caps text-label-caps text-on-surface-variant uppercase block mb-xs">Min Stock Threshold</label>
+            <input type="number" value="100" class="w-full px-md py-sm bg-surface-container-low border border-outline-variant rounded font-body-sm text-body-sm focus:outline-none focus:ring-1 focus:ring-primary"/>
+          </div>
+          <div>
+            <label class="font-label-caps text-label-caps text-on-surface-variant uppercase block mb-xs">Max Lead Time (weeks)</label>
+            <input type="number" value="8" class="w-full px-md py-sm bg-surface-container-low border border-outline-variant rounded font-body-sm text-body-sm focus:outline-none focus:ring-1 focus:ring-primary"/>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section: Notifications -->
+    <section class="bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden">
+      <div class="px-lg py-md border-b border-outline-variant bg-surface-container-low flex items-center gap-sm">
+        <span class="material-symbols-outlined text-primary" data-icon="notifications">notifications</span>
+        <h2 class="font-headline-md text-headline-md text-on-surface">Notifications</h2>
+      </div>
+      <div class="p-lg divide-y divide-outline-variant/40">
+        <div class="flex items-center justify-between py-md">
+          <div>
+            <p class="font-body-sm text-body-sm text-on-surface font-medium">Email Alerts</p>
+            <p class="font-body-sm text-body-sm text-on-surface-variant">Receive updates via email</p>
+          </div>
+          <label class="toggle"><input type="checkbox" checked/><span class="toggle-slider"></span></label>
+        </div>
+        <div class="flex items-center justify-between py-md">
+          <div>
+            <p class="font-body-sm text-body-sm text-on-surface font-medium">BOM Optimization Complete</p>
+            <p class="font-body-sm text-body-sm text-on-surface-variant">Notify when optimization finishes</p>
+          </div>
+          <label class="toggle"><input type="checkbox" checked/><span class="toggle-slider"></span></label>
+        </div>
+        <div class="flex items-center justify-between py-md">
+          <div>
+            <p class="font-body-sm text-body-sm text-on-surface font-medium">Low Stock Alerts</p>
+            <p class="font-body-sm text-body-sm text-on-surface-variant">Alert when part stock falls below threshold</p>
+          </div>
+          <label class="toggle"><input type="checkbox" checked/><span class="toggle-slider"></span></label>
+        </div>
+        <div class="flex items-center justify-between py-md">
+          <div>
+            <p class="font-body-sm text-body-sm text-on-surface font-medium">Price Change Alerts</p>
+            <p class="font-body-sm text-body-sm text-on-surface-variant">Alert on significant price movements (±15%)</p>
+          </div>
+          <label class="toggle"><input type="checkbox"/><span class="toggle-slider"></span></label>
+        </div>
+        <div class="flex items-center justify-between py-md">
+          <div>
+            <p class="font-body-sm text-body-sm text-on-surface font-medium">Order Status Updates</p>
+            <p class="font-body-sm text-body-sm text-on-surface-variant">Shipped, delivered, and exception notices</p>
+          </div>
+          <label class="toggle"><input type="checkbox" checked/><span class="toggle-slider"></span></label>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section: Data & Privacy -->
+    <section class="bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden">
+      <div class="px-lg py-md border-b border-outline-variant bg-surface-container-low flex items-center gap-sm">
+        <span class="material-symbols-outlined text-primary" data-icon="shield">shield</span>
+        <h2 class="font-headline-md text-headline-md text-on-surface">Data &amp; Privacy</h2>
+      </div>
+      <div class="p-lg divide-y divide-outline-variant/40">
+        <div class="flex items-center justify-between py-md">
+          <div>
+            <p class="font-body-sm text-body-sm text-on-surface font-medium">Export All Data</p>
+            <p class="font-body-sm text-body-sm text-on-surface-variant">Download all your BOMs and order history as JSON</p>
+          </div>
+          <button data-tooltip="Export all data as JSON" onclick="showToast('Data export — coming soon.')" class="px-md py-sm border border-outline-variant rounded font-label-caps text-label-caps text-on-surface-variant hover:bg-surface-container transition-all">Export</button>
+        </div>
+        <div class="flex items-center justify-between py-md">
+          <div>
+            <p class="font-body-sm text-body-sm text-on-surface font-medium">Delete Account</p>
+            <p class="font-body-sm text-body-sm text-on-surface-variant">Permanently remove your account and all data</p>
+          </div>
+          <button data-tooltip="Permanently delete your account" onclick="confirmDelete()" class="px-md py-sm border border-error/40 text-error rounded font-label-caps text-label-caps hover:bg-error/10 transition-all">Delete Account</button>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<!-- Delete Confirm Modal -->
+<div id="delete-modal" class="hidden fixed inset-0 bg-black/40 flex items-center justify-center z-[200]">
+  <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-xl max-w-sm w-full mx-md shadow-2xl">
+    <div class="flex items-center gap-sm mb-md">
+      <span class="material-symbols-outlined text-error" data-icon="warning">warning</span>
+      <h3 class="font-headline-md text-headline-md text-on-surface">Delete Account?</h3>
+    </div>
+    <p class="font-body-sm text-body-sm text-on-surface-variant mb-xl">This will permanently delete your account, all BOMs, and order history. This cannot be undone.</p>
+    <div class="flex gap-sm justify-end">
+      <button data-tooltip="Cancel account deletion" onclick="document.getElementById('delete-modal').classList.add('hidden')" class="px-lg py-sm border border-outline-variant rounded font-label-caps text-label-caps text-on-surface-variant hover:bg-surface-container transition-all">Cancel</button>
+      <button data-tooltip="Cancel account deletion" onclick="document.getElementById('delete-modal').classList.add('hidden'); showToast('Account deletion — coming soon.', 'info', 'text-blue-400')" class="px-lg py-sm bg-error text-on-error rounded font-label-caps text-label-caps hover:opacity-90 transition-all">Delete</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="fixed bottom-lg right-lg bg-inverse-surface text-inverse-on-surface px-lg py-md rounded shadow-xl transform translate-y-20 opacity-0 transition-all duration-300 flex items-center gap-md z-[100]" id="toast">
+  <span class="material-symbols-outlined text-green-400" data-icon="check_circle">check_circle</span>
+  <span class="font-body-sm text-body-sm">Done.</span>
+</div>
+
+<script>
+  let toastTimer;
+  function showToast(msg, icon='check_circle', color='text-green-400') {
+    const toast = document.getElementById('toast');
+    toast.querySelector('.material-symbols-outlined').textContent = icon;
+    toast.querySelector('.material-symbols-outlined').className = `material-symbols-outlined ${color}`;
+    toast.querySelector('span:last-child').textContent = msg;
+    toast.classList.remove('translate-y-20','opacity-0');
+    toast.classList.add('translate-y-0','opacity-100');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => {
+      toast.classList.add('translate-y-20','opacity-0');
+      toast.classList.remove('translate-y-0','opacity-100');
+    }, 3000);
+  }
+
+  function toggleDistributor(id, checkbox) {
+    const settings = document.getElementById(id + '-settings');
+    if (checkbox.checked) {
+      settings.classList.remove('hidden');
+    } else {
+      settings.classList.add('hidden');
+    }
+  }
+
+  function updateStrategy(val) {
+    const labels = ['Cost-focused','Mostly Cost','Balanced','Mostly Speed','Speed-focused'];
+    const idx = Math.round(val / 25);
+    document.getElementById('strategy-label').textContent = labels[Math.min(idx,4)];
+  }
+
+  function saveSettings() {
+    const btn = document.getElementById('save-btn');
+    btn.textContent = 'Saving…';
+    setTimeout(() => {
+      btn.textContent = 'Save Changes';
+      showToast('Settings saved.');
+    }, 800);
+  }
+
+  function saveApiKey(btn) {
+    const input = btn.previousElementSibling;
+    const section = btn.closest('[id$="-settings"]');
+    const dist = section ? section.id.replace('-settings', '') : null;
+    if (!dist) return;
+    if (!input.value.trim()) { showToast('Enter an API key first.', 'error', 'text-red-400'); return; }
+    const keys = JSON.parse(localStorage.getItem('kitted_api_keys') || '{}');
+    keys[dist] = input.value.trim();
+    localStorage.setItem('kitted_api_keys', JSON.stringify(keys));
+    showToast('API key saved.');
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const keys = JSON.parse(localStorage.getItem('kitted_api_keys') || '{}');
+    ['dk','mouser','arrow','newark','lcsc'].forEach(function(dist) {
+      if (!keys[dist]) return;
+      const section = document.getElementById(dist + '-settings');
+      if (!section) return;
+      const input = section.querySelector('.api-key-field');
+      if (input) input.value = keys[dist];
+    });
+  });
+
+  function confirmDelete() {
+    document.getElementById('delete-modal').classList.remove('hidden');
+  }
+
+  document.getElementById('delete-modal').addEventListener('click', (e) => {
+    if (e.target === document.getElementById('delete-modal')) {
+      document.getElementById('delete-modal').classList.add('hidden');
+    }
+  });
+</script>
+</body></html>

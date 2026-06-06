@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>BOM Detail | Kitted</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;700&family=Jetbrains+Mono:wght@400;500;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">tailwind.config = {darkMode: "class", theme: {extend: {colors: {"primary-container": "#0fc9f4", "on-primary-fixed-variant": "#004e60", primary: "#00677f", "error-container": "#ffdad6", "surface-container-lowest": "#ffffff", "on-primary": "#ffffff", "on-tertiary-container": "#644300", "on-secondary-container": "#386978", "tertiary-fixed-dim": "#ffba43", "on-secondary-fixed": "#001f27", "secondary-fixed": "#b9eafc", outline: "#6c797f", "on-tertiary": "#ffffff", "on-surface-variant": "#3c494e", "primary-fixed-dim": "#48d6ff", "surface-bright": "#f5fafd", "on-error-container": "#93000a", "inverse-primary": "#48d6ff", "primary-fixed": "#b6ebff", "tertiary-fixed": "#ffddaf", "inverse-on-surface": "#ecf1f5", "surface-dim": "#d5dbde", "on-tertiary-fixed-variant": "#614000", "tertiary-container": "#f3ab26", "on-secondary": "#ffffff", "on-background": "#171c1f", "on-primary-fixed": "#001f28", "surface-container-low": "#eff4f8", "outline-variant": "#bbc9cf", "on-secondary-fixed-variant": "#174d5b", "surface-tint": "#00677f", "surface-variant": "#dee3e7", "secondary-container": "#b6e7f9", "on-surface": "#171c1f", "surface-container": "#e9eff2", error: "#ba1a1a", background: "#f5fafd", "surface-container-high": "#e3e9ec", tertiary: "#805600", "on-error": "#ffffff", "inverse-surface": "#2b3134", surface: "#f5fafd", "surface-container-highest": "#dee3e7", "on-primary-container": "#005063", secondary: "#346574", "on-tertiary-fixed": "#281800"}, borderRadius: {DEFAULT: "0.125rem", lg: "0.25rem", xl: "0.5rem", full: "0.75rem"}, spacing: {gutter: "16px", "margin-desktop": "32px", md: "16px", lg: "24px", xs: "4px", "margin-mobile": "16px", xl: "48px", unit: "4px", sm: "8px"}, fontFamily: {"headline-md": ["Geist"], "headline-lg-mobile": ["Geist"], "body-sm": ["Geist"], "headline-lg": ["Geist"], "label-mono": ["JetBrains Mono"], "body-lg": ["Geist"], "label-caps": ["Geist"], display: ["Geist"], headline: ["Geist"], body: ["Geist"], label: ["Jetbrains Mono"]}, fontSize: {"headline-md": ["20px", {lineHeight: "28px", letterSpacing: "-0.02em", fontWeight: "500"}], "headline-lg-mobile": ["24px", {lineHeight: "32px", letterSpacing: "-0.02em", fontWeight: "600"}], "body-sm": ["14px", {lineHeight: "20px", letterSpacing: "0em", fontWeight: "400"}], "headline-lg": ["32px", {lineHeight: "40px", letterSpacing: "-0.03em", fontWeight: "600"}], "label-mono": ["13px", {lineHeight: "16px", letterSpacing: "0em", fontWeight: "500"}], "body-lg": ["16px", {lineHeight: "24px", letterSpacing: "-0.01em", fontWeight: "400"}], "label-caps": ["12px", {lineHeight: "16px", letterSpacing: "0.05em", fontWeight: "600"}], display: ["48px", {lineHeight: "1.1", letterSpacing: "-0.04em", fontWeight: "600"}]}}}};
+</script>
+<style>
+  body { font-family: 'Geist', sans-serif; }
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20; font-size: 20px; }
+  .filled { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 20; }
+  .status-chip { display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:9999px;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase; }
+
+/* custom tooltips */
+header [data-tooltip]::after{bottom:auto;top:calc(100% + 7px);}
+nav.flex [data-tooltip]::after{bottom:auto;top:calc(100% + 7px);}
+
+[data-tooltip]{position:relative;}
+[data-tooltip]::after{
+  content:attr(data-tooltip);
+  position:absolute;
+  bottom:calc(100% + 7px);
+  left:50%;
+  transform:translateX(-50%);
+  background:#2b3134;
+  color:#ecf1f5;
+  padding:4px 9px;
+  border-radius:5px;
+  font-size:11px;
+  font-weight:500;
+  white-space:nowrap;
+  pointer-events:none;
+  opacity:0;
+  transition:opacity .12s;
+  z-index:99999;
+  font-family:'Geist',sans-serif;
+  letter-spacing:.01em;
+  box-shadow:0 2px 8px rgba(0,0,0,.18);
+}
+[data-tooltip]:hover::after{opacity:1;}
+aside [data-tooltip]::after{
+  bottom:auto;
+  top:50%;
+  left:calc(100% + 10px);
+  transform:translateY(-50%);
+}
+</style>
+</head>
+<body class="bg-background text-on-surface">
+
+<!-- Sidebar -->
+<aside class="w-[240px] h-screen fixed left-0 top-0 bg-surface-container-lowest border-r border-outline-variant flex flex-col py-lg px-md z-50">
+  <div class="mb-xl px-sm">
+    <a data-tooltip="Go to the Kitted home page" href="/" target="_top" style="text-decoration:none;cursor:pointer;" class="font-headline-md text-headline-md font-bold text-primary">Kitted</a>
+  </div>
+  <nav class="flex-1 space-y-xs">
+    <a data-tooltip="BOM Optimizer — upload and optimize a bill of materials" class="flex items-center gap-md px-sm py-xs rounded-sm text-on-surface-variant hover:bg-surface-container transition-colors duration-200 group" href="/optimize" target="_top">
+      <span class="material-symbols-outlined group-hover:text-primary">upload_file</span>
+      <span class="font-body-sm text-body-sm">BOM Optimizer</span>
+    </a>
+    <a data-tooltip="Part Search — search distributor catalogs for components" class="flex items-center gap-md px-sm py-xs rounded-sm text-on-surface-variant hover:bg-surface-container transition-colors duration-200 group" href="/search" target="_top">
+      <span class="material-symbols-outlined group-hover:text-primary">search</span>
+      <span class="font-body-sm text-body-sm">Part Search</span>
+    </a>
+    <a data-tooltip="My BOMs — view and manage your saved BOM projects" class="flex items-center gap-md px-sm py-xs rounded-sm text-primary border-l-2 border-primary bg-surface-container-low transition-colors duration-200" href="/boms" target="_top">
+      <span class="material-symbols-outlined filled">inventory_2</span>
+      <span class="font-body-sm text-body-sm font-semibold">My BOMs</span>
+    </a>
+    <a data-tooltip="Orders — track your component orders" class="flex items-center gap-md px-sm py-xs rounded-sm text-on-surface-variant hover:bg-surface-container transition-colors duration-200 group" href="/orders" target="_top">
+      <span class="material-symbols-outlined group-hover:text-primary">shopping_cart</span>
+      <span class="font-body-sm text-body-sm">Orders</span>
+    </a>
+    <a data-tooltip="Settings — account and app preferences" class="flex items-center gap-md px-sm py-xs rounded-sm text-on-surface-variant hover:bg-surface-container transition-colors duration-200 group" href="/settings" target="_top">
+      <span class="material-symbols-outlined group-hover:text-primary">settings</span>
+      <span class="font-body-sm text-body-sm">Settings</span>
+    </a>
+  </nav>
+  <div class="mt-auto pt-lg border-t border-outline-variant/30 space-y-xs">
+    <button data-tooltip="Start a new BOM optimization project" class="w-full bg-primary text-on-primary py-sm px-md rounded-lg font-label-caps text-label-caps hover:bg-on-primary-fixed-variant transition-all mb-lg" onclick="window.top.location.href='/optimize'">New BOM Project</button>
+    <div id="acct-widget" class="px-sm mt-sm"><script>(function(){var u=JSON.parse(localStorage.getItem('kitted_user')||'null');var s=document.currentScript;var ini=u?(u.name||'?').split(' ').map(function(p){return p[0]||''}).join('').slice(0,2).toUpperCase():'';s.insertAdjacentHTML('afterend',u?'<div class="flex items-center gap-md py-md cursor-pointer hover:bg-surface-container rounded-sm px-xs -mx-xs transition-colors" onclick="window.top.location.href=\'\/settings\'"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0 text-on-primary font-bold text-xs">'+ini+'</div><div class="flex flex-col min-w-0"><span class="font-label-caps text-label-caps text-on-surface font-bold truncate">'+u.name+'</span><span class="text-[10px] text-on-surface-variant truncate">'+u.email+'</span></div></div>':'<a href="/onboarding" target="_top" class="flex items-center gap-md py-md px-xs -mx-xs hover:bg-surface-container rounded-sm transition-colors"><div class="w-8 h-8 rounded-full bg-surface-container border border-outline-variant flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-surface-variant" style="font-size:18px">person</span></div><div class="flex flex-col"><span class="font-label-caps text-label-caps text-primary font-bold">Sign in</span><span class="text-[10px] text-on-surface-variant">or create account</span></div></a>');})()</script></div>
+  </div>
+</aside>
+
+<!-- Main -->
+<div class="ml-[240px] min-h-screen flex flex-col">
+
+  <!-- Header -->
+  <header class="sticky top-0 z-40 bg-surface-container-lowest border-b border-outline-variant px-margin-desktop py-sm flex items-center gap-md">
+    <a href="/boms" target="_top" class="flex items-center gap-xs text-on-surface-variant hover:text-primary transition-colors font-label-caps text-label-caps">
+      <span class="material-symbols-outlined" style="font-size:16px;">arrow_back</span>
+      My BOMs
+    </a>
+    <span class="text-outline-variant">/</span>
+    <span id="header-name" class="font-label-caps text-label-caps text-on-surface"></span>
+    <div class="ml-auto flex items-center gap-sm">
+      <button data-tooltip="Re-run optimization to find better pricing or availability" onclick="window.top.location.href='/optimize'" class="flex items-center gap-xs px-md py-xs bg-surface-container border border-outline-variant text-on-surface font-label-caps text-label-caps hover:bg-surface-container-high transition-all rounded">
+        <span class="material-symbols-outlined" style="font-size:16px;">edit</span>
+        Re-optimize
+      </button>
+      <button id="btn-export" data-tooltip="Download this BOM as a CSV or Excel file" class="flex items-center gap-xs px-md py-xs bg-primary text-on-primary font-label-caps text-label-caps hover:bg-on-primary-fixed-variant transition-all rounded">
+        <span class="material-symbols-outlined" style="font-size:16px;">download</span>
+        Export BOM
+      </button>
+    </div>
+  </header>
+
+  <!-- BOM Info Bar -->
+  <div class="bg-surface-container-low border-b border-outline-variant px-margin-desktop py-md flex items-center gap-xl">
+    <div>
+      <p class="font-label-caps text-label-caps text-on-surface-variant uppercase mb-xs">Project</p>
+      <p id="info-name" class="font-headline-md text-headline-md text-on-surface font-bold"></p>
+    </div>
+    <div>
+      <p class="font-label-caps text-label-caps text-on-surface-variant uppercase mb-xs">Parts</p>
+      <p id="info-parts" class="font-headline-md text-headline-md text-on-surface font-bold"></p>
+    </div>
+    <div>
+      <p class="font-label-caps text-label-caps text-on-surface-variant uppercase mb-xs">Total Cost</p>
+      <p id="info-cost" class="font-headline-md text-headline-md text-primary font-bold"></p>
+    </div>
+    <div>
+      <p class="font-label-caps text-label-caps text-on-surface-variant uppercase mb-xs">Distributor(s)</p>
+      <p id="info-dist" class="font-body-sm text-body-sm text-on-surface"></p>
+    </div>
+    <div>
+      <p class="font-label-caps text-label-caps text-on-surface-variant uppercase mb-xs">Status</p>
+      <span id="info-status"></span>
+    </div>
+    <div>
+      <p class="font-label-caps text-label-caps text-on-surface-variant uppercase mb-xs">Last Modified</p>
+      <p id="info-modified" class="font-body-sm text-body-sm text-on-surface"></p>
+    </div>
+  </div>
+
+  <!-- Table Toolbar -->
+  <div class="px-margin-desktop py-md flex items-center gap-sm">
+    <div class="relative">
+      <span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-outline" style="font-size:16px;">search</span>
+      <input id="part-search" type="text" placeholder="Filter parts..." oninput="filterParts()" class="pl-8 pr-md py-xs bg-surface-container-lowest border border-outline-variant rounded font-body-sm text-body-sm focus:outline-none focus:ring-1 focus:ring-primary w-52 transition-all"/>
+    </div>
+    <span id="part-count" class="font-label-caps text-label-caps text-on-surface-variant ml-auto"></span>
+  </div>
+
+  <!-- Parts Table -->
+  <div class="px-margin-desktop pb-xl overflow-x-auto">
+    <table class="w-full border border-outline-variant rounded-lg overflow-hidden" style="border-collapse:separate;border-spacing:0;">
+      <thead>
+        <tr class="bg-surface-container-low">
+          <th class="px-md py-sm font-label-caps text-label-caps text-on-surface-variant text-left border-b border-outline-variant w-10">#</th>
+          <th class="px-md py-sm font-label-caps text-label-caps text-on-surface-variant text-left border-b border-outline-variant">Part Name</th>
+          <th class="px-md py-sm font-label-caps text-label-caps text-on-surface-variant text-left border-b border-outline-variant">MPN</th>
+          <th class="px-md py-sm font-label-caps text-label-caps text-on-surface-variant text-left border-b border-outline-variant">Manufacturer</th>
+          <th class="px-md py-sm font-label-caps text-label-caps text-on-surface-variant text-left border-b border-outline-variant">Distributor</th>
+          <th class="px-md py-sm font-label-caps text-label-caps text-on-surface-variant text-right border-b border-outline-variant">Qty</th>
+          <th class="px-md py-sm font-label-caps text-label-caps text-on-surface-variant text-right border-b border-outline-variant">Unit Price</th>
+          <th class="px-md py-sm font-label-caps text-label-caps text-on-surface-variant text-right border-b border-outline-variant">Ext. Price</th>
+          <th class="px-md py-sm font-label-caps text-label-caps text-on-surface-variant text-left border-b border-outline-variant">Lead Time</th>
+        </tr>
+      </thead>
+      <tbody id="parts-tbody" class="divide-y divide-outline-variant/40">
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Toast -->
+<div id="toast" class="fixed bottom-lg right-lg z-50 bg-inverse-surface text-inverse-on-surface px-md py-sm rounded-lg font-body-sm text-body-sm shadow-lg transition-all duration-300 opacity-0 pointer-events-none">Copied</div>
+
+<script>
+const DIST_HOME = {
+  "Digi-Key": "https://www.digikey.com",
+  "Mouser":   "https://www.mouser.com",
+  "LCSC":     "https://www.lcsc.com",
+  "Arrow":    "https://www.arrow.com",
+  "Newark":   "https://www.newark.com",
+};
+
+function partUrl(dist, mpn) {
+  const q = encodeURIComponent(mpn);
+  if (dist === "Digi-Key") return `https://www.digikey.com/en/products/result?keywords=${q}`;
+  if (dist === "Mouser")   return `https://www.mouser.com/Search/Refine?Keyword=${q}`;
+  if (dist === "LCSC")     return `https://www.lcsc.com/search?q=${q}`;
+  if (dist === "Arrow")    return `https://www.arrow.com/en/products/search?q=${q}`;
+  if (dist === "Newark")   return `https://www.newark.com/search?st=${q}`;
+  return null;
+}
+
+const BOMS = {
+  mctrl: {
+    name: "Motor Controller Rev2",
+    parts: 84,
+    cost: "$1,243.60",
+    distributors: "Digi-Key, Mouser",
+    status: "optimized",
+    modified: "May 30, 2026",
+    savings: 18,
+    rows: [
+      {name:"Ceramic Cap 100nF 0402",    mpn:"GRM155R71C104KA01D",  desc:"CAP CER 0.1UF 16V X7R 0402",             mfr:"Murata",             dist:"Digi-Key", qty:120, unit:0.011, lead:"In Stock", stock:"250,000"},
+      {name:"Resistor 10K 0402",         mpn:"RC0402FR-0710KL",     desc:"RES 10K OHM 1% 1/16W 0402",             mfr:"Yageo",              dist:"Digi-Key", qty:80,  unit:0.009, lead:"In Stock", stock:"500,000"},
+      {name:"STM32F405 MCU",             mpn:"STM32F405RGT6",       desc:"MCU 32BIT 1MB FLASH 168MHZ LQFP64",    mfr:"STMicroelectronics", dist:"Mouser",   qty:2,   unit:8.45,  lead:"3 Weeks",  stock:"4,200"},
+      {name:"3-Phase Motor Driver",      mpn:"DRV8305NPHP",         desc:"Motor Driver IC 3-Phase 48HTQFP",       mfr:"Texas Instruments",  dist:"Digi-Key", qty:2,   unit:4.20,  lead:"In Stock", stock:"12,000"},
+      {name:"N-Ch MOSFET 60V 60A",       mpn:"CSD18540Q5B",         desc:"N-Ch MOSFET 60V 60A D2PAK",            mfr:"Texas Instruments",  dist:"Digi-Key", qty:6,   unit:1.85,  lead:"In Stock", stock:"8,500"},
+      {name:"Buck Converter 100V",       mpn:"LM5164DDAR",          desc:"Buck Converter 100V 200mA 8SOIC",       mfr:"Texas Instruments",  dist:"Mouser",   qty:1,   unit:2.30,  lead:"In Stock", stock:"30,000"},
+      {name:"Ceramic Cap 47uF 1206",     mpn:"GRM31CR61A476KE15L",  desc:"CAP CER 47UF 10V X5R 1206",            mfr:"Murata",             dist:"Digi-Key", qty:10,  unit:0.38,  lead:"In Stock", stock:"15,000"},
+      {name:"Inductor 470nH 9.3A",       mpn:"IHLP2525CZERR47M01", desc:"INDUCTOR 470NH 9.3A SMD",               mfr:"Vishay",             dist:"Digi-Key", qty:4,   unit:0.95,  lead:"2 Weeks",  stock:"2,200"},
+      {name:"RS-232 Transceiver",        mpn:"MAX3232CSE+T",        desc:"IC RS-232 DRVR/RCVR 16SOIC",           mfr:"Analog Devices",     dist:"Mouser",   qty:1,   unit:1.75,  lead:"In Stock", stock:"18,000"},
+      {name:"CAN Bus Transceiver 3.3V",  mpn:"SN65HVD230DR",        desc:"IC CAN BUS TXRX 3.3V 8SOIC",           mfr:"Texas Instruments",  dist:"Digi-Key", qty:1,   unit:1.20,  lead:"In Stock", stock:"45,000"},
+      {name:"Resistor 1K 0402",          mpn:"RC0402FR-071KL",      desc:"RES 1K OHM 1% 1/16W 0402",             mfr:"Yageo",              dist:"Digi-Key", qty:60,  unit:0.009, lead:"In Stock", stock:"500,000"},
+      {name:"Resistor 1K 0402 (Vishay)", mpn:"CRCW04021K00FKED",    desc:"RES 1K OHM 1% 1/16W 0402",             mfr:"Vishay",             dist:"Mouser",   qty:40,  unit:0.010, lead:"In Stock", stock:"300,000"},
+      {name:"Ceramic Cap 10nF 0402",     mpn:"GRM155R71H103KA88D",  desc:"CAP CER 10000PF 50V X7R 0402",         mfr:"Murata",             dist:"Digi-Key", qty:50,  unit:0.012, lead:"In Stock", stock:"200,000"},
+      {name:"Zener Diode 5.1V SOT23",    mpn:"BZX84C5V1-7-F",      desc:"DIODE ZENER 5.1V 300MW SOT23",         mfr:"Diodes Inc.",        dist:"Digi-Key", qty:8,   unit:0.08,  lead:"In Stock", stock:"100,000"},
+      {name:"NPN Transistor SOT23",      mpn:"PMBT3904,215",        desc:"NPN TRANSISTOR 40V 200MA SOT23",        mfr:"Nexperia",           dist:"Mouser",   qty:12,  unit:0.045, lead:"In Stock", stock:"250,000"},
+    ]
+  },
+  iot: {
+    name: "IoT Sensor Node",
+    parts: 42,
+    cost: "$318.90",
+    distributors: "LCSC",
+    status: "optimized",
+    modified: "May 28, 2026",
+    savings: 23,
+    rows: [
+      {name:"ESP32-WROOM-32D Module",  mpn:"ESP32-WROOM-32D",     desc:"Wi-Fi+BT Module 4MB Flash PCB Ant",     mfr:"Espressif",          dist:"LCSC", qty:5,   unit:3.80, lead:"In Stock", stock:"50,000"},
+      {name:"BME280 Env. Sensor",      mpn:"BME280",              desc:"Humidity/Pressure/Temp Sensor LGA-8",   mfr:"Bosch",              dist:"LCSC", qty:5,   unit:2.40, lead:"In Stock", stock:"20,000"},
+      {name:"Ceramic Cap 1uF 0402",    mpn:"GRM155R60J105KA12D",  desc:"CAP CER 1UF 6.3V X5R 0402",            mfr:"Murata",             dist:"LCSC", qty:100, unit:0.008, lead:"In Stock", stock:"500,000"},
+      {name:"Resistor 47K 0402",       mpn:"RC0402FR-0747KL",     desc:"RES 47K OHM 1% 1/16W 0402",            mfr:"Yageo",              dist:"LCSC", qty:60,  unit:0.007, lead:"In Stock", stock:"999,000"},
+      {name:"Li-Ion Charger IC 1A",    mpn:"TP4056",              desc:"Li-Ion Charger IC 1A SOT-23-6",         mfr:"NanJing Top Power",  dist:"LCSC", qty:5,   unit:0.15, lead:"In Stock", stock:"80,000"},
+      {name:"LDO 3.3V 500mA",          mpn:"ME6211C33M5G-N",      desc:"LDO 3.3V 500mA SOT-23-5",              mfr:"MICRONE",            dist:"LCSC", qty:5,   unit:0.08, lead:"In Stock", stock:"200,000"},
+      {name:"Li-Ion Battery Protection",mpn:"DW01A",              desc:"Li-Ion Battery Protection IC SOT-23-6", mfr:"Fortune Semiconductor",dist:"LCSC", qty:5,  unit:0.05, lead:"In Stock", stock:"150,000"},
+      {name:"Dual N-CH MOSFET 20V",    mpn:"FS8205A",             desc:"Dual N-CH MOSFET 20V 6A SOT-23-6",     mfr:"Fortune Semiconductor",dist:"LCSC", qty:5,  unit:0.06, lead:"In Stock", stock:"100,000"},
+      {name:"LDO 3.3V 1A SOT-223",     mpn:"AMS1117-3.3",         desc:"LDO 3.3V 1A SOT-223",                  mfr:"AMS",                dist:"LCSC", qty:5,   unit:0.12, lead:"In Stock", stock:"300,000"},
+      {name:"Ceramic Cap 10uF 0603",   mpn:"GRM188R60J106ME47D",  desc:"CAP CER 10UF 6.3V X5R 0603",           mfr:"Murata",             dist:"LCSC", qty:40,  unit:0.035, lead:"In Stock", stock:"100,000"},
+      {name:"SHT30 Humidity Sensor",   mpn:"SHT30-DIS-B2.5KS",   desc:"Humidity and Temp Sensor ±2% DFN-8",   mfr:"Sensirion",          dist:"LCSC", qty:5,   unit:4.50, lead:"2 Weeks",  stock:"3,000"},
+      {name:"USB-C Receptacle 2.0",    mpn:"USB4105-GF-A",        desc:"USB Type-C Receptacle 2.0 SMD",         mfr:"GCT",                dist:"LCSC", qty:5,   unit:0.35, lead:"In Stock", stock:"25,000"},
+    ]
+  },
+  psu: {
+    name: "Power Supply Board",
+    parts: 59,
+    cost: "$587.40",
+    distributors: "Digi-Key",
+    status: "optimized",
+    modified: "May 25, 2026",
+    savings: 19,
+    rows: [
+      {name:"Buck Regulator Adj 3A",    mpn:"LM2596S-ADJ/NOPB",  desc:"Buck Regulator Adj 3A TO-263-5",        mfr:"Texas Instruments", dist:"Digi-Key", qty:4,  unit:2.85, lead:"In Stock", stock:"10,000"},
+      {name:"PWM Controller 52kHz",     mpn:"UCC28C44DR",         desc:"PWM Controller 1A 52kHz 8SOIC",         mfr:"Texas Instruments", dist:"Digi-Key", qty:2,  unit:1.95, lead:"In Stock", stock:"22,000"},
+      {name:"Schottky Diode 200V 10A",  mpn:"SBR10U200P5-13",     desc:"Diode Schottky 200V 10A D2PAK",         mfr:"Diodes Inc.",       dist:"Digi-Key", qty:8,  unit:0.72, lead:"In Stock", stock:"7,000"},
+      {name:"N-Ch MOSFET 250V 62A",     mpn:"IRFB4229PBF",        desc:"N-Ch MOSFET 250V 62A TO-220AB",         mfr:"Infineon",          dist:"Digi-Key", qty:4,  unit:3.40, lead:"1 Week",   stock:"2,500"},
+      {name:"Alum Cap 1000uF 50V",      mpn:"EEU-FM1H102",        desc:"CAP ALUM 1000UF 50V RADIAL",            mfr:"Panasonic",         dist:"Digi-Key", qty:8,  unit:0.95, lead:"In Stock", stock:"5,000"},
+      {name:"Inductor 10uH 7.6A",       mpn:"CLF12577T-100M-D",   desc:"INDUCTOR 10UH 7.6A SMD",                mfr:"TDK",               dist:"Digi-Key", qty:4,  unit:1.20, lead:"In Stock", stock:"3,000"},
+      {name:"Op Amp Dual 1MHz",         mpn:"LM358DR",            desc:"Op Amp Dual 1MHz 8SOIC",                mfr:"Texas Instruments", dist:"Digi-Key", qty:4,  unit:0.45, lead:"In Stock", stock:"50,000"},
+      {name:"Shunt Voltage Ref 2.5V",   mpn:"TL431AIDBZR",        desc:"Shunt Voltage Reference 2.495V SOT23",  mfr:"Texas Instruments", dist:"Digi-Key", qty:6,  unit:0.28, lead:"In Stock", stock:"80,000"},
+      {name:"Resistor 5.1K 0402",       mpn:"CRCW04025K10FKED",   desc:"RES 5.1K OHM 1% 0402",                 mfr:"Vishay",            dist:"Digi-Key", qty:40, unit:0.009, lead:"In Stock", stock:"400,000"},
+      {name:"Ceramic Cap 10uF 50V 1206",mpn:"GRM31CR71H106KA12L", desc:"CAP CER 10UF 50V X7R 1206",            mfr:"Murata",            dist:"Digi-Key", qty:20, unit:0.28, lead:"In Stock", stock:"30,000"},
+      {name:"TVS Diode 15V 400W",       mpn:"SMAJ15A-13-F",       desc:"TVS DIODE 15V 400W SMA",                mfr:"Diodes Inc.",       dist:"Digi-Key", qty:6,  unit:0.18, lead:"In Stock", stock:"60,000"},
+      {name:"Schmitt Trigger Inverter", mpn:"SN74LVC1G14DBVR",    desc:"Inverter Schmidt Trigger SOT-23-5",     mfr:"Texas Instruments", dist:"Digi-Key", qty:4,  unit:0.32, lead:"In Stock", stock:"90,000"},
+    ]
+  },
+  waudio: {
+    name: "Wireless Audio Module",
+    parts: 71,
+    cost: "$892.10",
+    distributors: "Arrow, Newark",
+    status: "optimized",
+    modified: "May 20, 2026",
+    savings: 15,
+    rows: [
+      {name:"nRF52840 BT SoC",         mpn:"nRF52840-QIAA",      desc:"SoC BT5/802.15.4 1MB QFN73",           mfr:"Nordic Semiconductor",dist:"Arrow",  qty:5,  unit:6.40,  lead:"In Stock", stock:"8,000"},
+      {name:"Audio DSP Codec",          mpn:"CS47L35-CNZR2",      desc:"Audio DSP Codec CSP68",                 mfr:"Cirrus Logic",        dist:"Arrow",  qty:5,  unit:9.20,  lead:"2 Weeks",  stock:"1,200"},
+      {name:"Class-D Stereo Amp 15W",   mpn:"TPA3130D2DAPR",      desc:"Class-D Stereo Amp 15W HTSSOP28",      mfr:"Texas Instruments",   dist:"Arrow",  qty:5,  unit:2.85,  lead:"In Stock", stock:"6,000"},
+      {name:"Ceramic Cap 22uF 0603",    mpn:"GRM188R60G226MEA0D", desc:"CAP CER 22UF 4V X5R 0603",             mfr:"Murata",              dist:"Arrow",  qty:60, unit:0.045, lead:"In Stock", stock:"80,000"},
+      {name:"LDO 3.3V 700mA SOT-25",   mpn:"XC6220B331MR-G",     desc:"LDO 3.3V 700mA SOT-25",                mfr:"Torex",               dist:"Newark", qty:5,  unit:0.42,  lead:"In Stock", stock:"40,000"},
+      {name:"Ferrite Bead 300Ω 0603",   mpn:"MMZ1608R301A",       desc:"Ferrite Bead 300OHM 100MHZ 0603",      mfr:"TDK",                 dist:"Arrow",  qty:30, unit:0.015, lead:"In Stock", stock:"200,000"},
+      {name:"MEMS Microphone Omni",     mpn:"INMP441ACEZ-R7",     desc:"MEMS Mic Omnidirectional -26dBFS LGA",  mfr:"InvenSense",          dist:"Arrow",  qty:4,  unit:1.85,  lead:"3 Weeks",  stock:"900"},
+      {name:"I2S Amp 3.2W Class D",     mpn:"MAX98357AEWL+T",     desc:"I2S Amp 3.2W Class D WLP",             mfr:"Analog Devices",      dist:"Newark", qty:5,  unit:1.50,  lead:"In Stock", stock:"15,000"},
+      {name:"LDO 3.3V 600mA SOT-25",   mpn:"AP2112K-3.3TRG1",    desc:"LDO 3.3V 600mA SOT-25",                mfr:"Diodes Inc.",         dist:"Arrow",  qty:5,  unit:0.18,  lead:"In Stock", stock:"100,000"},
+      {name:"Ceramic Cap 1nF 0402",     mpn:"GRM155R71H102KA01D", desc:"CAP CER 1000PF 50V X7R 0402",          mfr:"Murata",              dist:"Arrow",  qty:80, unit:0.010, lead:"In Stock", stock:"500,000"},
+      {name:"ESD TVS 3.3V SOT-553",     mpn:"ESD9L3.3ST5G",       desc:"TVS ESD 3.3V SOT-553",                 mfr:"onsemi",              dist:"Newark", qty:20, unit:0.09,  lead:"In Stock", stock:"50,000"},
+      {name:"IR LED 950nm SMD",         mpn:"SFH4545",            desc:"IR LED 950nm 100mA SMD",                mfr:"OSRAM",               dist:"Arrow",  qty:6,  unit:0.38,  lead:"In Stock", stock:"10,000"},
+    ]
+  },
+  bldc: {
+    name: "BLDC Driver v3",
+    parts: 33,
+    cost: "—",
+    distributors: "TBD",
+    status: "draft",
+    modified: "Jun 1, 2026",
+    savings: 0,
+    rows: [
+      {name:"FOC Motor Driver QFN32",  mpn:"MCF8316ARQKR",       desc:"3-Phase Sensorless FOC Motor Driver QFN32",mfr:"Texas Instruments",dist:"—", qty:2,  unit:null, lead:"—", stock:"—"},
+      {name:"N-Ch MOSFET 100V 71A",   mpn:"CSD19506KCS",         desc:"N-Ch MOSFET 100V 71A TO-263",           mfr:"Texas Instruments",dist:"—", qty:6,  unit:null, lead:"—", stock:"—"},
+      {name:"Precision Iso Amp",       mpn:"AMC1301DWVR",         desc:"Precision Iso Amp 200mV±1% SOP16W",     mfr:"Texas Instruments",dist:"—", qty:3,  unit:null, lead:"—", stock:"—"},
+      {name:"Zero-Drift Op Amp",       mpn:"OPA2330AIDCNT",       desc:"Op Amp 350kHz 0.005mV SOT-23-8",        mfr:"Texas Instruments",dist:"—", qty:2,  unit:null, lead:"—", stock:"—"},
+      {name:"Digital Isolator 2Ch",    mpn:"ISO7721DR",           desc:"Digital Isolator 2Ch 150Mbps SOIC16",   mfr:"Texas Instruments",dist:"—", qty:1,  unit:null, lead:"—", stock:"—"},
+      {name:"Ceramic Cap 100nF 0402",  mpn:"GRM155R71H104KE14D",  desc:"CAP CER 0.1UF 50V X7R 0402",           mfr:"Murata",           dist:"—", qty:60, unit:null, lead:"—", stock:"—"},
+      {name:"Resistor 10K 0402",       mpn:"CRCW040210K0FKED",    desc:"RES 10K OHM 1% 1/16W 0402",            mfr:"Vishay",           dist:"—", qty:40, unit:null, lead:"—", stock:"—"},
+      {name:"Alum Cap 470uF 35V",      mpn:"EEU-FM1V471",         desc:"CAP ALUM 470UF 35V RADIAL",             mfr:"Panasonic",        dist:"—", qty:4,  unit:null, lead:"—", stock:"—"},
+    ]
+  },
+  rf: {
+    name: "RF Frontend Board",
+    parts: 58,
+    cost: "—",
+    distributors: "TBD",
+    status: "draft",
+    modified: "May 31, 2026",
+    savings: 0,
+    rows: [
+      {name:"Sub-GHz+2.4GHz MCU",     mpn:"CC1352P7RGZ",         desc:"Sub-1GHz+2.4GHz MCU 352KB RAM QFN48",  mfr:"Texas Instruments",dist:"—", qty:3,  unit:null, lead:"—", stock:"—"},
+      {name:"2.4GHz PA+LNA FEM",       mpn:"SE2435L",             desc:"PA+LNA 2.4GHz FEM 10-QFN",             mfr:"Skyworks",         dist:"—", qty:3,  unit:null, lead:"—", stock:"—"},
+      {name:"SP3T RF Switch 6GHz",     mpn:"BGS12SN6E6327XTSA1",  desc:"SP3T RF Switch 6GHz SOT363",           mfr:"Infineon",         dist:"—", qty:3,  unit:null, lead:"—", stock:"—"},
+      {name:"RF Balun 2.45GHz",        mpn:"BALF-SPI2-01D3",      desc:"RF Balun+Matching 2.45GHz SC70-6",     mfr:"STMicroelectronics",dist:"—", qty:3, unit:null, lead:"—", stock:"—"},
+      {name:"RF Inductor 18nH 0402",   mpn:"LQG15HS18NJ02D",      desc:"INDUCTOR 18NH 0402 RF",                mfr:"Murata",           dist:"—", qty:12, unit:null, lead:"—", stock:"—"},
+      {name:"Ceramic Cap 4.7pF 0201",  mpn:"GRM0335C1H4R7BA01D",  desc:"CAP CER 4.7PF 50V C0G 0201",          mfr:"Murata",           dist:"—", qty:30, unit:null, lead:"—", stock:"—"},
+      {name:"Crystal 32MHz SMD",       mpn:"ABM8-32.000MHZ-B2-T", desc:"XTAL 32.0000MHZ 18PF SMD",            mfr:"Abracon",          dist:"—", qty:3,  unit:null, lead:"—", stock:"—"},
+      {name:"GaAs MMIC Amp DC-4GHz",   mpn:"SGA-6589Z",           desc:"GaAs MMIC Amp DC-4GHz SOT-363",        mfr:"Qorvo",            dist:"—", qty:3,  unit:null, lead:"—", stock:"—"},
+    ]
+  }
+};
+
+function getParam(name) {
+  return new URLSearchParams(window.location.search).get(name);
+}
+
+function render() {
+  const id = getParam('id') || 'mctrl';
+  const bom = BOMS[id];
+  if (!bom) { document.body.innerHTML = '<p style="padding:2rem">BOM not found.</p>'; return; }
+
+  document.title = bom.name + ' | Kitted';
+  document.getElementById('header-name').textContent = bom.name;
+  document.getElementById('info-name').textContent = bom.name;
+  document.getElementById('info-parts').textContent = bom.parts + ' line items';
+  document.getElementById('info-cost').textContent = bom.cost;
+  document.getElementById('info-dist').textContent = bom.distributors;
+  document.getElementById('info-modified').textContent = bom.modified;
+
+  const statusEl = document.getElementById('info-status');
+  if (bom.status === 'optimized') {
+    statusEl.innerHTML = '<span class="status-chip" style="background:#dcfce7;color:#166534;">✓ Optimized</span>';
+  } else {
+    statusEl.innerHTML = '<span class="status-chip" style="background:#f1f5f9;color:#64748b;">Draft</span>';
+  }
+
+  const tbody = document.getElementById('parts-tbody');
+  tbody.innerHTML = bom.rows.map((r, i) => {
+    const ext = r.unit != null ? '$' + (r.qty * r.unit).toFixed(2) : '—';
+    const unitStr = r.unit != null ? '$' + r.unit.toFixed(3) : '—';
+    const stockColor = r.lead === 'In Stock' ? 'color:#166534;' : r.lead === '—' ? 'color:#94a3b8;' : 'color:#92400e;';
+    const pUrl = partUrl(r.dist, r.mpn);
+    const nameCell = pUrl
+      ? `<a href="${pUrl}" target="_blank" rel="noopener" class="text-primary hover:underline font-semibold">${r.name}</a>`
+      : `<span class="font-semibold text-on-surface-variant">${r.name}</span>`;
+    const distHome = DIST_HOME[r.dist];
+    const distCell = distHome
+      ? `<a href="${distHome}" target="_blank" rel="noopener" class="text-on-surface hover:text-primary hover:underline transition-colors">${r.dist}</a>`
+      : `<span class="text-on-surface-variant">${r.dist}</span>`;
+    return `<tr class="hover:bg-surface-container-low transition-colors part-row">
+      <td class="px-md py-sm font-label-mono text-label-mono text-outline">${String(i+1).padStart(2,'0')}</td>
+      <td class="px-md py-sm font-body-sm text-body-sm">${nameCell}</td>
+      <td class="px-md py-sm font-label-mono text-label-mono text-on-surface-variant">${r.mpn}</td>
+      <td class="px-md py-sm font-body-sm text-body-sm text-on-surface-variant">${r.mfr}</td>
+      <td class="px-md py-sm font-body-sm text-body-sm">${distCell}</td>
+      <td class="px-md py-sm font-label-mono text-label-mono text-on-surface text-right">${r.qty}</td>
+      <td class="px-md py-sm font-label-mono text-label-mono text-on-surface text-right">${unitStr}</td>
+      <td class="px-md py-sm font-label-mono text-label-mono text-primary font-semibold text-right">${ext}</td>
+      <td class="px-md py-sm font-body-sm text-body-sm" style="${stockColor}">${r.lead}</td>
+    </tr>`;
+  }).join('');
+
+  updateCount();
+}
+
+function filterParts() {
+  const q = document.getElementById('part-search').value.toLowerCase();
+  document.querySelectorAll('.part-row').forEach(row => {
+    row.style.display = row.textContent.toLowerCase().includes(q) ? '' : 'none';
+  });
+  updateCount();
+}
+
+function updateCount() {
+  const visible = [...document.querySelectorAll('.part-row')].filter(r => r.style.display !== 'none').length;
+  document.getElementById('part-count').textContent = visible + ' parts shown';
+}
+
+document.getElementById('btn-export').addEventListener('click', () => {
+  const headers = [...document.querySelectorAll('thead th')].map(th => th.textContent.trim());
+  const rows = [...document.querySelectorAll('.part-row')].map(row =>
+    [...row.querySelectorAll('td')].map(td => {
+      const v = td.textContent.trim().replace(/"/g, '""');
+      return `"${v}"`;
+    }).join(',')
+  );
+  const csv = [headers.map(h => `"${h}"`).join(','), ...rows].join('\n');
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv' }));
+  const name = document.querySelector('h1,h2,.bom-name')?.textContent.trim().replace(/\s+/g,'_') || 'bom';
+  a.download = name + '.csv';
+  a.click();
+  showToast('BOM exported as CSV');
+});
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.style.opacity = '1';
+  setTimeout(() => t.style.opacity = '0', 2200);
+}
+
+render();
+</script>
+</body></html>

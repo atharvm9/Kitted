@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Kitted - Results</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;700&family=Jetbrains+Mono:wght@400;500;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=JetBrains+Mono:wght@100..800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">tailwind.config = {darkMode: "class", theme: {extend: {colors: {outline: "#6c797f", "surface-bright": "#f5fafd", "primary-fixed": "#b6ebff", error: "#ba1a1a", "tertiary-container": "#f3ab26", "surface-variant": "#dee3e7", "surface-container-low": "#eff4f8", "on-primary-container": "#005063", "on-surface-variant": "#3c494e", "surface-dim": "#d5dbde", secondary: "#346574", "on-error": "#ffffff", "surface-container-high": "#e3e9ec", "on-secondary": "#ffffff", "inverse-surface": "#2b3134", "on-tertiary-fixed-variant": "#614000", "surface-container-highest": "#dee3e7", "on-secondary-fixed-variant": "#174d5b", "tertiary-fixed": "#ffddaf", "surface-container": "#e9eff2", "surface-tint": "#00677f", "tertiary-fixed-dim": "#ffba43", "on-primary-fixed": "#001f28", "on-secondary-fixed": "#001f27", "on-primary-fixed-variant": "#004e60", "secondary-fixed-dim": "#9dcedf", "on-tertiary": "#ffffff", "on-secondary-container": "#386978", "on-tertiary-container": "#644300", "on-tertiary-fixed": "#281800", surface: "#f5fafd", primary: "#00677f", "primary-container": "#0fc9f4", background: "#f5fafd", "primary-fixed-dim": "#48d6ff", "inverse-on-surface": "#ecf1f5", "on-surface": "#171c1f", "outline-variant": "#bbc9cf", "on-error-container": "#93000a", "error-container": "#ffdad6", tertiary: "#805600", "on-background": "#171c1f", "secondary-fixed": "#b9eafc", "surface-container-lowest": "#ffffff", "on-primary": "#ffffff", "inverse-primary": "#48d6ff", "secondary-container": "#b6e7f9"}, borderRadius: {DEFAULT: "0.125rem", lg: "0.25rem", xl: "0.5rem", full: "0.75rem"}, spacing: {"margin-desktop": "32px", unit: "4px", sm: "8px", xs: "4px", md: "16px", xl: "48px", "margin-mobile": "16px", lg: "24px", gutter: "16px"}, fontFamily: {"body-lg": ["Geist"], "body-sm": ["Geist"], "label-mono": ["JetBrains Mono"], "headline-md": ["Geist"], "headline-lg": ["Geist"], "label-caps": ["Geist"], display: ["Geist"], headline: ["Geist"], body: ["Geist"], label: ["Jetbrains Mono"]}, fontSize: {"body-lg": ["16px", {lineHeight: "24px", letterSpacing: "-0.01em", fontWeight: "400"}], "body-sm": ["14px", {lineHeight: "20px", letterSpacing: "0em", fontWeight: "400"}], "label-mono": ["13px", {lineHeight: "16px", letterSpacing: "0em", fontWeight: "500"}], "headline-md": ["20px", {lineHeight: "28px", letterSpacing: "-0.02em", fontWeight: "500"}], "headline-lg": ["32px", {lineHeight: "40px", letterSpacing: "-0.03em", fontWeight: "600"}], "label-caps": ["12px", {lineHeight: "16px", letterSpacing: "0.05em", fontWeight: "600"}], display: ["48px", {lineHeight: "1.1", letterSpacing: "-0.04em", fontWeight: "600"}]}}}};</script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20;
+            font-size: 20px;
+        }
+        body { font-family: 'Geist', sans-serif; }
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; height: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #e5e7eb; border-radius: 2px; }
+    
+/* custom tooltips */
+header [data-tooltip]::after{bottom:auto;top:calc(100% + 7px);}
+nav.flex [data-tooltip]::after{bottom:auto;top:calc(100% + 7px);}
+
+[data-tooltip]{position:relative;}
+[data-tooltip]::after{
+  content:attr(data-tooltip);
+  position:absolute;
+  bottom:calc(100% + 7px);
+  left:50%;
+  transform:translateX(-50%);
+  background:#2b3134;
+  color:#ecf1f5;
+  padding:4px 9px;
+  border-radius:5px;
+  font-size:11px;
+  font-weight:500;
+  white-space:nowrap;
+  pointer-events:none;
+  opacity:0;
+  transition:opacity .12s;
+  z-index:99999;
+  font-family:'Geist',sans-serif;
+  letter-spacing:.01em;
+  box-shadow:0 2px 8px rgba(0,0,0,.18);
+}
+[data-tooltip]:hover::after{opacity:1;}
+aside [data-tooltip]::after{
+  bottom:auto;
+  top:50%;
+  left:calc(100% + 10px);
+  transform:translateY(-50%);
+}
+</style>
+</head>
+<body class="bg-background text-on-surface">
+<!-- SideNavBar -->
+<aside class="w-[240px] h-screen fixed left-0 top-0 bg-surface-container-lowest border-r border-outline-variant flex flex-col py-lg px-md z-50">
+  <div class="mb-xl px-sm">
+    <a data-tooltip="Go to the Kitted home page" href="/" target="_top" style="text-decoration:none;cursor:pointer;" class="font-headline-md text-headline-md font-bold text-primary">Kitted</a>
+  </div>
+  <nav class="flex-1 space-y-xs">
+    <a data-tooltip="BOM Optimizer — upload and optimize a bill of materials" class="flex items-center gap-md px-sm py-xs rounded-sm text-primary border-l-2 border-primary bg-surface-container-low transition-colors duration-200" href="/optimize" target="_top">
+      <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 20;">upload_file</span>
+      <span class="font-body-sm text-body-sm font-semibold">BOM Optimizer</span>
+    </a>
+    <a data-tooltip="Part Search — search distributor catalogs for components" class="flex items-center gap-md px-sm py-xs rounded-sm text-on-surface-variant hover:bg-surface-container transition-colors duration-200 group" href="/search" target="_top">
+      <span class="material-symbols-outlined group-hover:text-primary">search</span>
+      <span class="font-body-sm text-body-sm">Part Search</span>
+    </a>
+    <a data-tooltip="My BOMs — view and manage your saved BOM projects" class="flex items-center gap-md px-sm py-xs rounded-sm text-on-surface-variant hover:bg-surface-container transition-colors duration-200 group" href="/boms" target="_top">
+      <span class="material-symbols-outlined group-hover:text-primary">inventory_2</span>
+      <span class="font-body-sm text-body-sm">My BOMs</span>
+    </a>
+    <a data-tooltip="Orders — track your component orders" class="flex items-center gap-md px-sm py-xs rounded-sm text-on-surface-variant hover:bg-surface-container transition-colors duration-200 group" href="/orders" target="_top">
+      <span class="material-symbols-outlined group-hover:text-primary">shopping_cart</span>
+      <span class="font-body-sm text-body-sm">Orders</span>
+    </a>
+    <a data-tooltip="Settings — account and app preferences" class="flex items-center gap-md px-sm py-xs rounded-sm text-on-surface-variant hover:bg-surface-container transition-colors duration-200 group" href="/settings" target="_top">
+      <span class="material-symbols-outlined group-hover:text-primary">settings</span>
+      <span class="font-body-sm text-body-sm">Settings</span>
+    </a>
+  </nav>
+  <div class="mt-auto pt-lg border-t border-outline-variant/30 space-y-xs">
+    <button data-tooltip="Start a new BOM optimization project" class="w-full bg-primary text-on-primary py-sm px-md rounded-lg font-label-caps text-label-caps hover:bg-on-primary-fixed-variant transition-all mb-lg" onclick="window.top.location.href='/optimize'">New BOM Project</button>
+    <a class="flex items-center gap-md px-sm py-xs rounded-sm text-on-surface-variant hover:bg-surface-container transition-colors duration-200" href="#" onclick="showToast('Help Center — coming soon'); return false;">
+      <span class="material-symbols-outlined">help</span>
+      <span class="font-body-sm text-body-sm">Help Center</span>
+    </a>
+    <a class="flex items-center gap-md px-sm py-xs rounded-sm text-on-surface-variant hover:bg-surface-container transition-colors duration-200" href="#" onclick="showToast('Contact support — coming soon'); return false;">
+      <span class="material-symbols-outlined">support_agent</span>
+      <span class="font-body-sm text-body-sm">Contact Support</span>
+    </a>
+    <div id="acct-widget" class="px-sm mt-sm"><script>(function(){var u=JSON.parse(localStorage.getItem('kitted_user')||'null');var s=document.currentScript;var ini=u?(u.name||'?').split(' ').map(function(p){return p[0]||''}).join('').slice(0,2).toUpperCase():'';s.insertAdjacentHTML('afterend',u?'<div class="flex items-center gap-md py-md cursor-pointer hover:bg-surface-container rounded-sm px-xs -mx-xs transition-colors" onclick="window.top.location.href=\'\/settings\'"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0 text-on-primary font-bold text-xs">'+ini+'</div><div class="flex flex-col min-w-0"><span class="font-label-caps text-label-caps text-on-surface font-bold truncate">'+u.name+'</span><span class="text-[10px] text-on-surface-variant truncate">'+u.email+'</span></div></div>':'<a href="/onboarding" target="_top" class="flex items-center gap-md py-md px-xs -mx-xs hover:bg-surface-container rounded-sm transition-colors"><div class="w-8 h-8 rounded-full bg-surface-container border border-outline-variant flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-surface-variant" style="font-size:18px">person</span></div><div class="flex flex-col"><span class="font-label-caps text-label-caps text-primary font-bold">Sign in</span><span class="text-[10px] text-on-surface-variant">or create account</span></div></a>');})()</script></div>
+  </div>
+</aside>
+<!-- TopAppBar -->
+<header class="fixed top-0 left-[240px] right-0 h-16 bg-surface-container-lowest border-b border-outline-variant flex justify-between items-center px-margin-desktop z-40">
+<div class="flex items-center gap-xl h-full">
+<span class="font-headline-md text-headline-md font-semibold text-on-surface">BOM Optimizer</span>
+<nav class="flex items-center gap-lg h-full">
+<a class="font-label-caps text-label-caps text-outline hover:text-primary transition-colors cursor-pointer h-full flex items-center px-1" href="step1.html">Upload</a>
+<a class="font-label-caps text-label-caps text-outline hover:text-primary transition-colors cursor-pointer h-full flex items-center px-1" href="step2.html">Mapping</a>
+<a class="font-label-caps text-label-caps text-outline hover:text-primary transition-colors cursor-pointer h-full flex items-center px-1" href="step3.html">Preferences</a>
+<a class="font-label-caps text-label-caps text-primary border-b-2 border-primary transition-colors cursor-pointer h-full flex items-center px-1" href="step4.html">Results</a>
+</nav>
+</div>
+<div class="flex items-center gap-md">
+<button data-tooltip="View notifications" class="material-symbols-outlined text-outline hover:text-on-surface transition-colors active:opacity-70" data-icon="notifications">notifications</button>
+<button data-tooltip="Get help" class="material-symbols-outlined text-outline hover:text-on-surface transition-colors active:opacity-70" data-icon="help_outline">help_outline</button>
+</div>
+</header>
+<!-- Main Content -->
+<main class="ml-[240px] pt-16 min-h-screen">
+<div class="max-w-[1200px] mx-auto px-margin-desktop py-xl">
+<!-- Step Indicator -->
+<div class="flex items-center justify-between mb-xl max-w-2xl">
+<div class="flex items-center gap-sm">
+<div class="w-6 h-6 rounded-full bg-primary text-on-primary flex items-center justify-center text-xs font-bold">1</div>
+<span class="text-label-caps font-label-caps text-primary">Upload</span>
+</div>
+<div class="flex-1 h-[1px] bg-primary mx-md"></div>
+<div class="flex items-center gap-sm">
+<div class="w-6 h-6 rounded-full bg-primary text-on-primary flex items-center justify-center text-xs font-bold">2</div>
+<span class="text-label-caps font-label-caps text-primary">Mapping</span>
+</div>
+<div class="flex-1 h-[1px] bg-primary mx-md"></div>
+<div class="flex items-center gap-sm">
+<div class="w-6 h-6 rounded-full bg-primary text-on-primary flex items-center justify-center text-xs font-bold">3</div>
+<span class="text-label-caps font-label-caps text-primary">Analysis</span>
+</div>
+<div class="flex-1 h-[1px] bg-primary mx-md"></div>
+<div class="flex items-center gap-sm">
+<div class="w-6 h-6 rounded-full bg-primary text-on-primary flex items-center justify-center text-xs font-bold ring-2 ring-primary ring-offset-2 ring-offset-background">4</div>
+<span class="text-label-caps font-label-caps text-primary">Results</span>
+</div>
+</div>
+<!-- Page Header & Actions -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-md mb-lg">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-xs tracking-tight">Optimization Report</h2>
+<p class="font-body-sm text-body-sm text-outline-variant">Project: X-Alpha Flight Controller Rev. 2.1 — 42 Line Items Identified</p>
+</div>
+<div class="flex items-center gap-sm">
+<button id="btn-export-csv" data-tooltip="Export optimized BOM to CSV" class="flex items-center gap-xs px-md py-sm border border-outline-variant bg-surface-container-lowest text-on-surface font-label-caps text-label-caps hover:bg-surface-container-low transition-all">
+<span class="material-symbols-outlined text-sm" data-icon="download">download</span>
+                        Export to CSV
+                    </button>
+<button id="btn-save-bom" data-tooltip="Save this BOM to My BOMs" class="flex items-center gap-xs px-md py-sm border border-primary bg-surface-container-lowest text-primary font-label-caps text-label-caps hover:bg-primary-fixed transition-all">
+<span class="material-symbols-outlined text-sm" data-icon="bookmark_add">bookmark_add</span>
+                        Save to My BOMs
+                    </button>
+<button data-tooltip="Push BOM order to distributor cart" class="flex items-center gap-xs px-md py-sm bg-primary text-on-primary font-label-caps text-label-caps hover:bg-primary-container transition-all shadow-sm">
+<span class="material-symbols-outlined text-sm" data-icon="shopping_cart">shopping_cart</span>
+                        Push to Cart
+                    </button>
+</div>
+</div>
+<!-- Dashboard Grid Layout -->
+<div class="grid grid-cols-12 gap-gutter">
+<!-- Summary KPI Cards -->
+<div class="col-span-12 md:col-span-4 bg-surface-container-lowest border border-outline-variant p-lg">
+<span class="font-label-caps text-label-caps text-outline-variant block mb-sm">FULFILLMENT RATE</span>
+<div class="flex items-end gap-sm">
+<span class="font-display text-display text-on-surface leading-none">98.2%</span>
+<span class="text-on-tertiary-fixed-variant font-label-mono text-label-mono mb-1 flex items-center"><span class="material-symbols-outlined text-xs" data-icon="trending_up">trending_up</span> +2.4%</span>
+</div>
+</div>
+<div class="col-span-12 md:col-span-4 bg-surface-container-lowest border border-outline-variant p-lg">
+<span class="font-label-caps text-label-caps text-outline-variant block mb-sm">AVG. LEAD TIME</span>
+<div class="flex items-end gap-sm">
+<span class="font-display text-display text-on-surface leading-none">4.2w</span>
+<span class="text-outline font-label-mono text-label-mono mb-1">Optimized</span>
+</div>
+</div>
+<div class="col-span-12 md:col-span-4 bg-error-container border border-error p-lg">
+<span class="font-label-caps text-label-caps text-on-error-container block mb-sm">RISK ALERTS</span>
+<div class="flex items-end gap-sm">
+<span class="font-display text-display text-on-error-container leading-none">03</span>
+<span class="text-on-error-container font-label-mono text-label-mono mb-1 flex items-center"><span class="material-symbols-outlined text-xs" data-icon="warning">warning</span> Critical Stock</span>
+</div>
+</div>
+<!-- Main Data Table Container -->
+<div class="col-span-12 bg-surface-container-lowest border border-outline-variant overflow-hidden">
+<div class="px-md py-sm bg-surface-container border-b border-outline-variant flex justify-between items-center">
+<div class="flex items-center gap-md">
+<span class="font-label-caps text-label-caps text-on-surface">Optimized BOM Items</span>
+<div class="h-4 w-[1px] bg-outline-variant"></div>
+<span class="font-body-sm text-body-sm text-outline-variant">Showing 42 of 42 items</span>
+</div>
+<div class="flex items-center gap-sm">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-2 top-1/2 -translate-y-1/2 text-outline text-sm" data-icon="search">search</span>
+<input class="pl-8 pr-4 py-1 text-label-mono bg-background border border-outline-variant focus:outline-none focus:ring-1 focus:ring-primary w-48 transition-all" placeholder="Filter parts..." type="text"/>
+</div>
+</div>
+</div>
+<div class="overflow-x-auto custom-scrollbar">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low border-b border-outline-variant">
+<th class="px-md py-sm font-label-caps text-label-caps text-outline">Line</th>
+<th class="px-md py-sm font-label-caps text-label-caps text-outline">Manufacturer Part Number</th>
+<th class="px-md py-sm font-label-caps text-label-caps text-outline">Description</th>
+<th class="px-md py-sm font-label-caps text-label-caps text-outline">Distributor</th>
+<th class="px-md py-sm font-label-caps text-label-caps text-outline">Stock Status</th>
+<th class="px-md py-sm font-label-caps text-label-caps text-outline">Lead Time</th>
+<th class="px-md py-sm font-label-caps text-label-caps text-outline text-center">Risk</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-md py-sm font-label-mono text-label-mono text-outline">01</td>
+<td class="px-md py-sm font-body-sm text-body-sm font-bold text-on-surface">GRM155R71C104KA01D</td>
+<td class="px-md py-sm font-body-sm text-body-sm text-on-surface-variant">CAP CER 0.1UF 16V X7R 0402</td>
+<td class="px-md py-sm font-body-sm text-body-sm">DigiKey</td>
+<td class="px-md py-sm">
+<span class="inline-flex items-center px-sm py-xs rounded-full bg-secondary-fixed text-on-secondary-fixed-variant font-label-mono text-[10px] uppercase">14,200 IN STOCK</span>
+</td>
+<td class="px-md py-sm font-label-mono text-label-mono text-on-surface">24 Hours</td>
+<td class="px-md py-sm text-center">
+<span class="material-symbols-outlined text-outline-variant group-hover:text-tertiary-fixed-dim" data-icon="check_circle">check_circle</span>
+</td>
+</tr>
+<tr class="bg-surface-container-low transition-colors group">
+<td class="px-md py-sm font-label-mono text-label-mono text-outline">02</td>
+<td class="px-md py-sm font-body-sm text-body-sm font-bold text-on-surface">STM32F405RGT6</td>
+<td class="px-md py-sm font-body-sm text-body-sm text-on-surface-variant">IC MCU 32BIT 1MB FLASH 64LQFP</td>
+<td class="px-md py-sm font-body-sm text-body-sm">Mouser</td>
+<td class="px-md py-sm">
+<span class="inline-flex items-center px-sm py-xs rounded-full bg-error-container text-on-error-container font-label-mono text-[10px] uppercase">42 IN STOCK</span>
+</td>
+<td class="px-md py-sm font-label-mono text-label-mono text-on-surface">2-3 Days</td>
+<td class="px-md py-sm text-center">
+<div class="inline-flex items-center gap-xs px-sm py-xs bg-tertiary-fixed text-on-tertiary-fixed-variant font-label-mono text-[10px] uppercase rounded">
+<span class="material-symbols-outlined text-[12px]" data-icon="error_outline">error_outline</span>
+                                            Low Stock
+                                        </div>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-md py-sm font-label-mono text-label-mono text-outline">03</td>
+<td class="px-md py-sm font-body-sm text-body-sm font-bold text-on-surface">MPU-6000</td>
+<td class="px-md py-sm font-body-sm text-body-sm text-on-surface-variant">IMU ACCEL/GYRO I2C/SPI 24QFN</td>
+<td class="px-md py-sm font-body-sm text-body-sm">Arrow</td>
+<td class="px-md py-sm">
+<span class="inline-flex items-center px-sm py-xs rounded-full bg-secondary-fixed text-on-secondary-fixed-variant font-label-mono text-[10px] uppercase">2,500 IN STOCK</span>
+</td>
+<td class="px-md py-sm font-label-mono text-label-mono text-on-surface">Ships Today</td>
+<td class="px-md py-sm text-center">
+<span class="material-symbols-outlined text-outline-variant" data-icon="check_circle">check_circle</span>
+</td>
+</tr>
+<tr class="bg-surface-container-low transition-colors group">
+<td class="px-md py-sm font-label-mono text-label-mono text-outline">04</td>
+<td class="px-md py-sm font-body-sm text-body-sm font-bold text-on-surface">TPS63020DSJT</td>
+<td class="px-md py-sm font-body-sm text-body-sm text-on-surface-variant">IC REG BUCK BST ADJ 4A 14VSON</td>
+<td class="px-md py-sm font-body-sm text-body-sm">Avnet</td>
+<td class="px-md py-sm">
+<span class="inline-flex items-center px-sm py-xs rounded-full bg-error text-on-error font-label-mono text-[10px] uppercase">0 IN STOCK</span>
+</td>
+<td class="px-md py-sm font-label-mono text-label-mono text-error font-bold">18-24 Weeks</td>
+<td class="px-md py-sm text-center">
+<div class="inline-flex items-center gap-xs px-sm py-xs bg-error text-on-error font-label-mono text-[10px] uppercase rounded">
+<span class="material-symbols-outlined text-[12px]" data-icon="warning">warning</span>
+                                            High Risk
+                                        </div>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-md py-sm font-label-mono text-label-mono text-outline">05</td>
+<td class="px-md py-sm font-body-sm text-body-sm font-bold text-on-surface">RC0603FR-0710KL</td>
+<td class="px-md py-sm font-body-sm text-body-sm text-on-surface-variant">RES SMD 10K OHM 1% 1/10W 0603</td>
+<td class="px-md py-sm font-body-sm text-body-sm">DigiKey</td>
+<td class="px-md py-sm">
+<span class="inline-flex items-center px-sm py-xs rounded-full bg-secondary-fixed text-on-secondary-fixed-variant font-label-mono text-[10px] uppercase">999,999+ IN STOCK</span>
+</td>
+<td class="px-md py-sm font-label-mono text-label-mono text-on-surface">24 Hours</td>
+<td class="px-md py-sm text-center">
+<span class="material-symbols-outlined text-outline-variant" data-icon="check_circle">check_circle</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="px-md py-sm bg-surface-container-lowest border-t border-outline-variant flex justify-between items-center">
+<button data-tooltip="Previous page" class="text-label-caps font-label-caps text-outline hover:text-on-surface flex items-center gap-xs transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="chevron_left">chevron_left</span>
+                            Previous
+                        </button>
+<div class="flex items-center gap-md">
+<span class="text-label-mono text-label-mono text-on-surface bg-surface-container-high w-8 h-8 flex items-center justify-center">1</span>
+<span class="text-label-mono text-label-mono text-outline hover:text-on-surface cursor-pointer w-8 h-8 flex items-center justify-center">2</span>
+<span class="text-label-mono text-label-mono text-outline hover:text-on-surface cursor-pointer w-8 h-8 flex items-center justify-center">3</span>
+</div>
+<button data-tooltip="Next page" class="text-label-caps font-label-caps text-primary hover:text-primary-container flex items-center gap-xs transition-colors">
+                            Next
+                            <span class="material-symbols-outlined text-sm" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Secondary Info Panel -->
+<div class="col-span-12 lg:col-span-8 bg-surface-container-lowest border border-outline-variant p-lg flex flex-col gap-md relative overflow-hidden">
+<div class="absolute -right-4 -bottom-4 w-48 h-48 opacity-5">
+<span class="material-symbols-outlined text-[192px]" data-icon="precision_manufacturing">precision_manufacturing</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-xs">Logistics Insight</h3>
+<p class="font-body-sm text-body-sm text-outline-variant max-w-xl">
+                            Consolidated shipping detected. By routing through 3 major distributors, you have eliminated 14 individual shipping fees. Estimated arrival for 95% of items is Tuesday, Oct 14th.
+                        </p>
+</div>
+<div class="flex gap-xl mt-md">
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-outline">Consolidated Shipments</span>
+<span class="font-headline-md text-headline-md text-on-surface">03 Packages</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-outline">Avg Daily Volume</span>
+<span class="font-headline-md text-headline-md text-on-surface">1.4M Units</span>
+</div>
+</div>
+</div>
+<div class="col-span-12 lg:col-span-4 bg-primary text-on-primary p-lg flex flex-col justify-between">
+<div>
+<span class="font-label-caps text-label-caps opacity-70 block mb-sm">SYSTEM STATUS</span>
+<h3 class="font-headline-md text-headline-md leading-tight">API Engines are Synced with Global Stock</h3>
+</div>
+<div class="mt-lg">
+<div class="flex items-center gap-sm mb-sm">
+<div class="w-2 h-2 rounded-full bg-surface-bright animate-pulse"></div>
+<span class="font-label-mono text-label-mono">Real-time tracking enabled</span>
+</div>
+<button data-tooltip="Refresh real-time stock and pricing data" class="w-full py-sm border border-on-primary/30 font-label-caps text-label-caps hover:bg-on-primary hover:text-primary transition-all">
+                            REFRESH MARKET DATA
+                         </button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<script>
+(function() {
+  var csv = sessionStorage.getItem('kitted_bom_csv');
+  var colMapRaw = sessionStorage.getItem('kitted_col_map');
+  if (!csv || !colMapRaw) return;
+
+  var colMap = JSON.parse(colMapRaw);
+
+  function parseCSVLine(line) {
+    var result = [], cur = '', inQ = false;
+    for (var i = 0; i < line.length; i++) {
+      if (line[i] === '"') { inQ = !inQ; }
+      else if ((line[i] === ',' || line[i] === '\t') && !inQ) { result.push(cur.trim()); cur = ''; }
+      else { cur += line[i]; }
+    }
+    result.push(cur.trim());
+    return result;
+  }
+
+  var lines = csv.split(/\r?\n/).filter(function(l) { return l.trim(); });
+  var dataRows = lines.slice(1).map(parseCSVLine);
+
+  var mpnIdx = -1, qtyIdx = -1, descIdx = -1, refdesIdx = -1;
+  Object.keys(colMap).forEach(function(k) {
+    var i = parseInt(k), f = colMap[k];
+    if (f === 'mpn') mpnIdx = i;
+    else if (f === 'qty') qtyIdx = i;
+    else if (f === 'desc') descIdx = i;
+    else if (f === 'refdes') refdesIdx = i;
+  });
+
+  var filename = sessionStorage.getItem('kitted_bom_filename') || 'Uploaded BOM';
+
+  document.addEventListener('DOMContentLoaded', function() {
+    // Update subtitle
+    var subEl = document.querySelector('p.font-body-sm.text-body-sm.text-outline-variant');
+    if (subEl) subEl.textContent = filename + ' — ' + dataRows.length + ' Line Items';
+
+    // Update showing count
+    document.querySelectorAll('.text-outline-variant.font-body-sm').forEach(function(el) {
+      if (el.textContent.indexOf('Showing') >= 0)
+        el.textContent = 'Showing ' + dataRows.length + ' of ' + dataRows.length + ' items';
+    });
+
+    // Rebuild table
+    var tbody = document.querySelector('tbody');
+    if (!tbody || !dataRows.length) return;
+
+    tbody.innerHTML = dataRows.map(function(row, i) {
+      var mpn = mpnIdx >= 0 ? (row[mpnIdx] || '—') : '—';
+      var desc = descIdx >= 0 ? (row[descIdx] || '—') : '—';
+      var qty = qtyIdx >= 0 ? (row[qtyIdx] || '—') : '—';
+      var refdes = refdesIdx >= 0 ? (row[refdesIdx] || '') : '';
+      var lineNum = String(i + 1).padStart(2, '0');
+      var descCell = desc + (refdes ? ' <span class="text-outline text-[11px]">· ' + refdes + '</span>' : '');
+      return '<tr class="hover:bg-surface-container-low transition-colors group cursor-pointer">' +
+        '<td class="px-md py-sm font-label-mono text-label-mono text-outline">' + lineNum + '</td>' +
+        '<td class="px-md py-sm font-body-sm text-body-sm font-bold text-on-surface">' + mpn + '</td>' +
+        '<td class="px-md py-sm font-body-sm text-body-sm text-on-surface-variant">' + descCell + '</td>' +
+        '<td class="px-md py-sm font-body-sm text-body-sm text-outline">—</td>' +
+        '<td class="px-md py-sm"><span class="inline-flex items-center px-sm py-xs rounded-full bg-surface-container text-on-surface font-label-mono text-[10px] uppercase">QTY: ' + qty + '</span></td>' +
+        '<td class="px-md py-sm font-label-mono text-label-mono text-outline">—</td>' +
+        '<td class="px-md py-sm text-center"><span class="material-symbols-outlined text-outline-variant" style="font-size:18px">pending</span></td>' +
+      '</tr>';
+    }).join('');
+
+    // Row selection
+    tbody.querySelectorAll('tr').forEach(function(row) {
+      row.addEventListener('click', function() {
+        tbody.querySelectorAll('tr').forEach(function(r) { r.classList.remove('bg-primary-container/10'); });
+        row.classList.add('bg-primary-container/10');
+      });
+    });
+  });
+})();
+</script>
+<script>
+        document.querySelectorAll('tbody tr').forEach(row => {
+            row.addEventListener('click', () => {
+                document.querySelectorAll('tbody tr').forEach(r => r.classList.remove('bg-primary-container/10'));
+                row.classList.add('bg-primary-container/10');
+            });
+        });
+    </script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+
+  const DIST = {
+    'digikey': 'https://www.digikey.com/en/products/result?keywords=',
+    'digi-key': 'https://www.digikey.com/en/products/result?keywords=',
+    'mouser':   'https://www.mouser.com/Search/Refine?Keyword=',
+    'lcsc':     'https://www.lcsc.com/search?q=',
+    'arrow':    'https://www.arrow.com/en/products/search?q=',
+    'newark':   'https://www.newark.com/search?st=',
+  };
+  function distUrl(name) { return DIST[name.toLowerCase().trim()] || ''; }
+  function mpnLink(mpn, url) {
+    return `<a href="${url}${encodeURIComponent(mpn)}" target="_blank" rel="noopener"
+      class="hover:text-primary hover:underline transition-colors inline-flex items-center gap-xs"
+      >${mpn}<span class="material-symbols-outlined" style="font-size:12px;vertical-align:middle;opacity:0.6">open_in_new</span></a>`;
+  }
+  // BOM table: MPN=col1(idx1), Distributor=col3(idx3)
+  document.querySelectorAll('tbody tr').forEach(row => {
+    const cells = row.querySelectorAll('td');
+    if (cells.length < 4) return;
+    const mpnCell = cells[1], distCell = cells[3];
+    const mpn = mpnCell.textContent.trim();
+    const url = distUrl(distCell.textContent);
+    if (mpn && url && !mpnCell.querySelector('a'))
+      mpnCell.innerHTML = mpnLink(mpn, url);
+  });
+});
+</script>
+<div id="kitted-toast" style="position:fixed;bottom:24px;right:24px;z-index:9999;background:#2b3134;color:#ecf1f5;padding:10px 18px;border-radius:6px;font-size:13px;font-family:Geist,sans-serif;opacity:0;pointer-events:none;transition:opacity .25s;"></div>
+<script>
+function showToast(msg){var t=document.getElementById('kitted-toast');t.textContent=msg;t.style.opacity='1';setTimeout(function(){t.style.opacity='0';},2200);}
+</script>
+<script>
+document.getElementById('btn-export-csv').addEventListener('click', function() {
+  var headers = Array.from(document.querySelectorAll('thead th')).map(function(th) { return '"' + th.textContent.trim().replace(/"/g,'""') + '"'; });
+  var rows = Array.from(document.querySelectorAll('tbody tr')).map(function(row) {
+    return Array.from(row.querySelectorAll('td')).map(function(td) { return '"' + td.textContent.trim().replace(/"/g,'""') + '"'; }).join(',');
+  });
+  var csv = [headers.join(',')].concat(rows).join('\n');
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv' }));
+  var nameEl = document.querySelector('h2.font-headline-lg');
+  a.download = (nameEl ? nameEl.textContent.trim().replace(/\s+/g,'_') : 'bom') + '.csv';
+  a.click();
+  showToast('BOM exported as CSV');
+});
+
+document.getElementById('btn-save-bom').addEventListener('click', function() {
+  var nameEl = document.querySelector('h2.font-headline-lg');
+  var subEl = document.querySelector('p.font-body-sm');
+  var bomName = nameEl ? nameEl.textContent.trim() : 'Untitled BOM';
+  var bomSub = subEl ? subEl.textContent.trim() : '';
+  var parts = [];
+  document.querySelectorAll('tbody tr').forEach(function(row) {
+    var cells = row.querySelectorAll('td');
+    if (!cells.length) return;
+    var rowData = [];
+    cells.forEach(function(c) { rowData.push(c.textContent.trim()); });
+    parts.push(rowData);
+  });
+  var boms = JSON.parse(localStorage.getItem('kitted_boms') || '[]');
+  var entry = { id: Date.now(), name: bomName, subtitle: bomSub, date: new Date().toISOString(), parts: parts };
+  boms.unshift(entry);
+  localStorage.setItem('kitted_boms', JSON.stringify(boms));
+  showToast('BOM saved to My BOMs');
+  setTimeout(function() { window.top.location.href = '/boms'; }, 1000);
+});
+</script>
+</body></html>

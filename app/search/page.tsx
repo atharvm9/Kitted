@@ -1,9 +1,7 @@
-"use client";
-
-export default function BomOptimizer() {
+export default function SearchPage() {
   return (
     <iframe
-      src="/stitch/step1.html"
+      src="/stitch/search.html"
       style={{
         position: "fixed",
         inset: 0,
@@ -12,7 +10,7 @@ export default function BomOptimizer() {
         border: "none",
         display: "block",
       }}
-      title="BOM Optimizer"
+      title="Part Search"
     />
   );
 }

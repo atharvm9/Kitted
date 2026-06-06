@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Part Search | Kitted</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;700&family=Jetbrains+Mono:wght@400;500;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">tailwind.config = {darkMode: "class", theme: {extend: {colors: {"primary-container": "#0fc9f4", "on-primary-fixed-variant": "#004e60", primary: "#00677f", "error-container": "#ffdad6", "surface-container-lowest": "#ffffff", "on-primary": "#ffffff", "on-tertiary-container": "#644300", "on-secondary-container": "#386978", "tertiary-fixed-dim": "#ffba43", "on-secondary-fixed": "#001f27", "secondary-fixed": "#b9eafc", outline: "#6c797f", "on-tertiary": "#ffffff", "on-surface-variant": "#3c494e", "primary-fixed-dim": "#48d6ff", "surface-bright": "#f5fafd", "on-error-container": "#93000a", "inverse-primary": "#48d6ff", "primary-fixed": "#b6ebff", "tertiary-fixed": "#ffddaf", "inverse-on-surface": "#ecf1f5", "surface-dim": "#d5dbde", "on-tertiary-fixed-variant": "#614000", "tertiary-container": "#f3ab26", "on-secondary": "#ffffff", "on-background": "#171c1f", "on-primary-fixed": "#001f28", "surface-container-low": "#eff4f8", "outline-variant": "#bbc9cf", "on-secondary-fixed-variant": "#174d5b", "surface-tint": "#00677f", "surface-variant": "#dee3e7", "secondary-container": "#b6e7f9", "on-surface": "#171c1f", "surface-container": "#e9eff2", "secondary-fixed-dim": "#9dcedf", error: "#ba1a1a", background: "#f5fafd", "surface-container-high": "#e3e9ec", tertiary: "#805600", "on-error": "#ffffff", "inverse-surface": "#2b3134", surface: "#f5fafd", "surface-container-highest": "#dee3e7", "on-primary-container": "#005063", secondary: "#346574", "on-tertiary-fixed": "#281800"}, borderRadius: {DEFAULT: "0.125rem", lg: "0.25rem", xl: "0.5rem", full: "0.75rem"}, spacing: {gutter: "16px", "margin-desktop": "32px", md: "16px", lg: "24px", xs: "4px", "margin-mobile": "16px", xl: "48px", unit: "4px", sm: "8px"}, fontFamily: {"headline-md": ["Geist"], "headline-lg-mobile": ["Geist"], "body-sm": ["Geist"], "headline-lg": ["Geist"], "label-mono": ["JetBrains Mono"], "body-lg": ["Geist"], "label-caps": ["Geist"], display: ["Geist"], headline: ["Geist"], body: ["Geist"], label: ["Jetbrains Mono"]}, fontSize: {"headline-md": ["20px", {lineHeight: "28px", letterSpacing: "-0.02em", fontWeight: "500"}], "headline-lg-mobile": ["24px", {lineHeight: "32px", letterSpacing: "-0.02em", fontWeight: "600"}], "body-sm": ["14px", {lineHeight: "20px", letterSpacing: "0em", fontWeight: "400"}], "headline-lg": ["32px", {lineHeight: "40px", letterSpacing: "-0.03em", fontWeight: "600"}], "label-mono": ["13px", {lineHeight: "16px", letterSpacing: "0em", fontWeight: "500"}], "body-lg": ["16px", {lineHeight: "24px", letterSpacing: "-0.01em", fontWeight: "400"}], "label-caps": ["12px", {lineHeight: "16px", letterSpacing: "0.05em", fontWeight: "600"}], display: ["48px", {lineHeight: "1.1", letterSpacing: "-0.04em", fontWeight: "600"}]}}}};</script>
+<style>
+        body { font-family: 'Geist', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+            font-size: 20px;
+        }
+        .distributor-border-dk { border-left: 3px solid #CC0000; }
+        .distributor-border-mouser { border-left: 3px solid #004A99; }
+        .distributor-border-lcsc { border-left: 3px solid #FC6A03; }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    
+/* custom tooltips */
+header [data-tooltip]::after{bottom:auto;top:calc(100% + 7px);}
+nav.flex [data-tooltip]::after{bottom:auto;top:calc(100% + 7px);}
+
+[data-tooltip]{position:relative;}
+[data-tooltip]::after{
+  content:attr(data-tooltip);
+  position:absolute;
+  bottom:calc(100% + 7px);
+  left:50%;
+  transform:translateX(-50%);
+  background:#2b3134;
+  color:#ecf1f5;
+  padding:4px 9px;
+  border-radius:5px;
+  font-size:11px;
+  font-weight:500;
+  white-space:nowrap;
+  pointer-events:none;
+  opacity:0;
+  transition:opacity .12s;
+  z-index:99999;
+  font-family:'Geist',sans-serif;
+  letter-spacing:.01em;
+  box-shadow:0 2px 8px rgba(0,0,0,.18);
+}
+[data-tooltip]:hover::after{opacity:1;}
+aside [data-tooltip]::after{
+  bottom:auto;
+  top:50%;
+  left:calc(100% + 10px);
+  transform:translateY(-50%);
+}
+</style>
+</head>
+<body class="bg-background text-on-surface">
+<!-- SideNavBar Anchor -->
+<aside class="w-[240px] h-screen fixed left-0 top-0 bg-surface-container-lowest border-r border-outline-variant flex flex-col py-lg px-md z-50">
+<div class="mb-xl px-sm">
+<a data-tooltip="Go to the Kitted home page" href="/" target="_top" style="text-decoration:none;cursor:pointer;" class="font-headline-md text-headline-md font-bold text-primary">Kitted</a>
+</div>
+<nav class="flex-1 space-y-xs">
+
+<a data-tooltip="BOM Optimizer — upload and optimize a bill of materials" class="flex items-center gap-md px-sm py-xs rounded-sm text-on-surface-variant hover:bg-surface-container transition-colors duration-200 group" href="/optimize" target="_top">
+<span class="material-symbols-outlined group-hover:text-primary" data-icon="upload_file">upload_file</span>
+<span class="font-body-sm text-body-sm">BOM Optimizer</span>
+</a>
+<a data-tooltip="Part Search — search distributor catalogs for components" class="flex items-center gap-md px-sm py-xs rounded-sm text-primary border-l-2 border-primary bg-surface-container-low transition-colors duration-200" href="/search" target="_top">
+<span class="material-symbols-outlined" data-icon="search" style="font-variation-settings: 'FILL' 1;">search</span>
+<span class="font-body-sm text-body-sm font-semibold">Part Search</span>
+</a>
+<a data-tooltip="My BOMs — view and manage your saved BOM projects" class="flex items-center gap-md px-sm py-xs rounded-sm text-on-surface-variant hover:bg-surface-container transition-colors duration-200 group" href="/boms" target="_top">
+<span class="material-symbols-outlined group-hover:text-primary" data-icon="inventory_2">inventory_2</span>
+<span class="font-body-sm text-body-sm">My BOMs</span>
+</a>
+<a data-tooltip="Orders — track your component orders" class="flex items-center gap-md px-sm py-xs rounded-sm text-on-surface-variant hover:bg-surface-container transition-colors duration-200 group" href="/orders" target="_top">
+<span class="material-symbols-outlined group-hover:text-primary" data-icon="shopping_cart">shopping_cart</span>
+<span class="font-body-sm text-body-sm">Orders</span>
+</a>
+<a data-tooltip="Settings — account and app preferences" class="flex items-center gap-md px-sm py-xs rounded-sm text-on-surface-variant hover:bg-surface-container transition-colors duration-200 group" href="/settings" target="_top">
+<span class="material-symbols-outlined group-hover:text-primary" data-icon="settings">settings</span>
+<span class="font-body-sm text-body-sm">Settings</span>
+</a>
+</nav>
+<div class="mt-auto pt-lg border-t border-outline-variant/30 space-y-xs">
+<button data-tooltip="Start a new BOM optimization project" class="w-full bg-primary text-on-primary py-sm px-md rounded-lg font-label-caps text-label-caps hover:bg-on-primary-fixed-variant transition-all mb-lg" onclick="window.top.location.href='/optimize'">
+                New BOM Project
+            </button>
+<a class="flex items-center gap-md px-sm py-xs rounded-sm text-on-surface-variant hover:bg-surface-container transition-colors duration-200" href="#" onclick="showToast('Help Center — coming soon'); return false;">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span class="font-body-sm text-body-sm">Help Center</span>
+</a>
+<a class="flex items-center gap-md px-sm py-xs rounded-sm text-on-surface-variant hover:bg-surface-container transition-colors duration-200" href="#" onclick="showToast('Contact support — coming soon'); return false;">
+<span class="material-symbols-outlined" data-icon="support_agent">support_agent</span>
+<span class="font-body-sm text-body-sm">Contact Support</span>
+</a>
+<div id="acct-widget" class="px-sm mt-sm"><script>(function(){var u=JSON.parse(localStorage.getItem('kitted_user')||'null');var s=document.currentScript;var ini=u?(u.name||'?').split(' ').map(function(p){return p[0]||''}).join('').slice(0,2).toUpperCase():'';s.insertAdjacentHTML('afterend',u?'<div class="flex items-center gap-md py-md cursor-pointer hover:bg-surface-container rounded-sm px-xs -mx-xs transition-colors" onclick="window.top.location.href=\'\/settings\'"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0 text-on-primary font-bold text-xs">'+ini+'</div><div class="flex flex-col min-w-0"><span class="font-label-caps text-label-caps text-on-surface font-bold truncate">'+u.name+'</span><span class="text-[10px] text-on-surface-variant truncate">'+u.email+'</span></div></div>':'<a href="/onboarding" target="_top" class="flex items-center gap-md py-md px-xs -mx-xs hover:bg-surface-container rounded-sm transition-colors"><div class="w-8 h-8 rounded-full bg-surface-container border border-outline-variant flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-surface-variant" style="font-size:18px">person</span></div><div class="flex flex-col"><span class="font-label-caps text-label-caps text-primary font-bold">Sign in</span><span class="text-[10px] text-on-surface-variant">or create account</span></div></a>');})()</script></div>
+</div>
+</aside>
+<!-- TopAppBar Anchor -->
+<header class="h-16 fixed top-0 right-0 w-[calc(100%-240px)] bg-surface-container-lowest border-b border-outline-variant flex items-center justify-between px-margin-desktop z-40">
+<div class="flex items-center gap-lg">
+<span class="font-headline-md text-headline-md font-bold text-on-surface">Part Search</span>
+</div>
+<div class="flex items-center gap-md">
+<div class="relative" id="notif-container">
+<button data-tooltip="View notifications" id="notif-btn" class="p-xs hover:bg-surface-container rounded-sm transition-all relative" onclick="toggleNotif()">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="notifications">notifications</span>
+<span class="absolute top-1 right-1 w-2 h-2 bg-primary rounded-full" id="notif-badge"></span>
+</button>
+<div id="notif-panel" class="hidden absolute right-0 top-full mt-xs w-72 bg-surface-container-lowest border border-outline-variant rounded-lg shadow-xl z-50 overflow-hidden">
+<div class="px-md py-sm border-b border-outline-variant flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface uppercase tracking-widest">Notifications</span>
+<button data-tooltip="Mark all notifications as read" onclick="clearNotifs()" class="font-label-caps text-label-caps text-primary hover:underline">Mark all read</button>
+</div>
+<div id="notif-list">
+<div class="px-md py-sm border-b border-outline-variant/40 hover:bg-surface-container transition-colors">
+<div class="flex items-start gap-sm">
+<span class="material-symbols-outlined text-primary text-sm mt-xs" data-icon="check_circle">check_circle</span>
+<div><p class="font-body-sm text-body-sm text-on-surface">BOM optimization complete</p><p class="font-label-caps text-label-caps text-on-surface-variant">2 min ago</p></div>
+</div>
+</div>
+<div class="px-md py-sm border-b border-outline-variant/40 hover:bg-surface-container transition-colors">
+<div class="flex items-start gap-sm">
+<span class="material-symbols-outlined text-yellow-500 text-sm mt-xs" data-icon="warning">warning</span>
+<div><p class="font-body-sm text-body-sm text-on-surface">3 parts below min stock</p><p class="font-label-caps text-label-caps text-on-surface-variant">15 min ago</p></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="relative" id="hist-container">
+<button data-tooltip="View search history" id="hist-btn" class="p-xs hover:bg-surface-container rounded-sm transition-all" onclick="toggleHistory()">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="history">history</span>
+</button>
+<div id="hist-panel" class="hidden absolute right-0 top-full mt-xs w-64 bg-surface-container-lowest border border-outline-variant rounded-lg shadow-xl z-50 overflow-hidden">
+<div class="px-md py-sm border-b border-outline-variant flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface uppercase tracking-widest">Recent Searches</span>
+<button data-tooltip="Clear search history" onclick="clearHistory()" class="font-label-caps text-label-caps text-primary hover:underline">Clear</button>
+</div>
+<div id="hist-list" class="max-h-48 overflow-y-auto">
+<p class="px-md py-sm font-body-sm text-body-sm text-on-surface-variant" id="hist-empty">No recent searches</p>
+</div>
+</div>
+</div>
+<div class="h-6 w-[1px] bg-outline-variant mx-xs"></div>
+<span class="font-label-caps text-label-caps text-primary bg-primary-fixed px-sm py-xs rounded-sm">v2.4.0-STABLE</span>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-[240px] pt-16 min-h-screen">
+<div class="max-w-[1200px] mx-auto px-margin-desktop py-xl">
+<!-- Header Section -->
+<section class="mb-lg">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-xs">Search Components</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Find and compare components across top distributors.</p>
+</section>
+<!-- Search Interface -->
+<section class="space-y-md mb-xl">
+<div class="relative group">
+<div class="absolute inset-y-0 left-0 pl-md flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-outline" data-icon="search">search</span>
+</div>
+<input class="w-full pl-xl pr-md py-lg bg-surface-container-lowest border border-outline-variant rounded-lg font-body-lg text-body-lg focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all shadow-sm" id="search-input" placeholder="Search by SKU, manufacturer, or keywords (e.g., STM32F4, 10k resistor)..." type="text"/>
+<div class="absolute inset-y-0 right-0 pr-md flex items-center">
+<kbd class="hidden md:inline-flex items-center gap-1 font-label-mono text-label-mono text-outline-variant bg-surface-container px-sm py-xs rounded border border-outline-variant">
+<span>⌘</span>K
+                        </kbd>
+</div>
+</div>
+<!-- Search Chips -->
+<div class="flex flex-wrap items-center gap-sm">
+<span class="font-label-caps text-label-caps text-outline uppercase mr-xs">Trending:</span>
+<button data-tooltip="Search for Arduino Uno R3" class="px-md py-xs bg-surface-container-lowest border border-outline-variant rounded-full font-body-sm text-body-sm hover:border-primary hover:text-primary transition-all">Arduino Uno R3</button>
+<button data-tooltip="Search for ESP32" class="px-md py-xs bg-surface-container-lowest border border-outline-variant rounded-full font-body-sm text-body-sm hover:border-primary hover:text-primary transition-all">ESP32</button>
+<button data-tooltip="Search for Raspberry Pi Pico" class="px-md py-xs bg-surface-container-lowest border border-outline-variant rounded-full font-body-sm text-body-sm hover:border-primary hover:text-primary transition-all">Raspberry Pi Pico</button>
+<button data-tooltip="Search for STM32" class="px-md py-xs bg-surface-container-lowest border border-outline-variant rounded-full font-body-sm text-body-sm hover:border-primary hover:text-primary transition-all">STM32</button>
+<button data-tooltip="Search for ATmega328P" class="px-md py-xs bg-surface-container-lowest border border-outline-variant rounded-full font-body-sm text-body-sm hover:border-primary hover:text-primary transition-all">ATmega328P</button>
+<button data-tooltip="Search for Teensy" class="px-md py-xs bg-surface-container-lowest border border-outline-variant rounded-full font-body-sm text-body-sm hover:border-primary hover:text-primary transition-all">Teensy</button>
+</div>
+</section>
+<!-- Filters & Status -->
+<section class="flex flex-col md:flex-row md:items-center justify-between gap-md mb-lg border-b border-outline-variant/30 pb-md">
+<div class="flex items-center gap-md">
+<div class="flex flex-col">
+<label class="font-label-caps text-[10px] text-outline mb-xs uppercase">Distributor</label>
+<select class="bg-surface-container-lowest border border-outline-variant rounded px-sm py-xs font-body-sm text-body-sm focus:ring-1 focus:ring-primary min-w-[140px]">
+<option>All Distributors</option>
+<option>Digi-Key</option>
+<option>Mouser</option>
+<option>LCSC</option>
+</select>
+</div>
+<div class="flex flex-col">
+<label class="font-label-caps text-[10px] text-outline mb-xs uppercase">Stock</label>
+<select class="bg-surface-container-lowest border border-outline-variant rounded px-sm py-xs font-body-sm text-body-sm focus:ring-1 focus:ring-primary min-w-[140px]">
+<option>In Stock Only</option>
+<option>All Availability</option>
+</select>
+</div>
+<div class="flex flex-col">
+<label class="font-label-caps text-[10px] text-outline mb-xs uppercase">Sort Order</label>
+<select class="bg-surface-container-lowest border border-outline-variant rounded px-sm py-xs font-body-sm text-body-sm focus:ring-1 focus:ring-primary min-w-[140px]">
+<option>Best Match</option>
+<option>Inventory: High to Low</option>
+</select>
+</div>
+</div>
+<div class="flex items-center gap-sm">
+<span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+<span class="font-label-mono text-label-mono text-on-surface-variant">2,481 results found</span>
+</div>
+</section>
+<!-- Results Grid -->
+<section class="space-y-xl">
+<!-- Result Card 1 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden transition-shadow hover:shadow-md">
+<div class="px-lg py-md bg-surface-container-low border-b border-outline-variant flex items-center justify-between">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-primary" data-icon="memory">memory</span>
+<h3 class="font-headline-md text-headline-md text-on-surface">Arduino Uno R3 — <span class="font-normal text-on-surface-variant">2 versions, 2 brands</span></h3>
+</div>
+<button data-tooltip="View part datasheet" class="text-primary font-label-caps text-label-caps hover:underline" onclick="window.open('https://octopart.com/search?q=Arduino+Uno+R3&currency=USD&specs=0','_blank')">View Datasheet</button>
+</div>
+<!-- Variant 1 -->
+<div class="p-lg border-b border-outline-variant/30">
+<div class="flex flex-wrap items-center justify-between mb-lg">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded border border-outline-variant bg-surface-container-low flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">developer_board</span>
+</div>
+<div>
+<div class="flex items-center gap-sm mb-xs">
+<span class="font-body-lg text-body-lg font-bold">Arduino Uno R3</span>
+<span class="bg-primary text-on-primary font-label-caps text-[10px] px-sm py-0.5 rounded-full uppercase">Official</span>
+</div>
+<p class="font-label-mono text-label-mono text-on-surface-variant">SKU: A000066 | ATmega328P, 5V, 16MHz</p>
+</div>
+</div>
+</div>
+<!-- Distributor Rows for Variant 1 -->
+<div class="space-y-sm">
+<div class="distributor-border-dk bg-white p-md flex items-center justify-between group hover:bg-surface-container-low transition-colors rounded-sm border border-outline-variant/30 border-l-0">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-xl flex-1">
+<div class="flex items-center gap-md">
+<div class="w-8 h-8 flex items-center justify-center font-bold text-[10px] bg-[#CC0000] text-white rounded">DK</div>
+<span class="font-body-sm text-body-sm font-semibold">Digi-Key</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-caps text-[10px] text-outline uppercase">Inventory</span>
+<span class="font-body-sm text-body-sm font-medium">Stock: 4,291</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-caps text-[10px] text-outline uppercase">Logistics</span>
+<span class="font-body-sm text-body-sm">Shipping: 1-2 days</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-caps text-[10px] text-outline uppercase">Unit Price</span>
+<span class="font-body-sm text-body-sm font-semibold text-on-surface">$24.99</span>
+</div>
+</div>
+<a href="https://www.digikey.com/en/products/result?keywords=A000066" target="_blank" rel="noopener" data-tooltip="View on distributor site" class="flex items-center gap-xs border border-outline-variant px-md py-xs rounded font-label-caps text-label-caps text-on-surface-variant hover:text-primary hover:border-primary transition-all"><span class="material-symbols-outlined !text-sm">open_in_new</span></a>
+<button data-tooltip="Add this part to a BOM" class="add-btn flex items-center gap-xs bg-surface-container-lowest border border-outline-variant px-md py-xs rounded font-label-caps text-label-caps hover:bg-primary hover:text-on-primary hover:border-primary transition-all">
+<span class="material-symbols-outlined !text-sm" data-icon="add">add</span> Add
+                                </button>
+</div>
+<div class="distributor-border-mouser bg-white p-md flex items-center justify-between group hover:bg-surface-container-low transition-colors rounded-sm border border-outline-variant/30 border-l-0">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-xl flex-1">
+<div class="flex items-center gap-md">
+<div class="w-8 h-8 flex items-center justify-center font-bold text-[10px] bg-[#004A99] text-white rounded">M</div>
+<span class="font-body-sm text-body-sm font-semibold">Mouser</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-caps text-[10px] text-outline uppercase">Inventory</span>
+<span class="font-body-sm text-body-sm font-medium">Stock: 1,850</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-caps text-[10px] text-outline uppercase">Logistics</span>
+<div class="flex items-center gap-sm">
+<span class="font-body-sm text-body-sm">Shipping: 2-3 days</span>
+<span class="bg-green-100 text-green-700 font-label-caps text-[10px] px-sm py-0.5 rounded-full border border-green-200 uppercase">Best Price</span>
+</div>
+</div>
+<div class="flex flex-col">
+<span class="font-label-caps text-[10px] text-outline uppercase">Unit Price</span>
+<span class="font-body-sm text-body-sm font-semibold text-green-700">$22.50</span>
+</div>
+</div>
+<a href="https://www.mouser.com/Search/Refine?Keyword=A000066" target="_blank" rel="noopener" data-tooltip="View on distributor site" class="flex items-center gap-xs border border-outline-variant px-md py-xs rounded font-label-caps text-label-caps text-on-surface-variant hover:text-primary hover:border-primary transition-all"><span class="material-symbols-outlined !text-sm">open_in_new</span></a>
+<button data-tooltip="Add this part to a BOM" class="add-btn flex items-center gap-xs bg-surface-container-lowest border border-outline-variant px-md py-xs rounded font-label-caps text-label-caps hover:bg-primary hover:text-on-primary hover:border-primary transition-all">
+<span class="material-symbols-outlined !text-sm" data-icon="add">add</span> Add
+                                </button>
+</div>
+</div>
+<div class="mt-sm">
+  <button data-tooltip="Show or hide specifications" class="flex items-center gap-xs font-label-caps text-[10px] text-outline uppercase hover:text-primary transition-colors" onclick="toggleSpecs('ard-official')">
+    <span class="material-symbols-outlined select-none" id="specs-ch-ard-official" style="font-size:14px;transition:transform 0.2s">expand_more</span>
+    Technical Specs
+  </button>
+  <div id="specs-ard-official" class="hidden mt-sm grid grid-cols-2 md:grid-cols-5 gap-sm">
+    <div class="flex flex-col"><span class="font-label-caps text-[10px] text-outline uppercase">Package</span><span class="font-body-sm text-body-sm">Through-Hole DIP</span></div>
+    <div class="flex flex-col"><span class="font-label-caps text-[10px] text-outline uppercase">Min Order</span><span class="font-body-sm text-body-sm">1 unit</span></div>
+    <div class="flex flex-col"><span class="font-label-caps text-[10px] text-outline uppercase">RoHS</span><span class="font-body-sm text-body-sm">Compliant</span></div>
+    <div class="flex flex-col"><span class="font-label-caps text-[10px] text-outline uppercase">Op. Temp</span><span class="font-body-sm text-body-sm">-40°C to 85°C</span></div>
+    <div class="flex flex-col"><span class="font-label-caps text-[10px] text-outline uppercase">Category</span><span class="font-body-sm text-body-sm">Development Board / MCU</span></div>
+  </div>
+</div>
+</div>
+<!-- Variant 2 -->
+<div class="p-lg bg-surface-container-lowest">
+<div class="flex flex-wrap items-center justify-between mb-lg">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded border border-outline-variant bg-surface-container-low flex items-center justify-center">
+<span class="material-symbols-outlined text-outline" data-icon="developer_board">developer_board</span>
+</div>
+<div>
+<div class="flex items-center gap-sm mb-xs">
+<span class="font-body-lg text-body-lg font-bold">Uno R3 (Clone)</span>
+<span class="bg-secondary-container text-on-secondary-container font-label-caps text-[10px] px-sm py-0.5 rounded-full uppercase">Compatible</span>
+</div>
+<p class="font-label-mono text-label-mono text-on-surface-variant">SKU: DEV-11021 | ATmega328P, CH340G</p>
+</div>
+</div>
+</div>
+<div class="distributor-border-lcsc bg-white p-md flex items-center justify-between group hover:bg-surface-container-low transition-colors rounded-sm border border-outline-variant/30 border-l-0">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-xl flex-1">
+<div class="flex items-center gap-md">
+<div class="w-8 h-8 flex items-center justify-center font-bold text-[10px] bg-[#FC6A03] text-white rounded">L</div>
+<span class="font-body-sm text-body-sm font-semibold">LCSC</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-caps text-[10px] text-outline uppercase">Inventory</span>
+<span class="font-body-sm text-body-sm font-medium">Stock: 12,400</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-caps text-[10px] text-outline uppercase">Logistics</span>
+<div class="flex items-center gap-sm">
+<span class="font-body-sm text-body-sm">Shipping: 5-7 days</span>
+<span class="bg-green-100 text-green-700 font-label-caps text-[10px] px-sm py-0.5 rounded-full border border-green-200 uppercase">Best Price</span>
+</div>
+</div>
+<div class="flex flex-col">
+<span class="font-label-caps text-[10px] text-outline uppercase">Unit Price</span>
+<span class="font-body-sm text-body-sm font-semibold text-green-700">$3.80</span>
+</div>
+</div>
+<a href="https://www.lcsc.com/search?q=DEV-11021" target="_blank" rel="noopener" data-tooltip="View on distributor site" class="flex items-center gap-xs border border-outline-variant px-md py-xs rounded font-label-caps text-label-caps text-on-surface-variant hover:text-primary hover:border-primary transition-all"><span class="material-symbols-outlined !text-sm">open_in_new</span></a>
+<button data-tooltip="Add this part to a BOM" class="add-btn flex items-center gap-xs bg-surface-container-lowest border border-outline-variant px-md py-xs rounded font-label-caps text-label-caps hover:bg-primary hover:text-on-primary hover:border-primary transition-all">
+<span class="material-symbols-outlined !text-sm" data-icon="add">add</span> Add
+                            </button>
+</div>
+<div class="mt-sm">
+  <button data-tooltip="Show or hide specifications" class="flex items-center gap-xs font-label-caps text-[10px] text-outline uppercase hover:text-primary transition-colors" onclick="toggleSpecs('ard-clone')">
+    <span class="material-symbols-outlined select-none" id="specs-ch-ard-clone" style="font-size:14px;transition:transform 0.2s">expand_more</span>
+    Technical Specs
+  </button>
+  <div id="specs-ard-clone" class="hidden mt-sm grid grid-cols-2 md:grid-cols-5 gap-sm">
+    <div class="flex flex-col"><span class="font-label-caps text-[10px] text-outline uppercase">Package</span><span class="font-body-sm text-body-sm">Through-Hole DIP</span></div>
+    <div class="flex flex-col"><span class="font-label-caps text-[10px] text-outline uppercase">Min Order</span><span class="font-body-sm text-body-sm">1 unit</span></div>
+    <div class="flex flex-col"><span class="font-label-caps text-[10px] text-outline uppercase">RoHS</span><span class="font-body-sm text-body-sm">Compliant</span></div>
+    <div class="flex flex-col"><span class="font-label-caps text-[10px] text-outline uppercase">Op. Temp</span><span class="font-body-sm text-body-sm">0°C to 70°C</span></div>
+    <div class="flex flex-col"><span class="font-label-caps text-[10px] text-outline uppercase">Category</span><span class="font-body-sm text-body-sm">Development Board (Clone)</span></div>
+  </div>
+</div>
+</div>
+</div>
+<!-- Result Card 2 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden transition-shadow hover:shadow-md">
+<div class="px-lg py-md bg-surface-container-low border-b border-outline-variant flex items-center justify-between">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-primary" data-icon="wifi">wifi</span>
+<h3 class="font-headline-md text-headline-md text-on-surface">ESP32-WROOM-32D — <span class="font-normal text-on-surface-variant">1 version, 1 brand</span></h3>
+</div>
+<button data-tooltip="View part datasheet" class="text-primary font-label-caps text-label-caps hover:underline" onclick="window.open('https://octopart.com/search?q=ESP32-WROOM-32D&currency=USD&specs=0','_blank')">View Datasheet</button>
+</div>
+<div class="p-lg">
+<div class="flex flex-wrap items-center justify-between mb-lg">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded border border-outline-variant bg-surface-container-low flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">memory</span>
+</div>
+<div>
+<div class="flex items-center gap-sm mb-xs">
+<span class="font-body-lg text-body-lg font-bold">ESP32-WROOM-32D</span>
+<span class="bg-primary text-on-primary font-label-caps text-[10px] px-sm py-0.5 rounded-full uppercase">Official</span>
+</div>
+<p class="font-label-mono text-label-mono text-on-surface-variant">SKU: ESP32-WROOM-32D-N4 | 4MB Flash, PCB Antenna</p>
+</div>
+</div>
+</div>
+<div class="distributor-border-dk bg-white p-md flex items-center justify-between group hover:bg-surface-container-low transition-colors rounded-sm border border-outline-variant/30 border-l-0">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-xl flex-1">
+<div class="flex items-center gap-md">
+<div class="w-8 h-8 flex items-center justify-center font-bold text-[10px] bg-[#CC0000] text-white rounded">DK</div>
+<span class="font-body-sm text-body-sm font-semibold">Digi-Key</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-caps text-[10px] text-outline uppercase">Inventory</span>
+<span class="font-body-sm text-body-sm font-medium">Stock: 45,200</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-caps text-[10px] text-outline uppercase">Logistics</span>
+<span class="font-body-sm text-body-sm">Shipping: 1-2 days</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-caps text-[10px] text-outline uppercase">Unit Price</span>
+<span class="font-body-sm text-body-sm font-semibold text-on-surface">$3.50</span>
+</div>
+</div>
+<a href="https://www.digikey.com/en/products/result?keywords=ESP32-WROOM-32D-N4" target="_blank" rel="noopener" data-tooltip="View on distributor site" class="flex items-center gap-xs border border-outline-variant px-md py-xs rounded font-label-caps text-label-caps text-on-surface-variant hover:text-primary hover:border-primary transition-all"><span class="material-symbols-outlined !text-sm">open_in_new</span></a>
+<button data-tooltip="Add this part to a BOM" class="add-btn flex items-center gap-xs bg-surface-container-lowest border border-outline-variant px-md py-xs rounded font-label-caps text-label-caps hover:bg-primary hover:text-on-primary hover:border-primary transition-all">
+<span class="material-symbols-outlined !text-sm" data-icon="add">add</span> Add
+                            </button>
+</div>
+</div>
+<div class="mt-sm">
+  <button data-tooltip="Show or hide specifications" class="flex items-center gap-xs font-label-caps text-[10px] text-outline uppercase hover:text-primary transition-colors" onclick="toggleSpecs('esp32-wroom')">
+    <span class="material-symbols-outlined select-none" id="specs-ch-esp32-wroom" style="font-size:14px;transition:transform 0.2s">expand_more</span>
+    Technical Specs
+  </button>
+  <div id="specs-esp32-wroom" class="hidden mt-sm grid grid-cols-2 md:grid-cols-5 gap-sm">
+    <div class="flex flex-col"><span class="font-label-caps text-[10px] text-outline uppercase">Package</span><span class="font-body-sm text-body-sm">SMD 18×25.5mm</span></div>
+    <div class="flex flex-col"><span class="font-label-caps text-[10px] text-outline uppercase">Min Order</span><span class="font-body-sm text-body-sm">1 unit</span></div>
+    <div class="flex flex-col"><span class="font-label-caps text-[10px] text-outline uppercase">RoHS</span><span class="font-body-sm text-body-sm">Compliant</span></div>
+    <div class="flex flex-col"><span class="font-label-caps text-[10px] text-outline uppercase">Op. Temp</span><span class="font-body-sm text-body-sm">-40°C to 85°C</span></div>
+    <div class="flex flex-col"><span class="font-label-caps text-[10px] text-outline uppercase">Category</span><span class="font-body-sm text-body-sm">Wi-Fi + BLE Module</span></div>
+  </div>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- Floating Toast Notification -->
+<div class="fixed bottom-lg right-lg bg-inverse-surface text-inverse-on-surface px-lg py-md rounded shadow-xl transform translate-y-20 opacity-0 transition-all duration-300 flex items-center gap-md z-[100]" id="toast">
+<span class="material-symbols-outlined text-green-400" data-icon="check_circle">check_circle</span>
+<span class="font-body-sm text-body-sm">Component added to project.</span>
+</div>
+
+<!-- Add to BOM Modal -->
+<div id="add-bom-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[200] hidden flex items-center justify-center p-lg" onclick="if(event.target===this)closeAddModal()">
+  <div class="bg-surface-container-low border border-outline-variant rounded-xl shadow-2xl w-full max-w-sm flex flex-col overflow-hidden">
+    <div class="flex items-center justify-between px-lg py-md border-b border-outline-variant">
+      <span class="font-label-caps text-label-caps text-on-surface">Add to BOM</span>
+      <button onclick="closeAddModal()" class="p-xs rounded hover:bg-surface-container transition-colors text-on-surface-variant">
+        <span class="material-symbols-outlined text-sm" data-icon="close">close</span>
+      </button>
+    </div>
+
+    <!-- Existing BOMs -->
+    <div class="px-lg pt-md pb-sm">
+      <p class="font-label-caps text-[10px] text-outline uppercase mb-sm tracking-wider">Existing BOMs</p>
+      <div id="bom-list" class="flex flex-col gap-xs max-h-40 overflow-y-auto">
+        <!-- populated by JS -->
+      </div>
+      <p id="bom-list-empty" class="font-body-sm text-body-sm text-on-surface-variant py-sm hidden">No saved BOMs yet.</p>
+    </div>
+
+    <!-- Divider -->
+    <div class="flex items-center gap-md px-lg py-sm">
+      <div class="flex-1 h-px bg-outline-variant"></div>
+      <span class="font-label-caps text-[10px] text-outline uppercase tracking-wider">or create new</span>
+      <div class="flex-1 h-px bg-outline-variant"></div>
+    </div>
+
+    <!-- Create new BOM -->
+    <div class="px-lg pb-lg flex gap-sm">
+      <input id="new-bom-name" type="text" placeholder="BOM name…" maxlength="60"
+        class="flex-1 bg-surface-container border border-outline-variant rounded-lg px-md py-sm font-body-sm text-body-sm text-on-surface placeholder:text-on-surface-variant focus:outline-none focus:border-primary transition-colors"
+        onkeydown="if(event.key==='Enter')createAndAdd()">
+      <button onclick="createAndAdd()" class="bg-primary text-on-primary px-md py-sm rounded-lg font-label-caps text-label-caps hover:bg-on-primary-fixed-variant transition-colors whitespace-nowrap">
+        Create &amp; Add
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+        // ── Toast ──────────────────────────────────────────────────────────
+        let toastTimer;
+        function showToast(msg, icon='check_circle', color='text-green-400') {
+            const toast = document.getElementById('toast');
+            const toastIcon = toast.querySelector('.material-symbols-outlined');
+            const toastMsg = toast.querySelector('span:last-child');
+            toastIcon.textContent = icon;
+            toastIcon.className = `material-symbols-outlined ${color}`;
+            toastMsg.textContent = msg;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+            clearTimeout(toastTimer);
+            toastTimer = setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+                toast.classList.remove('translate-y-0', 'opacity-100');
+            }, 3000);
+        }
+
+        // ── Add buttons ────────────────────────────────────────────────────
+        function toggleSpecs(uid) {
+          const panel = document.getElementById('specs-' + uid);
+          const ch = document.getElementById('specs-ch-' + uid);
+          if (panel.classList.contains('hidden')) {
+            panel.classList.remove('hidden');
+            if (ch) ch.style.transform = 'rotate(180deg)';
+          } else {
+            panel.classList.add('hidden');
+            if (ch) ch.style.transform = '';
+          }
+        }
+
+        // ── BOM storage (localStorage) ─────────────────────────────────────
+        const BOM_KEY = 'kitted_boms';
+        const BOM_COLORS = [
+          { bg: 'bg-blue-500/15', ring: 'ring-blue-500/40', dot: 'bg-blue-400', label: 'Blue' },
+          { bg: 'bg-violet-500/15', ring: 'ring-violet-500/40', dot: 'bg-violet-400', label: 'Violet' },
+          { bg: 'bg-emerald-500/15', ring: 'ring-emerald-500/40', dot: 'bg-emerald-400', label: 'Emerald' },
+          { bg: 'bg-amber-500/15', ring: 'ring-amber-500/40', dot: 'bg-amber-400', label: 'Amber' },
+          { bg: 'bg-rose-500/15', ring: 'ring-rose-500/40', dot: 'bg-rose-400', label: 'Rose' },
+          { bg: 'bg-cyan-500/15', ring: 'ring-cyan-500/40', dot: 'bg-cyan-400', label: 'Cyan' },
+        ];
+
+        function loadBoms() {
+            try { return JSON.parse(localStorage.getItem(BOM_KEY)) || []; } catch { return []; }
+        }
+        function saveBoms(boms) { localStorage.setItem(BOM_KEY, JSON.stringify(boms)); }
+
+        let pendingBtn = null;
+
+        function openAddModal(btn) {
+            pendingBtn = btn;
+            renderBomList();
+            document.getElementById('new-bom-name').value = '';
+            document.getElementById('add-bom-modal').classList.remove('hidden');
+            setTimeout(() => document.getElementById('new-bom-name').focus(), 80);
+        }
+
+        function closeAddModal() {
+            document.getElementById('add-bom-modal').classList.add('hidden');
+            pendingBtn = null;
+        }
+
+        function renderBomList() {
+            const boms = loadBoms();
+            const list = document.getElementById('bom-list');
+            const empty = document.getElementById('bom-list-empty');
+            list.innerHTML = '';
+            if (boms.length === 0) { empty.classList.remove('hidden'); return; }
+            empty.classList.add('hidden');
+            boms.forEach((bom, i) => {
+                const c = BOM_COLORS[bom.colorIdx % BOM_COLORS.length];
+                const row = document.createElement('button');
+                row.className = `flex items-center gap-sm px-sm py-xs rounded-lg ring-1 ${c.ring} ${c.bg} hover:opacity-80 transition-opacity text-left w-full`;
+                row.innerHTML = `<span class="w-2 h-2 rounded-full ${c.dot} shrink-0"></span><span class="font-body-sm text-body-sm text-on-surface flex-1 truncate">${bom.name}</span><span class="font-label-caps text-[10px] text-on-surface-variant">${bom.parts.length} part${bom.parts.length!==1?'s':''}</span>`;
+                row.onclick = () => addToExistingBom(i);
+                list.appendChild(row);
+            });
+        }
+
+        function addToExistingBom(idx) {
+            const boms = loadBoms();
+            const part = pendingBtn ? pendingBtn.closest('[data-part-name]')?.dataset.partName || 'Part' : 'Part';
+            boms[idx].parts.push({ name: part, addedAt: Date.now() });
+            saveBoms(boms);
+            markAdded();
+            closeAddModal();
+            showToast(`Added to "${boms[idx].name}"`);
+        }
+
+        function createAndAdd() {
+            const nameEl = document.getElementById('new-bom-name');
+            const name = nameEl.value.trim();
+            if (!name) { nameEl.focus(); return; }
+            const boms = loadBoms();
+            const colorIdx = boms.length % BOM_COLORS.length;
+            const part = pendingBtn ? pendingBtn.closest('[data-part-name]')?.dataset.partName || 'Part' : 'Part';
+            boms.unshift({ name, colorIdx, parts: [{ name: part, addedAt: Date.now() }], createdAt: Date.now() });
+            saveBoms(boms);
+            markAdded();
+            closeAddModal();
+            showToast(`Created "${name}" and added part`);
+        }
+
+        function markAdded() {
+            if (!pendingBtn) return;
+            pendingBtn.classList.add('bg-primary', 'text-on-primary', 'border-primary');
+            pendingBtn.innerHTML = `<span class="material-symbols-outlined !text-sm" data-icon="check">check</span> Added`;
+        }
+
+        document.querySelectorAll('.add-btn').forEach(btn => {
+            btn.addEventListener('click', () => openAddModal(btn));
+        });
+
+        // ── Search history ─────────────────────────────────────────────────
+        let searchHistory = [];
+        const searchInput = document.getElementById('search-input');
+
+        function pushHistory(q) {
+            q = q.trim();
+            if (!q) return;
+            searchHistory = [q, ...searchHistory.filter(h => h !== q)].slice(0, 8);
+            renderHistory();
+        }
+
+        function renderHistory() {
+            const list = document.getElementById('hist-list');
+            const empty = document.getElementById('hist-empty');
+            if (searchHistory.length === 0) { empty && (empty.style.display = ''); return; }
+            empty && (empty.style.display = 'none');
+            const existing = list.querySelectorAll('.hist-item');
+            existing.forEach(e => e.remove());
+            searchHistory.forEach(q => {
+                const div = document.createElement('div');
+                div.className = 'hist-item flex items-center gap-sm px-md py-sm hover:bg-surface-container transition-colors cursor-pointer border-b border-outline-variant/30';
+                div.innerHTML = `<span class="material-symbols-outlined text-on-surface-variant text-sm" data-icon="history">history</span><span class="font-body-sm text-body-sm text-on-surface flex-1">${q}</span><button data-tooltip="Remove from search history" class="text-on-surface-variant hover:text-primary transition-colors" onclick="event.stopPropagation(); removeHistory('${q.replace(/'/g, "\'")}')"><span class="material-symbols-outlined text-sm" data-icon="close">close</span></button>`;
+                div.addEventListener('click', () => {
+                    searchInput.value = q;
+                    searchInput.focus();
+                    closeHistory();
+                });
+                list.appendChild(div);
+            });
+        }
+
+        function removeHistory(q) {
+            searchHistory = searchHistory.filter(h => h !== q);
+            renderHistory();
+        }
+
+        function clearHistory() {
+            searchHistory = [];
+            renderHistory();
+        }
+
+        searchInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                pushHistory(searchInput.value);
+                closeHistory();
+            }
+        });
+
+        // ── Notifications ─────────────────────────────────────────────────
+        function toggleNotif() {
+            const panel = document.getElementById('notif-panel');
+            const histPanel = document.getElementById('hist-panel');
+            histPanel.classList.add('hidden');
+            panel.classList.toggle('hidden');
+        }
+
+        function clearNotifs() {
+            document.getElementById('notif-list').innerHTML = '<p class="px-md py-sm font-body-sm text-body-sm text-on-surface-variant">No new notifications</p>';
+            document.getElementById('notif-badge').classList.add('hidden');
+            document.getElementById('notif-panel').classList.add('hidden');
+        }
+
+        // ── History panel ─────────────────────────────────────────────────
+        function toggleHistory() {
+            const panel = document.getElementById('hist-panel');
+            const notifPanel = document.getElementById('notif-panel');
+            notifPanel.classList.add('hidden');
+            panel.classList.toggle('hidden');
+        }
+
+        function closeHistory() {
+            document.getElementById('hist-panel').classList.add('hidden');
+        }
+
+        // Close panels on outside click
+        document.addEventListener('click', (e) => {
+            if (!document.getElementById('notif-container').contains(e.target)) {
+                document.getElementById('notif-panel').classList.add('hidden');
+            }
+            if (!document.getElementById('hist-container').contains(e.target)) {
+                document.getElementById('hist-panel').classList.add('hidden');
+            }
+        });
+
+        // ── ⌘K shortcut ──────────────────────────────────────────────────
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'k' && (e.metaKey || e.ctrlKey)) {
+                e.preventDefault();
+                searchInput.focus();
+            }
+        });
+
+        // ── Trending chips ────────────────────────────────────────────────
+        document.querySelectorAll('.flex.flex-wrap.items-center.gap-sm button').forEach(chip => {
+            chip.addEventListener('click', () => {
+                searchInput.value = chip.textContent.trim();
+                searchInput.focus();
+                pushHistory(chip.textContent.trim());
+            });
+        });
+    </script>
+</body></html>

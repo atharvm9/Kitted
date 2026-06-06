@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Kitted - Upload BOM</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;700&family=Jetbrains+Mono:wght@400;500;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500&family=Geist:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20;
+            font-size: 20px;
+        }
+        .drag-active {
+            border-color: #3525cd !important;
+            background-color: #eff4ff !important;
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #c7c4d8;
+            border-radius: 10px;
+        }
+    
+/* custom tooltips */
+header [data-tooltip]::after{bottom:auto;top:calc(100% + 7px);}
+nav.flex [data-tooltip]::after{bottom:auto;top:calc(100% + 7px);}
+
+[data-tooltip]{position:relative;}
+[data-tooltip]::after{
+  content:attr(data-tooltip);
+  position:absolute;
+  bottom:calc(100% + 7px);
+  left:50%;
+  transform:translateX(-50%);
+  background:#2b3134;
+  color:#ecf1f5;
+  padding:4px 9px;
+  border-radius:5px;
+  font-size:11px;
+  font-weight:500;
+  white-space:nowrap;
+  pointer-events:none;
+  opacity:0;
+  transition:opacity .12s;
+  z-index:99999;
+  font-family:'Geist',sans-serif;
+  letter-spacing:.01em;
+  box-shadow:0 2px 8px rgba(0,0,0,.18);
+}
+[data-tooltip]:hover::after{opacity:1;}
+aside [data-tooltip]::after{
+  bottom:auto;
+  top:50%;
+  left:calc(100% + 10px);
+  transform:translateY(-50%);
+}
+</style>
+<script id="tailwind-config">tailwind.config = {darkMode: "class", theme: {extend: {colors: {outline: "#6c797f", "surface-bright": "#f5fafd", "primary-fixed": "#b6ebff", error: "#ba1a1a", "tertiary-container": "#f3ab26", "surface-variant": "#dee3e7", "surface-container-low": "#eff4f8", "on-primary-container": "#005063", "on-surface-variant": "#3c494e", "surface-dim": "#d5dbde", secondary: "#346574", "on-error": "#ffffff", "surface-container-high": "#e3e9ec", "on-secondary": "#ffffff", "inverse-surface": "#2b3134", "on-tertiary-fixed-variant": "#614000", "surface-container-highest": "#dee3e7", "on-secondary-fixed-variant": "#174d5b", "tertiary-fixed": "#ffddaf", "surface-container": "#e9eff2", "surface-tint": "#00677f", "tertiary-fixed-dim": "#ffba43", "on-primary-fixed": "#001f28", "on-secondary-fixed": "#001f27", "on-primary-fixed-variant": "#004e60", "secondary-fixed-dim": "#9dcedf", "on-tertiary": "#ffffff", "on-secondary-container": "#386978", "on-tertiary-container": "#644300", "on-tertiary-fixed": "#281800", surface: "#f5fafd", primary: "#00677f", "primary-container": "#0fc9f4", background: "#f5fafd", "primary-fixed-dim": "#48d6ff", "inverse-on-surface": "#ecf1f5", "on-surface": "#171c1f", "outline-variant": "#bbc9cf", "on-error-container": "#93000a", "error-container": "#ffdad6", tertiary: "#805600", "on-background": "#171c1f", "secondary-fixed": "#b9eafc", "surface-container-lowest": "#ffffff", "on-primary": "#ffffff", "inverse-primary": "#48d6ff", "secondary-container": "#b6e7f9"}, borderRadius: {DEFAULT: "0.125rem", lg: "0.25rem", xl: "0.5rem", full: "0.75rem"}, spacing: {"margin-desktop": "32px", unit: "4px", sm: "8px", xs: "4px", md: "16px", xl: "48px", "margin-mobile": "16px", lg: "24px", gutter: "16px"}, fontFamily: {"body-lg": ["Geist"], "body-sm": ["Geist"], "label-mono": ["JetBrains Mono"], "headline-md": ["Geist"], "headline-lg-mobile": ["Geist"], "headline-lg": ["Geist"], "label-caps": ["Geist"], display: ["Geist"], headline: ["Geist"], body: ["Geist"], label: ["Jetbrains Mono"]}, fontSize: {"body-lg": ["16px", {lineHeight: "24px", letterSpacing: "-0.01em", fontWeight: "400"}], "body-sm": ["14px", {lineHeight: "20px", letterSpacing: "0em", fontWeight: "400"}], "label-mono": ["13px", {lineHeight: "16px", letterSpacing: "0em", fontWeight: "500"}], "headline-md": ["20px", {lineHeight: "28px", letterSpacing: "-0.02em", fontWeight: "500"}], "headline-lg-mobile": ["24px", {lineHeight: "32px", letterSpacing: "-0.02em", fontWeight: "600"}], "headline-lg": ["32px", {lineHeight: "40px", letterSpacing: "-0.03em", fontWeight: "600"}], "label-caps": ["12px", {lineHeight: "16px", letterSpacing: "0.05em", fontWeight: "600"}], display: ["48px", {lineHeight: "1.1", letterSpacing: "-0.04em", fontWeight: "600"}]}}}};</script>
+</head>
+<body class="bg-surface-bright font-body-sm text-on-surface">
+<!-- SideNavBar Anchor -->
+<aside class="w-[240px] h-screen fixed left-0 top-0 bg-surface-container-lowest border-r border-outline-variant flex flex-col py-lg px-md z-50">
+  <div class="mb-xl px-sm">
+    <a data-tooltip="Go to the Kitted home page" href="/" target="_top" style="text-decoration:none;cursor:pointer;" class="font-headline-md text-headline-md font-bold text-primary">Kitted</a>
+  </div>
+  <nav class="flex-1 space-y-xs">
+    <a data-tooltip="BOM Optimizer — upload and optimize a bill of materials" class="flex items-center gap-md px-sm py-xs rounded-sm text-primary border-l-2 border-primary bg-surface-container-low transition-colors duration-200" href="/optimize" target="_top">
+      <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 20;">upload_file</span>
+      <span class="font-body-sm text-body-sm font-semibold">BOM Optimizer</span>
+    </a>
+    <a data-tooltip="Part Search — search distributor catalogs for components" class="flex items-center gap-md px-sm py-xs rounded-sm text-on-surface-variant hover:bg-surface-container transition-colors duration-200 group" href="/search" target="_top">
+      <span class="material-symbols-outlined group-hover:text-primary">search</span>
+      <span class="font-body-sm text-body-sm">Part Search</span>
+    </a>
+    <a data-tooltip="My BOMs — view and manage your saved BOM projects" class="flex items-center gap-md px-sm py-xs rounded-sm text-on-surface-variant hover:bg-surface-container transition-colors duration-200 group" href="/boms" target="_top">
+      <span class="material-symbols-outlined group-hover:text-primary">inventory_2</span>
+      <span class="font-body-sm text-body-sm">My BOMs</span>
+    </a>
+    <a data-tooltip="Orders — track your component orders" class="flex items-center gap-md px-sm py-xs rounded-sm text-on-surface-variant hover:bg-surface-container transition-colors duration-200 group" href="/orders" target="_top">
+      <span class="material-symbols-outlined group-hover:text-primary">shopping_cart</span>
+      <span class="font-body-sm text-body-sm">Orders</span>
+    </a>
+    <a data-tooltip="Settings — account and app preferences" class="flex items-center gap-md px-sm py-xs rounded-sm text-on-surface-variant hover:bg-surface-container transition-colors duration-200 group" href="/settings" target="_top">
+      <span class="material-symbols-outlined group-hover:text-primary">settings</span>
+      <span class="font-body-sm text-body-sm">Settings</span>
+    </a>
+  </nav>
+  <div class="mt-auto pt-lg border-t border-outline-variant/30 space-y-xs">
+    <button data-tooltip="Start a new BOM optimization project" class="w-full bg-primary text-on-primary py-sm px-md rounded-lg font-label-caps text-label-caps hover:bg-on-primary-fixed-variant transition-all mb-lg" onclick="window.top.location.href='/optimize'">New BOM Project</button>
+    <a class="flex items-center gap-md px-sm py-xs rounded-sm text-on-surface-variant hover:bg-surface-container transition-colors duration-200" href="#" onclick="showToast('Help Center — coming soon'); return false;">
+      <span class="material-symbols-outlined">help</span>
+      <span class="font-body-sm text-body-sm">Help Center</span>
+    </a>
+    <a class="flex items-center gap-md px-sm py-xs rounded-sm text-on-surface-variant hover:bg-surface-container transition-colors duration-200" href="#" onclick="showToast('Contact support — coming soon'); return false;">
+      <span class="material-symbols-outlined">support_agent</span>
+      <span class="font-body-sm text-body-sm">Contact Support</span>
+    </a>
+    <div id="acct-widget" class="px-sm mt-sm"><script>(function(){var u=JSON.parse(localStorage.getItem('kitted_user')||'null');var s=document.currentScript;var ini=u?(u.name||'?').split(' ').map(function(p){return p[0]||''}).join('').slice(0,2).toUpperCase():'';s.insertAdjacentHTML('afterend',u?'<div class="flex items-center gap-md py-md cursor-pointer hover:bg-surface-container rounded-sm px-xs -mx-xs transition-colors" onclick="window.top.location.href=\'\/settings\'"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0 text-on-primary font-bold text-xs">'+ini+'</div><div class="flex flex-col min-w-0"><span class="font-label-caps text-label-caps text-on-surface font-bold truncate">'+u.name+'</span><span class="text-[10px] text-on-surface-variant truncate">'+u.email+'</span></div></div>':'<a href="/onboarding" target="_top" class="flex items-center gap-md py-md px-xs -mx-xs hover:bg-surface-container rounded-sm transition-colors"><div class="w-8 h-8 rounded-full bg-surface-container border border-outline-variant flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-surface-variant" style="font-size:18px">person</span></div><div class="flex flex-col"><span class="font-label-caps text-label-caps text-primary font-bold">Sign in</span><span class="text-[10px] text-on-surface-variant">or create account</span></div></a>');})()</script></div>
+  </div>
+</aside>
+<!-- TopAppBar Anchor -->
+<header class="flex justify-between items-center ml-[240px] px-margin-desktop docked full-width top-0 h-16 bg-surface-container-lowest border-b border-outline-variant z-40 sticky">
+<div class="flex items-center gap-xl">
+<span class="font-headline-md text-headline-md font-semibold text-on-surface">BOM Optimizer</span>
+<nav class="flex items-center gap-md">
+<a class="font-label-caps text-label-caps text-primary border-b-2 border-primary pb-1" href="step1.html">Upload</a>
+<a class="font-label-caps text-label-caps text-outline hover:text-primary transition-colors" href="step2.html">Mapping</a>
+<a class="font-label-caps text-label-caps text-outline hover:text-primary transition-colors" href="step3.html">Preferences</a>
+<a class="font-label-caps text-label-caps text-outline hover:text-primary transition-colors" href="step4.html">Results</a>
+</nav>
+</div>
+<div class="flex items-center gap-md text-outline">
+<button data-tooltip="View notifications" class="material-symbols-outlined hover:text-primary transition-colors cursor-pointer active:opacity-70">notifications</button>
+<button data-tooltip="Get help" class="material-symbols-outlined hover:text-primary transition-colors cursor-pointer active:opacity-70">help_outline</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-[240px] min-h-[calc(100vh-64px)] p-margin-desktop flex flex-col items-center">
+<!-- Page Header & Stepper -->
+<div class="w-full max-w-[800px] mb-xl">
+<div class="flex justify-between items-end mb-md">
+<div>
+<h2 class="font-headline-lg text-headline-lg mb-xs">Initiate Optimizer</h2>
+<p class="text-on-surface-variant font-body-sm">Upload your Bill of Materials to start the multi-source procurement analysis.</p>
+</div>
+<div class="flex items-center gap-xs">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span class="w-2 h-2 rounded-full bg-outline-variant"></span>
+<span class="w-2 h-2 rounded-full bg-outline-variant"></span>
+<span class="w-2 h-2 rounded-full bg-outline-variant"></span>
+</div>
+</div>
+</div>
+<!-- Central Upload Zone -->
+<div class="w-full max-w-[800px] grid grid-cols-1 gap-lg">
+<!-- Drag & Drop Card -->
+<div class="bg-surface-container-lowest border border-dashed border-outline-variant rounded-xl p-xl flex flex-col items-center justify-center min-h-[320px] transition-all duration-200 group hover:border-primary hover:bg-surface-container-low cursor-pointer" id="drop-zone">
+<div class="w-16 h-16 rounded-full bg-surface-container-high flex items-center justify-center mb-md group-hover:bg-primary-fixed transition-colors">
+<span class="material-symbols-outlined text-primary !text-[32px]">upload_file</span>
+</div>
+<h3 class="font-headline-md text-headline-md mb-xs text-center">Drop BOM file here</h3>
+<p class="text-outline font-body-sm mb-lg text-center">Supports .csv, .xlsx, or .txt (TSV) formats</p>
+<button data-tooltip="Upload your BOM file" class="px-lg py-md bg-primary text-on-primary rounded font-label-caps text-label-caps hover:bg-primary-container transition-all active:scale-[0.98]">
+                    SELECT FILE FROM DISK
+                </button>
+</div>
+<!-- Alternative Methods -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<!-- URL Import -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-md">
+<div class="flex items-center gap-sm mb-md">
+<span class="material-symbols-outlined text-outline">link</span>
+<h4 class="font-label-caps text-label-caps">Import from URL</h4>
+</div>
+<div class="relative">
+<input id="url-import-input" class="w-full bg-surface-bright border border-outline-variant rounded px-md py-sm text-body-sm focus:ring-1 focus:ring-primary focus:border-primary outline-none transition-all pr-10" placeholder="https://raw.githubusercontent.com/..." type="text" onkeydown="if(event.key==='Enter')document.getElementById('url-import-btn').click()"/>
+<button id="url-import-btn" data-tooltip="Import BOM from URL" class="absolute right-2 top-1.5 material-symbols-outlined text-primary">arrow_forward</button>
+</div>
+</div>
+<!-- Template Download -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-md flex flex-col justify-between">
+<div class="flex items-center gap-sm mb-md">
+<span class="material-symbols-outlined text-outline">download</span>
+<h4 class="font-label-caps text-label-caps">Download Template</h4>
+</div>
+<div class="flex gap-sm">
+<button data-tooltip="Download BOM template as Excel" class="flex-1 px-sm py-xs border border-outline-variant rounded text-[11px] font-label-caps hover:bg-surface-container-low transition-colors">EXCEL (.XLSX)</button>
+<button data-tooltip="Download BOM template as CSV" class="flex-1 px-sm py-xs border border-outline-variant rounded text-[11px] font-label-caps hover:bg-surface-container-low transition-colors">CSV (.CSV)</button>
+</div>
+</div>
+</div>
+<!-- Recent Activity / Templates -->
+<div class="mt-lg">
+<div class="flex items-center justify-between mb-md">
+<h4 class="font-label-caps text-label-caps text-outline">Recently Uploaded Templates</h4>
+<button data-tooltip="View all recent templates" class="text-[11px] font-label-caps text-primary hover:underline">VIEW ALL</button>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low border-b border-outline-variant">
+<th class="px-md py-sm font-label-caps text-label-caps text-outline">FILE NAME</th>
+<th class="px-md py-sm font-label-caps text-label-caps text-outline">DATE</th>
+<th class="px-md py-sm font-label-caps text-label-caps text-outline">COMPONENTS</th>
+<th class="px-md py-sm font-label-caps text-label-caps text-outline text-right">ACTION</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<tr class="hover:bg-surface-container-low transition-colors cursor-pointer group">
+<td class="px-md py-md font-body-sm text-on-surface">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-outline">description</span>
+<span>Prototyping_BOM_v2.xlsx</span>
+</div>
+</td>
+<td class="px-md py-md font-label-mono text-label-mono text-outline">2023-11-24</td>
+<td class="px-md py-md font-label-mono text-label-mono">142 Items</td>
+<td class="px-md py-md text-right">
+<button data-tooltip="Re-use this BOM template" class="text-primary font-label-caps text-label-caps opacity-0 group-hover:opacity-100 transition-opacity">RE-USE</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors cursor-pointer group">
+<td class="px-md py-md font-body-sm text-on-surface">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-outline">description</span>
+<span>Production_H1_Mainboard.csv</span>
+</div>
+</td>
+<td class="px-md py-md font-label-mono text-label-mono text-outline">2023-11-20</td>
+<td class="px-md py-md font-label-mono text-label-mono">584 Items</td>
+<td class="px-md py-md text-right">
+<button data-tooltip="Re-use this BOM template" class="text-primary font-label-caps text-label-caps opacity-0 group-hover:opacity-100 transition-opacity">RE-USE</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors cursor-pointer group">
+<td class="px-md py-md font-body-sm text-on-surface">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-outline">description</span>
+<span>Legacy_Audio_RevB.xlsx</span>
+</div>
+</td>
+<td class="px-md py-md font-label-mono text-label-mono text-outline">2023-11-15</td>
+<td class="px-md py-md font-label-mono text-label-mono">42 Items</td>
+<td class="px-md py-md text-right">
+<button data-tooltip="Re-use this BOM template" class="text-primary font-label-caps text-label-caps opacity-0 group-hover:opacity-100 transition-opacity">RE-USE</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</main>
+<input type="file" id="file-input" accept=".csv,.txt" style="display:none">
+<script>
+  // Wire SELECT FILE button
+  document.querySelector('[data-tooltip="Upload your BOM file"]').addEventListener('click', function() {
+    document.getElementById('file-input').click();
+  });
+
+  const dropZone = document.getElementById('drop-zone');
+  ['dragenter','dragover','dragleave','drop'].forEach(ev => dropZone.addEventListener(ev, e => { e.preventDefault(); e.stopPropagation(); }, false));
+  ['dragenter','dragover'].forEach(ev => dropZone.addEventListener(ev, () => dropZone.classList.add('drag-active'), false));
+  ['dragleave','drop'].forEach(ev => dropZone.addEventListener(ev, () => dropZone.classList.remove('drag-active'), false));
+  dropZone.addEventListener('drop', e => handleFile(e.dataTransfer.files[0]), false);
+  document.getElementById('file-input').addEventListener('change', e => handleFile(e.target.files[0]));
+
+  function handleFile(file) {
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      sessionStorage.setItem('kitted_bom_csv', e.target.result);
+      sessionStorage.setItem('kitted_bom_filename', file.name);
+      sessionStorage.removeItem('kitted_col_map');
+      sessionStorage.removeItem('kitted_bom_headers');
+      window.location.href = 'step2.html';
+    };
+    reader.readAsText(file);
+  }
+
+  // URL import
+  document.getElementById('url-import-btn').addEventListener('click', async function() {
+    const v = document.getElementById('url-import-input').value.trim();
+    if (!v) { showToast('Enter a URL first.'); return; }
+    try { new URL(v); } catch(e) { showToast('Invalid URL — must start with http:// or https://'); return; }
+    showToast('Fetching…');
+    try {
+      const res = await fetch('/api/proxy-csv?url=' + encodeURIComponent(v));
+      if (!res.ok) { showToast('Could not fetch URL — check that it is a direct download link.'); return; }
+      const text = await res.text();
+      sessionStorage.setItem('kitted_bom_csv', text);
+      sessionStorage.setItem('kitted_bom_filename', v.split('/').pop() || 'imported.csv');
+      sessionStorage.removeItem('kitted_col_map');
+      sessionStorage.removeItem('kitted_bom_headers');
+      window.location.href = 'step2.html';
+    } catch(e) {
+      showToast('Fetch failed — check the URL and try again.');
+    }
+  });
+</script>
+<div id="kitted-toast" style="position:fixed;bottom:24px;right:24px;z-index:9999;background:#2b3134;color:#ecf1f5;padding:10px 18px;border-radius:6px;font-size:13px;font-family:Geist,sans-serif;opacity:0;pointer-events:none;transition:opacity .25s;"></div>
+<script>
+function showToast(msg){var t=document.getElementById('kitted-toast');t.textContent=msg;t.style.opacity='1';setTimeout(function(){t.style.opacity='0';},2200);}
+</script>
+</body></html>

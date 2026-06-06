@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;700&family=Jetbrains+Mono:wght@400;500;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=JetBrains+Mono:wght@100..900&display=swap" rel="stylesheet"/>
+<title>Kitted - Step 3: Preferences</title>
+<script id="tailwind-config">tailwind.config = {darkMode: "class", theme: {extend: {colors: {outline: "#6c797f", "surface-bright": "#f5fafd", "primary-fixed": "#b6ebff", error: "#ba1a1a", "tertiary-container": "#f3ab26", "surface-variant": "#dee3e7", "surface-container-low": "#eff4f8", "on-primary-container": "#005063", "on-surface-variant": "#3c494e", "surface-dim": "#d5dbde", secondary: "#346574", "on-error": "#ffffff", "surface-container-high": "#e3e9ec", "on-secondary": "#ffffff", "inverse-surface": "#2b3134", "on-tertiary-fixed-variant": "#614000", "surface-container-highest": "#dee3e7", "on-secondary-fixed-variant": "#174d5b", "tertiary-fixed": "#ffddaf", "surface-container": "#e9eff2", "surface-tint": "#00677f", "tertiary-fixed-dim": "#ffba43", "on-primary-fixed": "#001f28", "on-secondary-fixed": "#001f27", "on-primary-fixed-variant": "#004e60", "secondary-fixed-dim": "#9dcedf", "on-tertiary": "#ffffff", "on-secondary-container": "#386978", "on-tertiary-container": "#644300", "on-tertiary-fixed": "#281800", surface: "#f5fafd", primary: "#00677f", "primary-container": "#0fc9f4", background: "#f5fafd", "primary-fixed-dim": "#48d6ff", "inverse-on-surface": "#ecf1f5", "on-surface": "#171c1f", "outline-variant": "#bbc9cf", "on-error-container": "#93000a", "error-container": "#ffdad6", tertiary: "#805600", "on-background": "#171c1f", "secondary-fixed": "#b9eafc", "surface-container-lowest": "#ffffff", "on-primary": "#ffffff", "inverse-primary": "#48d6ff", "secondary-container": "#b6e7f9"}, borderRadius: {DEFAULT: "0.125rem", lg: "0.25rem", xl: "0.5rem", full: "0.75rem"}, spacing: {"margin-desktop": "32px", unit: "4px", sm: "8px", xs: "4px", md: "16px", xl: "48px", "margin-mobile": "16px", lg: "24px", gutter: "16px"}, fontFamily: {"body-lg": ["Geist"], "body-sm": ["Geist"], "label-mono": ["JetBrains Mono"], "headline-md": ["Geist"], "headline-lg-mobile": ["Geist"], "headline-lg": ["Geist"], "label-caps": ["Geist"], display: ["Geist"], headline: ["Geist"], body: ["Geist"], label: ["Jetbrains Mono"]}, fontSize: {"body-lg": ["16px", {lineHeight: "24px", letterSpacing: "-0.01em", fontWeight: "400"}], "body-sm": ["14px", {lineHeight: "20px", letterSpacing: "0em", fontWeight: "400"}], "label-mono": ["13px", {lineHeight: "16px", letterSpacing: "0em", fontWeight: "500"}], "headline-md": ["20px", {lineHeight: "28px", letterSpacing: "-0.02em", fontWeight: "500"}], "headline-lg-mobile": ["24px", {lineHeight: "32px", letterSpacing: "-0.02em", fontWeight: "600"}], "headline-lg": ["32px", {lineHeight: "40px", letterSpacing: "-0.03em", fontWeight: "600"}], "label-caps": ["12px", {lineHeight: "16px", letterSpacing: "0.05em", fontWeight: "600"}], display: ["48px", {lineHeight: "1.1", letterSpacing: "-0.04em", fontWeight: "600"}]}}}};</script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            font-size: 20px;
+        }
+        .step-active { color: #3525cd; border-color: #3525cd; }
+        .step-complete { color: #3525cd; border-color: #3525cd; }
+        .step-upcoming { color: #777587; border-color: #c7c4d8; }
+
+        input[type="checkbox"]:checked {
+            background-color: #3525cd;
+            border-color: #3525cd;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 16px;
+            height: 16px;
+            background: #3525cd;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+    
+/* custom tooltips */
+header [data-tooltip]::after{bottom:auto;top:calc(100% + 7px);}
+nav.flex [data-tooltip]::after{bottom:auto;top:calc(100% + 7px);}
+
+[data-tooltip]{position:relative;}
+[data-tooltip]::after{
+  content:attr(data-tooltip);
+  position:absolute;
+  bottom:calc(100% + 7px);
+  left:50%;
+  transform:translateX(-50%);
+  background:#2b3134;
+  color:#ecf1f5;
+  padding:4px 9px;
+  border-radius:5px;
+  font-size:11px;
+  font-weight:500;
+  white-space:nowrap;
+  pointer-events:none;
+  opacity:0;
+  transition:opacity .12s;
+  z-index:99999;
+  font-family:'Geist',sans-serif;
+  letter-spacing:.01em;
+  box-shadow:0 2px 8px rgba(0,0,0,.18);
+}
+[data-tooltip]:hover::after{opacity:1;}
+aside [data-tooltip]::after{
+  bottom:auto;
+  top:50%;
+  left:calc(100% + 10px);
+  transform:translateY(-50%);
+}
+</style>
+</head>
+<body class="bg-background text-on-surface font-body-sm selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- SideNavBar Anchor -->
+<aside class="w-[240px] h-screen fixed left-0 top-0 bg-surface-container-lowest border-r border-outline-variant flex flex-col py-lg px-md z-50">
+  <div class="mb-xl px-sm">
+    <a data-tooltip="Go to the Kitted home page" href="/" target="_top" style="text-decoration:none;cursor:pointer;" class="font-headline-md text-headline-md font-bold text-primary">Kitted</a>
+  </div>
+  <nav class="flex-1 space-y-xs">
+    <a data-tooltip="BOM Optimizer — upload and optimize a bill of materials" class="flex items-center gap-md px-sm py-xs rounded-sm text-primary border-l-2 border-primary bg-surface-container-low transition-colors duration-200" href="/optimize" target="_top">
+      <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 20;">upload_file</span>
+      <span class="font-body-sm text-body-sm font-semibold">BOM Optimizer</span>
+    </a>
+    <a data-tooltip="Part Search — search distributor catalogs for components" class="flex items-center gap-md px-sm py-xs rounded-sm text-on-surface-variant hover:bg-surface-container transition-colors duration-200 group" href="/search" target="_top">
+      <span class="material-symbols-outlined group-hover:text-primary">search</span>
+      <span class="font-body-sm text-body-sm">Part Search</span>
+    </a>
+    <a data-tooltip="My BOMs — view and manage your saved BOM projects" class="flex items-center gap-md px-sm py-xs rounded-sm text-on-surface-variant hover:bg-surface-container transition-colors duration-200 group" href="/boms" target="_top">
+      <span class="material-symbols-outlined group-hover:text-primary">inventory_2</span>
+      <span class="font-body-sm text-body-sm">My BOMs</span>
+    </a>
+    <a data-tooltip="Orders — track your component orders" class="flex items-center gap-md px-sm py-xs rounded-sm text-on-surface-variant hover:bg-surface-container transition-colors duration-200 group" href="/orders" target="_top">
+      <span class="material-symbols-outlined group-hover:text-primary">shopping_cart</span>
+      <span class="font-body-sm text-body-sm">Orders</span>
+    </a>
+    <a data-tooltip="Settings — account and app preferences" class="flex items-center gap-md px-sm py-xs rounded-sm text-on-surface-variant hover:bg-surface-container transition-colors duration-200 group" href="/settings" target="_top">
+      <span class="material-symbols-outlined group-hover:text-primary">settings</span>
+      <span class="font-body-sm text-body-sm">Settings</span>
+    </a>
+  </nav>
+  <div class="mt-auto pt-lg border-t border-outline-variant/30 space-y-xs">
+    <button data-tooltip="Start a new BOM optimization project" class="w-full bg-primary text-on-primary py-sm px-md rounded-lg font-label-caps text-label-caps hover:bg-on-primary-fixed-variant transition-all mb-lg" onclick="window.top.location.href='/optimize'">New BOM Project</button>
+    <a class="flex items-center gap-md px-sm py-xs rounded-sm text-on-surface-variant hover:bg-surface-container transition-colors duration-200" href="#" onclick="showToast('Help Center — coming soon'); return false;">
+      <span class="material-symbols-outlined">help</span>
+      <span class="font-body-sm text-body-sm">Help Center</span>
+    </a>
+    <a class="flex items-center gap-md px-sm py-xs rounded-sm text-on-surface-variant hover:bg-surface-container transition-colors duration-200" href="#" onclick="showToast('Contact support — coming soon'); return false;">
+      <span class="material-symbols-outlined">support_agent</span>
+      <span class="font-body-sm text-body-sm">Contact Support</span>
+    </a>
+    <div id="acct-widget" class="px-sm mt-sm"><script>(function(){var u=JSON.parse(localStorage.getItem('kitted_user')||'null');var s=document.currentScript;var ini=u?(u.name||'?').split(' ').map(function(p){return p[0]||''}).join('').slice(0,2).toUpperCase():'';s.insertAdjacentHTML('afterend',u?'<div class="flex items-center gap-md py-md cursor-pointer hover:bg-surface-container rounded-sm px-xs -mx-xs transition-colors" onclick="window.top.location.href=\'\/settings\'"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0 text-on-primary font-bold text-xs">'+ini+'</div><div class="flex flex-col min-w-0"><span class="font-label-caps text-label-caps text-on-surface font-bold truncate">'+u.name+'</span><span class="text-[10px] text-on-surface-variant truncate">'+u.email+'</span></div></div>':'<a href="/onboarding" target="_top" class="flex items-center gap-md py-md px-xs -mx-xs hover:bg-surface-container rounded-sm transition-colors"><div class="w-8 h-8 rounded-full bg-surface-container border border-outline-variant flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-surface-variant" style="font-size:18px">person</span></div><div class="flex flex-col"><span class="font-label-caps text-label-caps text-primary font-bold">Sign in</span><span class="text-[10px] text-on-surface-variant">or create account</span></div></a>');})()</script></div>
+  </div>
+</aside>
+<!-- TopAppBar Anchor -->
+<header class="flex justify-between items-center ml-[240px] px-margin-desktop bg-surface-container-lowest h-16 border-b border-outline-variant fixed top-0 left-0 right-0 z-40">
+<div class="flex items-center gap-xl">
+<span class="font-headline-md text-headline-md font-semibold text-on-surface">BOM Optimizer</span>
+<nav class="flex gap-lg items-center">
+<a class="font-label-caps text-label-caps text-outline hover:text-primary transition-colors py-2" href="step1.html">Upload</a>
+<a class="font-label-caps text-label-caps text-outline hover:text-primary transition-colors py-2" href="step2.html">Mapping</a>
+<a class="font-label-caps text-label-caps text-primary border-b-2 border-primary pb-1 py-2" href="step3.html">Preferences</a>
+<a class="font-label-caps text-label-caps text-outline hover:text-primary transition-colors py-2" href="step4.html">Results</a>
+</nav>
+</div>
+<div class="flex items-center gap-md">
+<button data-tooltip="View notifications" class="material-symbols-outlined text-outline cursor-pointer hover:text-primary transition-colors">notifications</button>
+<button data-tooltip="Get help" class="material-symbols-outlined text-outline cursor-pointer hover:text-primary transition-colors">help_outline</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-[240px] pt-16 min-h-screen">
+<div class="max-w-[1200px] mx-auto px-margin-desktop py-xl">
+<!-- Progress Stepper Component -->
+<div class="flex items-center justify-between mb-xl max-w-2xl mx-auto">
+<div class="flex flex-col items-center gap-sm">
+<div class="w-8 h-8 rounded-full border-2 flex items-center justify-center font-label-caps step-complete">1</div>
+<span class="text-label-caps text-primary">Upload</span>
+</div>
+<div class="h-[1px] flex-1 bg-primary mx-sm mb-6"></div>
+<div class="flex flex-col items-center gap-sm">
+<div class="w-8 h-8 rounded-full border-2 flex items-center justify-center font-label-caps step-complete">2</div>
+<span class="text-label-caps text-primary">Mapping</span>
+</div>
+<div class="h-[1px] flex-1 bg-primary mx-sm mb-6"></div>
+<div class="flex flex-col items-center gap-sm">
+<div class="w-8 h-8 rounded-full border-2 flex items-center justify-center font-label-caps step-active ring-4 ring-primary-fixed">3</div>
+<span class="text-label-caps text-primary">Preferences</span>
+</div>
+<div class="h-[1px] flex-1 bg-outline-variant mx-sm mb-6"></div>
+<div class="flex flex-col items-center gap-sm">
+<div class="w-8 h-8 rounded-full border-2 flex items-center justify-center font-label-caps step-upcoming">4</div>
+<span class="text-label-caps text-outline">Results</span>
+</div>
+</div>
+<!-- Bento Grid Configuration -->
+<div class="grid grid-cols-12 gap-lg">
+<!-- Section 1: Distributor Selection -->
+<section class="col-span-12 lg:col-span-7 p-lg bg-surface-container-lowest border border-outline-variant rounded-lg">
+<div class="flex items-center justify-between mb-lg">
+<h2 class="font-headline-md text-headline-md text-on-surface">Distributor Channels</h2>
+<span class="text-label-mono text-label-mono text-outline">5 Channels Selected</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<label class="flex items-center p-md border border-outline-variant rounded-lg hover:bg-surface-container-low transition-colors cursor-pointer group">
+<input checked="" class="w-4 h-4 rounded text-primary focus:ring-primary border-outline-variant" type="checkbox"/>
+<div class="ml-md flex flex-col">
+<span class="font-body-lg text-body-lg text-on-surface">Digi-Key Electronics</span>
+<span class="text-label-mono text-label-mono text-outline">Global / High Stock</span>
+</div>
+</label>
+<label class="flex items-center p-md border border-outline-variant rounded-lg hover:bg-surface-container-low transition-colors cursor-pointer group">
+<input checked="" class="w-4 h-4 rounded text-primary focus:ring-primary border-outline-variant" type="checkbox"/>
+<div class="ml-md flex flex-col">
+<span class="font-body-lg text-body-lg text-on-surface">Mouser Electronics</span>
+<span class="text-label-mono text-label-mono text-outline">Tier 1 / Rapid Ship</span>
+</div>
+</label>
+<label class="flex items-center p-md border border-outline-variant rounded-lg hover:bg-surface-container-low transition-colors cursor-pointer group">
+<input checked="" class="w-4 h-4 rounded text-primary focus:ring-primary border-outline-variant" type="checkbox"/>
+<div class="ml-md flex flex-col">
+<span class="font-body-lg text-body-lg text-on-surface">LCSC Electronics</span>
+<span class="text-label-mono text-label-mono text-outline">APAC / Value Pricing</span>
+</div>
+</label>
+<label class="flex items-center p-md border border-outline-variant rounded-lg hover:bg-surface-container-low transition-colors cursor-pointer group">
+<input checked="" class="w-4 h-4 rounded text-primary focus:ring-primary border-outline-variant" type="checkbox"/>
+<div class="ml-md flex flex-col">
+<span class="font-body-lg text-body-lg text-on-surface">Arrow Electronics</span>
+<span class="text-label-mono text-label-mono text-outline">Enterprise Supply</span>
+</div>
+</label>
+<label class="flex items-center p-md border border-outline-variant rounded-lg hover:bg-surface-container-low transition-colors cursor-pointer group">
+<input checked="" class="w-4 h-4 rounded text-primary focus:ring-primary border-outline-variant" type="checkbox"/>
+<div class="ml-md flex flex-col">
+<span class="font-body-lg text-body-lg text-on-surface">Newark / Avnet</span>
+<span class="text-label-mono text-label-mono text-outline">Legacy Support</span>
+</div>
+</label>
+<button data-tooltip="Add a new part row to the BOM" class="flex items-center justify-center p-md border border-dashed border-outline-variant rounded-lg hover:bg-surface-container-low transition-all text-outline hover:text-primary">
+<span class="material-symbols-outlined mr-sm">add_circle</span>
+<span class="font-label-caps text-label-caps">Connect Custom API</span>
+</button>
+</div>
+</section>
+<!-- Section 2: Optimization Logic -->
+<section class="col-span-12 lg:col-span-5 flex flex-col gap-lg">
+<div class="p-lg bg-surface-container-lowest border border-outline-variant rounded-lg">
+<h3 class="font-label-caps text-label-caps text-outline mb-md">Optimization Strategy</h3>
+<div class="flex items-center justify-between mb-sm">
+<span class="text-body-sm font-semibold">Fastest Lead Time</span>
+<span class="text-body-sm font-semibold">Lowest Total Cost</span>
+</div>
+<input class="w-full h-2 bg-surface-container-high rounded-full appearance-none cursor-pointer" id="strategy-slider" max="100" min="0" type="range" value="70"/>
+<div class="flex justify-between mt-sm">
+<span class="text-label-mono text-[10px] text-outline">PRIORITY: TIME</span>
+<span class="text-label-mono text-[10px] text-primary">PRIORITY: BUDGET</span>
+</div>
+<p class="mt-md text-body-sm text-outline italic" id="strategy-text">Current: Prioritizing cost with 30% weighting towards shipping speed.</p>
+</div>
+<div class="p-lg bg-surface-container-lowest border border-outline-variant rounded-lg">
+<h3 class="font-label-caps text-label-caps text-outline mb-md">Stock Buffer Overage</h3>
+<div class="flex items-end gap-md">
+<div class="flex-1">
+<div class="flex items-center gap-xs">
+<input class="w-full h-10 px-md border border-outline-variant rounded-lg focus:ring-1 focus:ring-primary focus:border-primary font-label-mono text-body-lg" type="number" value="10"/>
+<span class="text-headline-md">%</span>
+</div>
+</div>
+<div class="flex-1 pb-1">
+<p class="text-[11px] text-outline leading-tight">Minimum safety margin to account for assembly waste and reel leader length.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 3: Packaging & Constraints -->
+<section class="col-span-12 p-lg bg-surface-container-lowest border border-outline-variant rounded-lg">
+<h3 class="font-label-caps text-label-caps text-outline mb-lg">Packaging &amp; Lifecycle Constraints</h3>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-xl">
+<div>
+<label class="font-label-caps text-label-caps text-on-surface block mb-sm">Packaging Type</label>
+<div class="space-y-sm">
+<label class="flex items-center gap-sm cursor-pointer group">
+<input class="w-4 h-4 text-primary border-outline-variant" name="packaging" type="radio"/>
+<span class="text-body-sm group-hover:text-primary">Cut Tape / Loose</span>
+</label>
+<label class="flex items-center gap-sm cursor-pointer group">
+<input checked="" class="w-4 h-4 text-primary border-outline-variant" name="packaging" type="radio"/>
+<span class="text-body-sm group-hover:text-primary">Full Reel Only (Production)</span>
+</label>
+<label class="flex items-center gap-sm cursor-pointer group">
+<input class="w-4 h-4 text-primary border-outline-variant" name="packaging" type="radio"/>
+<span class="text-body-sm group-hover:text-primary">Tube / Tray</span>
+</label>
+</div>
+</div>
+<div>
+<label class="font-label-caps text-label-caps text-on-surface block mb-sm">Component Status</label>
+<div class="space-y-sm">
+<label class="flex items-center gap-sm cursor-pointer group">
+<input checked="" class="w-4 h-4 rounded text-primary border-outline-variant" type="checkbox"/>
+<span class="text-body-sm group-hover:text-primary">Exclude NRND (Not Recommended)</span>
+</label>
+<label class="flex items-center gap-sm cursor-pointer group">
+<input checked="" class="w-4 h-4 rounded text-primary border-outline-variant" type="checkbox"/>
+<span class="text-body-sm group-hover:text-primary">Exclude EOL (End of Life)</span>
+</label>
+<label class="flex items-center gap-sm cursor-pointer group">
+<input class="w-4 h-4 rounded text-primary border-outline-variant" type="checkbox"/>
+<span class="text-body-sm group-hover:text-primary">Allow Obsolete (Stock Only)</span>
+</label>
+</div>
+</div>
+<div class="bg-surface-container-low rounded p-md border border-outline-variant border-dashed flex flex-col justify-center items-center text-center">
+<span class="material-symbols-outlined text-primary mb-xs">verified</span>
+<p class="text-label-caps text-primary font-bold">Optimization Engine Ready</p>
+<p class="text-[11px] text-outline mt-1 px-md">Configuration will be applied to 142 line items in your BOM.</p>
+</div>
+</div>
+</section>
+</div>
+<!-- Action Bar -->
+<div class="mt-xl flex justify-between items-center pt-lg border-t border-outline-variant">
+<button data-tooltip="Return to column mapping" class="flex items-center px-lg py-md border border-outline-variant text-on-surface hover:bg-surface-container-high transition-colors font-label-caps text-label-caps uppercase tracking-wider rounded" onclick="window.location.href='step2.html'">
+<span class="material-symbols-outlined mr-sm">arrow_back</span>
+                    Back to Mapping
+                </button>
+<div class="flex gap-md">
+<button data-tooltip="Save optimization settings as a preset" class="px-lg py-md border border-outline-variant text-outline hover:bg-surface-container-high transition-colors font-label-caps text-label-caps uppercase tracking-wider rounded">
+                        Save as Preset
+                    </button>
+<button data-tooltip="Run optimization and view results" class="flex items-center px-xl py-md bg-primary text-on-primary hover:bg-primary-container transition-all font-label-caps text-label-caps uppercase tracking-wider rounded shadow-sm hover:shadow-md active:scale-[0.98]" onclick="window.location.href='step4.html'">
+                        Run Optimization
+                        <span class="material-symbols-outlined ml-sm">rocket_launch</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+<div class="fixed bottom-margin-desktop right-margin-desktop">
+<button data-tooltip="Contact support" class="w-12 h-12 bg-primary text-on-primary rounded-full shadow-lg flex items-center justify-center hover:scale-110 transition-transform cursor-pointer">
+<span class="material-symbols-outlined">support_agent</span>
+</button>
+</div>
+<script>
+        const slider = document.getElementById('strategy-slider');
+        const strategyText = document.getElementById('strategy-text');
+
+        slider.addEventListener('input', (e) => {
+            const val = e.target.value;
+            if(val < 40) {
+                strategyText.innerText = "Current: Aggressively prioritizing shipping speed and lead time.";
+                strategyText.classList.remove('text-outline');
+                strategyText.classList.add('text-primary');
+            } else if (val > 60) {
+                strategyText.innerText = "Current: Prioritizing cost efficiency over delivery speed.";
+                strategyText.classList.remove('text-primary');
+                strategyText.classList.add('text-outline');
+            } else {
+                strategyText.innerText = "Current: Balanced trade-off between price and speed.";
+                strategyText.classList.remove('text-primary');
+                strategyText.classList.add('text-outline');
+            }
+        });
+    </script>
+<div id="kitted-toast" style="position:fixed;bottom:24px;right:24px;z-index:9999;background:#2b3134;color:#ecf1f5;padding:10px 18px;border-radius:6px;font-size:13px;font-family:Geist,sans-serif;opacity:0;pointer-events:none;transition:opacity .25s;"></div>
+<script>
+function showToast(msg){var t=document.getElementById('kitted-toast');t.textContent=msg;t.style.opacity='1';setTimeout(function(){t.style.opacity='0';},2200);}
+</script>
+</body></html>
