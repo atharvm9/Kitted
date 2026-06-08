@@ -121,19 +121,19 @@ aside [data-tooltip]::after{
     <div class="grid grid-cols-4 gap-md mb-xl">
       <div class="bg-surface-container-lowest border border-outline-variant rounded-lg px-lg py-md">
         <p class="font-label-caps text-label-caps text-on-surface-variant uppercase mb-xs">Total Projects</p>
-        <p class="font-headline-md text-headline-md text-on-surface font-bold">6</p>
+        <p class="font-headline-md text-headline-md text-on-surface font-bold" id="stat-total">0</p>
       </div>
       <div class="bg-surface-container-lowest border border-outline-variant rounded-lg px-lg py-md">
         <p class="font-label-caps text-label-caps text-on-surface-variant uppercase mb-xs">Optimized</p>
-        <p class="font-headline-md text-headline-md text-primary font-bold">4</p>
+        <p class="font-headline-md text-headline-md text-primary font-bold" id="stat-optimized">0</p>
       </div>
       <div class="bg-surface-container-lowest border border-outline-variant rounded-lg px-lg py-md">
         <p class="font-label-caps text-label-caps text-on-surface-variant uppercase mb-xs">Draft</p>
-        <p class="font-headline-md text-headline-md text-on-surface font-bold">2</p>
+        <p class="font-headline-md text-headline-md text-on-surface font-bold" id="stat-draft">0</p>
       </div>
       <div class="bg-surface-container-lowest border border-outline-variant rounded-lg px-lg py-md">
         <p class="font-label-caps text-label-caps text-on-surface-variant uppercase mb-xs">Total Parts</p>
-        <p class="font-headline-md text-headline-md text-on-surface font-bold">347</p>
+        <p class="font-headline-md text-headline-md text-on-surface font-bold" id="stat-parts">0</p>
       </div>
     </div>
 
@@ -413,6 +413,12 @@ aside [data-tooltip]::after{
   (function() {
     var COLORS = ['#60a5fa','#a78bfa','#34d399','#fbbf24','#f87171','#22d3ee'];
     var boms = JSON.parse(localStorage.getItem('kitted_boms') || '[]');
+    // Update stat cards
+    var totalParts = boms.reduce(function(s, b) { return s + (b.parts ? b.parts.length : 0); }, 0);
+    document.getElementById('stat-total').textContent = boms.length;
+    document.getElementById('stat-optimized').textContent = boms.length;
+    document.getElementById('stat-draft').textContent = 0;
+    document.getElementById('stat-parts').textContent = totalParts;
     if (!boms.length) return;
     var grid = document.getElementById('bom-grid');
     var tbody = document.getElementById('list-tbody');
