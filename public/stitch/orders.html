@@ -118,19 +118,19 @@ aside [data-tooltip]::after{
     <div class="grid grid-cols-4 gap-md mb-xl">
       <div class="bg-surface-container-lowest border border-outline-variant rounded-lg px-lg py-md">
         <p class="font-label-caps text-label-caps text-on-surface-variant uppercase mb-xs">Total Orders</p>
-        <p class="font-headline-md text-headline-md text-on-surface font-bold">8</p>
+        <p class="font-headline-md text-headline-md text-on-surface font-bold" id="stat-total">0</p>
       </div>
       <div class="bg-surface-container-lowest border border-outline-variant rounded-lg px-lg py-md">
         <p class="font-label-caps text-label-caps text-on-surface-variant uppercase mb-xs">Active</p>
-        <p class="font-headline-md text-headline-md text-primary font-bold">3</p>
+        <p class="font-headline-md text-headline-md text-primary font-bold" id="stat-active">0</p>
       </div>
       <div class="bg-surface-container-lowest border border-outline-variant rounded-lg px-lg py-md">
         <p class="font-label-caps text-label-caps text-on-surface-variant uppercase mb-xs">Delivered</p>
-        <p class="font-headline-md text-headline-md text-on-surface font-bold">4</p>
+        <p class="font-headline-md text-headline-md text-on-surface font-bold" id="stat-delivered">0</p>
       </div>
       <div class="bg-surface-container-lowest border border-outline-variant rounded-lg px-lg py-md">
         <p class="font-label-caps text-label-caps text-on-surface-variant uppercase mb-xs">Total Spent</p>
-        <p class="font-headline-md text-headline-md text-on-surface font-bold">$7,841</p>
+        <p class="font-headline-md text-headline-md text-on-surface font-bold" id="stat-spent">$0</p>
       </div>
     </div>
 
@@ -166,240 +166,6 @@ aside [data-tooltip]::after{
               <p class="font-body-sm text-body-sm text-on-surface-variant">Orders placed after optimizing a BOM will appear here.</p>
             </td>
           </tr>
-        </tbody>
-      </table>
-
-          <tr class="order-row border-b border-outline-variant/40 hover:bg-surface-container-low transition-colors" data-status="shipped">
-            <td class="px-lg py-md distributor-mouser pl-[21px]"><span class="font-label-mono text-label-mono text-on-surface">#ORD-2840</span></td>
-            <td class="px-lg py-md"><span class="font-body-sm text-body-sm text-on-surface">Motor Controller Rev2</span></td>
-            <td class="px-lg py-md"><span class="font-label-caps text-label-caps text-on-surface-variant">Mouser</span></td>
-            <td class="px-lg py-md"><span class="font-body-sm text-body-sm text-on-surface-variant">May 28, 2026</span></td>
-            <td class="px-lg py-md text-right"><span class="font-label-mono text-label-mono text-on-surface">37</span></td>
-            <td class="px-lg py-md text-right"><span class="font-label-mono text-label-mono text-on-surface font-bold">$409.40</span></td>
-            <td class="px-lg py-md"><span class="px-sm py-xs rounded-full font-label-caps text-label-caps bg-blue-50 text-blue-700">Shipped</span></td>
-            <td class="px-lg py-md"><button data-tooltip="View order details" onclick="showToast('Order details — coming soon.')" class="font-label-caps text-label-caps text-primary hover:underline">View</button></td>
-          </tr>
-  <tr class="order-expand hidden border-b border-outline-variant/40 bg-surface-container-low/40">
-    <td colspan="9" class="px-lg pt-sm pb-md">
-      <p class="font-label-caps text-[10px] text-outline uppercase tracking-wider mb-sm">Parts in this order</p>
-      <table class="w-full">
-        <thead><tr class="border-b border-outline-variant/30">
-          <th class="text-left pb-xs font-label-caps text-[10px] text-outline uppercase">MPN</th>
-          <th class="text-left pb-xs font-label-caps text-[10px] text-outline uppercase">Description</th>
-          <th class="text-right pb-xs font-label-caps text-[10px] text-outline uppercase">Qty</th>
-          <th class="text-right pb-xs font-label-caps text-[10px] text-outline uppercase">Unit $</th>
-          <th class="text-right pb-xs font-label-caps text-[10px] text-outline uppercase">Ext. $</th>
-        </tr></thead>
-        <tbody>
-<tr class="border-b border-outline-variant/20"><td class="py-xs pr-lg font-label-mono text-label-mono text-xs">STM32F405RGT6</td><td class="py-xs pr-lg font-body-sm text-body-sm text-on-surface-variant text-xs">ARM Cortex-M4 MCU 168MHz</td><td class="py-xs pr-lg text-right font-label-mono text-label-mono text-xs">2</td><td class="py-xs pr-lg text-right font-label-mono text-label-mono text-xs">$7.82</td><td class="py-xs text-right font-label-mono text-label-mono text-xs">$15.64</td></tr>
-<tr class="border-b border-outline-variant/20"><td class="py-xs pr-lg font-label-mono text-label-mono text-xs">TCAN1042VDRQ1</td><td class="py-xs pr-lg font-body-sm text-body-sm text-on-surface-variant text-xs">CAN FD Transceiver 5Mbps</td><td class="py-xs pr-lg text-right font-label-mono text-label-mono text-xs">4</td><td class="py-xs pr-lg text-right font-label-mono text-label-mono text-xs">$1.94</td><td class="py-xs text-right font-label-mono text-label-mono text-xs">$7.76</td></tr>
-<tr class="border-b border-outline-variant/20"><td class="py-xs pr-lg font-label-mono text-label-mono text-xs">CL21A106KAYNNNE</td><td class="py-xs pr-lg font-body-sm text-body-sm text-on-surface-variant text-xs">10µF MLCC 10V X5R 0805</td><td class="py-xs pr-lg text-right font-label-mono text-label-mono text-xs">30</td><td class="py-xs pr-lg text-right font-label-mono text-label-mono text-xs">$0.47</td><td class="py-xs text-right font-label-mono text-label-mono text-xs">$14.10</td></tr>
-<tr class="border-b border-outline-variant/20"><td class="py-xs pr-lg font-label-mono text-label-mono text-xs">GCT USB4135-GF-A</td><td class="py-xs pr-lg font-body-sm text-body-sm text-on-surface-variant text-xs">USB-C Receptacle 2.0</td><td class="py-xs pr-lg text-right font-label-mono text-label-mono text-xs">2</td><td class="py-xs pr-lg text-right font-label-mono text-label-mono text-xs">$1.22</td><td class="py-xs text-right font-label-mono text-label-mono text-xs">$2.44</td></tr>
-<tr class=""><td class="py-xs pr-lg font-label-mono text-label-mono text-xs">LM5164DDAR</td><td class="py-xs pr-lg font-body-sm text-body-sm text-on-surface-variant text-xs">Synchronous Buck Reg 100V</td><td class="py-xs pr-lg text-right font-label-mono text-label-mono text-xs">2</td><td class="py-xs pr-lg text-right font-label-mono text-label-mono text-xs">$3.89</td><td class="py-xs text-right font-label-mono text-label-mono text-xs">$7.78</td></tr>
-        </tbody>
-      </table>
-      <button data-tooltip="Show all parts in this order" class="mt-sm font-label-caps text-label-caps text-xs text-primary hover:underline" onclick="showToast('Full part list — coming soon.')">Show all 37 parts →</button>
-    </td>
-  </tr>
-
-          <tr class="order-row border-b border-outline-variant/40 hover:bg-surface-container-low transition-colors" data-status="processing">
-            <td class="px-lg py-md distributor-lcsc pl-[21px]"><span class="font-label-mono text-label-mono text-on-surface">#ORD-2839</span></td>
-            <td class="px-lg py-md"><span class="font-body-sm text-body-sm text-on-surface">IoT Sensor Node</span></td>
-            <td class="px-lg py-md"><span class="font-label-caps text-label-caps text-on-surface-variant">LCSC</span></td>
-            <td class="px-lg py-md"><span class="font-body-sm text-body-sm text-on-surface-variant">Jun 1, 2026</span></td>
-            <td class="px-lg py-md text-right"><span class="font-label-mono text-label-mono text-on-surface">42</span></td>
-            <td class="px-lg py-md text-right"><span class="font-label-mono text-label-mono text-on-surface font-bold">$318.90</span></td>
-            <td class="px-lg py-md"><span class="px-sm py-xs rounded-full font-label-caps text-label-caps bg-yellow-50 text-yellow-700">Processing</span></td>
-            <td class="px-lg py-md"><button data-tooltip="View order details" onclick="showToast('Order details — coming soon.')" class="font-label-caps text-label-caps text-primary hover:underline">View</button></td>
-          </tr>
-  <tr class="order-expand hidden border-b border-outline-variant/40 bg-surface-container-low/40">
-    <td colspan="9" class="px-lg pt-sm pb-md">
-      <p class="font-label-caps text-[10px] text-outline uppercase tracking-wider mb-sm">Parts in this order</p>
-      <table class="w-full">
-        <thead><tr class="border-b border-outline-variant/30">
-          <th class="text-left pb-xs font-label-caps text-[10px] text-outline uppercase">MPN</th>
-          <th class="text-left pb-xs font-label-caps text-[10px] text-outline uppercase">Description</th>
-          <th class="text-right pb-xs font-label-caps text-[10px] text-outline uppercase">Qty</th>
-          <th class="text-right pb-xs font-label-caps text-[10px] text-outline uppercase">Unit $</th>
-          <th class="text-right pb-xs font-label-caps text-[10px] text-outline uppercase">Ext. $</th>
-        </tr></thead>
-        <tbody>
-<tr class="border-b border-outline-variant/20"><td class="py-xs pr-lg font-label-mono text-label-mono text-xs">ESP32-S3-MINI-1-N4</td><td class="py-xs pr-lg font-body-sm text-body-sm text-on-surface-variant text-xs">Wi-Fi/BLE Module 4MB</td><td class="py-xs pr-lg text-right font-label-mono text-label-mono text-xs">5</td><td class="py-xs pr-lg text-right font-label-mono text-label-mono text-xs">$4.20</td><td class="py-xs text-right font-label-mono text-label-mono text-xs">$21.00</td></tr>
-<tr class="border-b border-outline-variant/20"><td class="py-xs pr-lg font-label-mono text-label-mono text-xs">BME688</td><td class="py-xs pr-lg font-body-sm text-body-sm text-on-surface-variant text-xs">Gas/Temp/Humidity Sensor</td><td class="py-xs pr-lg text-right font-label-mono text-label-mono text-xs">5</td><td class="py-xs pr-lg text-right font-label-mono text-label-mono text-xs">$5.80</td><td class="py-xs text-right font-label-mono text-label-mono text-xs">$29.00</td></tr>
-<tr class="border-b border-outline-variant/20"><td class="py-xs pr-lg font-label-mono text-label-mono text-xs">SHT40-AD1B-R2</td><td class="py-xs pr-lg font-body-sm text-body-sm text-on-surface-variant text-xs">Temp & Humidity Sensor</td><td class="py-xs pr-lg text-right font-label-mono text-label-mono text-xs">5</td><td class="py-xs pr-lg text-right font-label-mono text-label-mono text-xs">$2.10</td><td class="py-xs text-right font-label-mono text-label-mono text-xs">$10.50</td></tr>
-<tr class="border-b border-outline-variant/20"><td class="py-xs pr-lg font-label-mono text-label-mono text-xs">TP4056</td><td class="py-xs pr-lg font-body-sm text-body-sm text-on-surface-variant text-xs">1A Li-ion Charger IC</td><td class="py-xs pr-lg text-right font-label-mono text-label-mono text-xs">5</td><td class="py-xs pr-lg text-right font-label-mono text-label-mono text-xs">$0.18</td><td class="py-xs text-right font-label-mono text-label-mono text-xs">$0.90</td></tr>
-<tr class=""><td class="py-xs pr-lg font-label-mono text-label-mono text-xs">CL05A105KQ5NNNC</td><td class="py-xs pr-lg font-body-sm text-body-sm text-on-surface-variant text-xs">1µF MLCC 10V X5R 0402</td><td class="py-xs pr-lg text-right font-label-mono text-label-mono text-xs">100</td><td class="py-xs pr-lg text-right font-label-mono text-label-mono text-xs">$0.01</td><td class="py-xs text-right font-label-mono text-label-mono text-xs">$1.00</td></tr>
-        </tbody>
-      </table>
-      <button data-tooltip="Show all parts in this order" class="mt-sm font-label-caps text-label-caps text-xs text-primary hover:underline" onclick="showToast('Full part list — coming soon.')">Show all 42 parts →</button>
-    </td>
-  </tr>
-
-          <tr class="order-row border-b border-outline-variant/40 hover:bg-surface-container-low transition-colors" data-status="delivered">
-            <td class="px-lg py-md distributor-dk pl-[21px]"><span class="font-label-mono text-label-mono text-on-surface">#ORD-2831</span></td>
-            <td class="px-lg py-md"><span class="font-body-sm text-body-sm text-on-surface">Power Supply Board</span></td>
-            <td class="px-lg py-md"><span class="font-label-caps text-label-caps text-on-surface-variant">Digi-Key</span></td>
-            <td class="px-lg py-md"><span class="font-body-sm text-body-sm text-on-surface-variant">May 20, 2026</span></td>
-            <td class="px-lg py-md text-right"><span class="font-label-mono text-label-mono text-on-surface">59</span></td>
-            <td class="px-lg py-md text-right"><span class="font-label-mono text-label-mono text-on-surface font-bold">$587.40</span></td>
-            <td class="px-lg py-md"><span class="px-sm py-xs rounded-full font-label-caps text-label-caps bg-green-50 text-green-700">Delivered</span></td>
-            <td class="px-lg py-md"><button data-tooltip="View order details" onclick="showToast('Order details — coming soon.')" class="font-label-caps text-label-caps text-primary hover:underline">View</button></td>
-          </tr>
-  <tr class="order-expand hidden border-b border-outline-variant/40 bg-surface-container-low/40">
-    <td colspan="9" class="px-lg pt-sm pb-md">
-      <p class="font-label-caps text-[10px] text-outline uppercase tracking-wider mb-sm">Parts in this order</p>
-      <table class="w-full">
-        <thead><tr class="border-b border-outline-variant/30">
-          <th class="text-left pb-xs font-label-caps text-[10px] text-outline uppercase">MPN</th>
-          <th class="text-left pb-xs font-label-caps text-[10px] text-outline uppercase">Description</th>
-          <th class="text-right pb-xs font-label-caps text-[10px] text-outline uppercase">Qty</th>
-          <th class="text-right pb-xs font-label-caps text-[10px] text-outline uppercase">Unit $</th>
-          <th class="text-right pb-xs font-label-caps text-[10px] text-outline uppercase">Ext. $</th>
-        </tr></thead>
-        <tbody>
-<tr class="border-b border-outline-variant/20"><td class="py-xs pr-lg font-label-mono text-label-mono text-xs">LM2596S-5.0/NOPB</td><td class="py-xs pr-lg font-body-sm text-body-sm text-on-surface-variant text-xs">3A Buck Switching Reg</td><td class="py-xs pr-lg text-right font-label-mono text-label-mono text-xs">4</td><td class="py-xs pr-lg text-right font-label-mono text-label-mono text-xs">$2.84</td><td class="py-xs text-right font-label-mono text-label-mono text-xs">$11.36</td></tr>
-<tr class="border-b border-outline-variant/20"><td class="py-xs pr-lg font-label-mono text-label-mono text-xs">LT3080EDD#TRPBF</td><td class="py-xs pr-lg font-body-sm text-body-sm text-on-surface-variant text-xs">1.1A LDO Adj Linear Reg</td><td class="py-xs pr-lg text-right font-label-mono text-label-mono text-xs">4</td><td class="py-xs pr-lg text-right font-label-mono text-label-mono text-xs">$5.67</td><td class="py-xs text-right font-label-mono text-label-mono text-xs">$22.68</td></tr>
-<tr class="border-b border-outline-variant/20"><td class="py-xs pr-lg font-label-mono text-label-mono text-xs">EEE-FK1V101P</td><td class="py-xs pr-lg font-body-sm text-body-sm text-on-surface-variant text-xs">100µF 35V Alum Electrolytic</td><td class="py-xs pr-lg text-right font-label-mono text-label-mono text-xs">20</td><td class="py-xs pr-lg text-right font-label-mono text-label-mono text-xs">$0.38</td><td class="py-xs text-right font-label-mono text-label-mono text-xs">$7.60</td></tr>
-<tr class="border-b border-outline-variant/20"><td class="py-xs pr-lg font-label-mono text-label-mono text-xs">IHLP2020BZER220M01</td><td class="py-xs pr-lg font-body-sm text-body-sm text-on-surface-variant text-xs">22µH Power Inductor 3.5A</td><td class="py-xs pr-lg text-right font-label-mono text-label-mono text-xs">8</td><td class="py-xs pr-lg text-right font-label-mono text-label-mono text-xs">$0.89</td><td class="py-xs text-right font-label-mono text-label-mono text-xs">$7.12</td></tr>
-<tr class=""><td class="py-xs pr-lg font-label-mono text-label-mono text-xs">B340A-13-F</td><td class="py-xs pr-lg font-body-sm text-body-sm text-on-surface-variant text-xs">40V 3A Schottky Diode SMA</td><td class="py-xs pr-lg text-right font-label-mono text-label-mono text-xs">12</td><td class="py-xs pr-lg text-right font-label-mono text-label-mono text-xs">$0.44</td><td class="py-xs text-right font-label-mono text-label-mono text-xs">$5.28</td></tr>
-        </tbody>
-      </table>
-      <button data-tooltip="Show all parts in this order" class="mt-sm font-label-caps text-label-caps text-xs text-primary hover:underline" onclick="showToast('Full part list — coming soon.')">Show all 59 parts →</button>
-    </td>
-  </tr>
-
-          <tr class="order-row border-b border-outline-variant/40 hover:bg-surface-container-low transition-colors" data-status="delivered">
-            <td class="px-lg py-md distributor-arrow pl-[21px]"><span class="font-label-mono text-label-mono text-on-surface">#ORD-2822</span></td>
-            <td class="px-lg py-md"><span class="font-body-sm text-body-sm text-on-surface">Wireless Audio Module</span></td>
-            <td class="px-lg py-md"><span class="font-label-caps text-label-caps text-on-surface-variant">Arrow</span></td>
-            <td class="px-lg py-md"><span class="font-body-sm text-body-sm text-on-surface-variant">May 15, 2026</span></td>
-            <td class="px-lg py-md text-right"><span class="font-label-mono text-label-mono text-on-surface">71</span></td>
-            <td class="px-lg py-md text-right"><span class="font-label-mono text-label-mono text-on-surface font-bold">$892.10</span></td>
-            <td class="px-lg py-md"><span class="px-sm py-xs rounded-full font-label-caps text-label-caps bg-green-50 text-green-700">Delivered</span></td>
-            <td class="px-lg py-md"><button data-tooltip="View order details" onclick="showToast('Order details — coming soon.')" class="font-label-caps text-label-caps text-primary hover:underline">View</button></td>
-          </tr>
-  <tr class="order-expand hidden border-b border-outline-variant/40 bg-surface-container-low/40">
-    <td colspan="9" class="px-lg pt-sm pb-md">
-      <p class="font-label-caps text-[10px] text-outline uppercase tracking-wider mb-sm">Parts in this order</p>
-      <table class="w-full">
-        <thead><tr class="border-b border-outline-variant/30">
-          <th class="text-left pb-xs font-label-caps text-[10px] text-outline uppercase">MPN</th>
-          <th class="text-left pb-xs font-label-caps text-[10px] text-outline uppercase">Description</th>
-          <th class="text-right pb-xs font-label-caps text-[10px] text-outline uppercase">Qty</th>
-          <th class="text-right pb-xs font-label-caps text-[10px] text-outline uppercase">Unit $</th>
-          <th class="text-right pb-xs font-label-caps text-[10px] text-outline uppercase">Ext. $</th>
-        </tr></thead>
-        <tbody>
-<tr class="border-b border-outline-variant/20"><td class="py-xs pr-lg font-label-mono text-label-mono text-xs">nRF52840-QIAA-R</td><td class="py-xs pr-lg font-body-sm text-body-sm text-on-surface-variant text-xs">BLE 5.3 SoC 64MHz 1MB</td><td class="py-xs pr-lg text-right font-label-mono text-label-mono text-xs">3</td><td class="py-xs pr-lg text-right font-label-mono text-label-mono text-xs">$8.90</td><td class="py-xs text-right font-label-mono text-label-mono text-xs">$26.70</td></tr>
-<tr class="border-b border-outline-variant/20"><td class="py-xs pr-lg font-label-mono text-label-mono text-xs">PCM5102APWR</td><td class="py-xs pr-lg font-body-sm text-body-sm text-on-surface-variant text-xs">Stereo Audio DAC 32-bit</td><td class="py-xs pr-lg text-right font-label-mono text-label-mono text-xs">3</td><td class="py-xs pr-lg text-right font-label-mono text-label-mono text-xs">$2.70</td><td class="py-xs text-right font-label-mono text-label-mono text-xs">$8.10</td></tr>
-<tr class="border-b border-outline-variant/20"><td class="py-xs pr-lg font-label-mono text-label-mono text-xs">W25Q32JVSSIQ</td><td class="py-xs pr-lg font-body-sm text-body-sm text-on-surface-variant text-xs">32Mb SPI NOR Flash</td><td class="py-xs pr-lg text-right font-label-mono text-label-mono text-xs">3</td><td class="py-xs pr-lg text-right font-label-mono text-label-mono text-xs">$1.20</td><td class="py-xs text-right font-label-mono text-label-mono text-xs">$3.60</td></tr>
-<tr class="border-b border-outline-variant/20"><td class="py-xs pr-lg font-label-mono text-label-mono text-xs">DFE201612E-2R2M=P2</td><td class="py-xs pr-lg font-body-sm text-body-sm text-on-surface-variant text-xs">2.2µH Power Inductor</td><td class="py-xs pr-lg text-right font-label-mono text-label-mono text-xs">10</td><td class="py-xs pr-lg text-right font-label-mono text-label-mono text-xs">$0.45</td><td class="py-xs text-right font-label-mono text-label-mono text-xs">$4.50</td></tr>
-<tr class=""><td class="py-xs pr-lg font-label-mono text-label-mono text-xs">CL05B103KB5NNNC</td><td class="py-xs pr-lg font-body-sm text-body-sm text-on-surface-variant text-xs">10nF MLCC 50V X7R 0402</td><td class="py-xs pr-lg text-right font-label-mono text-label-mono text-xs">100</td><td class="py-xs pr-lg text-right font-label-mono text-label-mono text-xs">$0.03</td><td class="py-xs text-right font-label-mono text-label-mono text-xs">$3.00</td></tr>
-        </tbody>
-      </table>
-      <button data-tooltip="Show all parts in this order" class="mt-sm font-label-caps text-label-caps text-xs text-primary hover:underline" onclick="showToast('Full part list — coming soon.')">Show all 71 parts →</button>
-    </td>
-  </tr>
-
-          <tr class="order-row border-b border-outline-variant/40 hover:bg-surface-container-low transition-colors" data-status="delivered">
-            <td class="px-lg py-md distributor-newark pl-[21px]"><span class="font-label-mono text-label-mono text-on-surface">#ORD-2819</span></td>
-            <td class="px-lg py-md"><span class="font-body-sm text-body-sm text-on-surface">Wireless Audio Module</span></td>
-            <td class="px-lg py-md"><span class="font-label-caps text-label-caps text-on-surface-variant">Newark</span></td>
-            <td class="px-lg py-md"><span class="font-body-sm text-body-sm text-on-surface-variant">May 15, 2026</span></td>
-            <td class="px-lg py-md text-right"><span class="font-label-mono text-label-mono text-on-surface">12</span></td>
-            <td class="px-lg py-md text-right"><span class="font-label-mono text-label-mono text-on-surface font-bold">$214.80</span></td>
-            <td class="px-lg py-md"><span class="px-sm py-xs rounded-full font-label-caps text-label-caps bg-green-50 text-green-700">Delivered</span></td>
-            <td class="px-lg py-md"><button data-tooltip="View order details" onclick="showToast('Order details — coming soon.')" class="font-label-caps text-label-caps text-primary hover:underline">View</button></td>
-          </tr>
-  <tr class="order-expand hidden border-b border-outline-variant/40 bg-surface-container-low/40">
-    <td colspan="9" class="px-lg pt-sm pb-md">
-      <p class="font-label-caps text-[10px] text-outline uppercase tracking-wider mb-sm">Parts in this order</p>
-      <table class="w-full">
-        <thead><tr class="border-b border-outline-variant/30">
-          <th class="text-left pb-xs font-label-caps text-[10px] text-outline uppercase">MPN</th>
-          <th class="text-left pb-xs font-label-caps text-[10px] text-outline uppercase">Description</th>
-          <th class="text-right pb-xs font-label-caps text-[10px] text-outline uppercase">Qty</th>
-          <th class="text-right pb-xs font-label-caps text-[10px] text-outline uppercase">Unit $</th>
-          <th class="text-right pb-xs font-label-caps text-[10px] text-outline uppercase">Ext. $</th>
-        </tr></thead>
-        <tbody>
-<tr class="border-b border-outline-variant/20"><td class="py-xs pr-lg font-label-mono text-label-mono text-xs">TPA3118D2DAPR</td><td class="py-xs pr-lg font-body-sm text-body-sm text-on-surface-variant text-xs">30W Class-D Amp BTL</td><td class="py-xs pr-lg text-right font-label-mono text-label-mono text-xs">3</td><td class="py-xs pr-lg text-right font-label-mono text-label-mono text-xs">$2.95</td><td class="py-xs text-right font-label-mono text-label-mono text-xs">$8.85</td></tr>
-<tr class="border-b border-outline-variant/20"><td class="py-xs pr-lg font-label-mono text-label-mono text-xs">SJ-3523-SMT-TR</td><td class="py-xs pr-lg font-body-sm text-body-sm text-on-surface-variant text-xs">3.5mm Stereo Jack SMT</td><td class="py-xs pr-lg text-right font-label-mono text-label-mono text-xs">3</td><td class="py-xs pr-lg text-right font-label-mono text-label-mono text-xs">$1.10</td><td class="py-xs text-right font-label-mono text-label-mono text-xs">$3.30</td></tr>
-<tr class="border-b border-outline-variant/20"><td class="py-xs pr-lg font-label-mono text-label-mono text-xs">FUSB302BMPX</td><td class="py-xs pr-lg font-body-sm text-body-sm text-on-surface-variant text-xs">USB-C PD Controller</td><td class="py-xs pr-lg text-right font-label-mono text-label-mono text-xs">3</td><td class="py-xs pr-lg text-right font-label-mono text-label-mono text-xs">$2.45</td><td class="py-xs text-right font-label-mono text-label-mono text-xs">$7.35</td></tr>
-<tr class="border-b border-outline-variant/20"><td class="py-xs pr-lg font-label-mono text-label-mono text-xs">DW01A</td><td class="py-xs pr-lg font-body-sm text-body-sm text-on-surface-variant text-xs">1-Cell Li-ion BMS IC</td><td class="py-xs pr-lg text-right font-label-mono text-label-mono text-xs">3</td><td class="py-xs pr-lg text-right font-label-mono text-label-mono text-xs">$0.18</td><td class="py-xs text-right font-label-mono text-label-mono text-xs">$0.54</td></tr>
-<tr class=""><td class="py-xs pr-lg font-label-mono text-label-mono text-xs">CL21A226MQCLRNC</td><td class="py-xs pr-lg font-body-sm text-body-sm text-on-surface-variant text-xs">22µF MLCC 10V X5R 0805</td><td class="py-xs pr-lg text-right font-label-mono text-label-mono text-xs">12</td><td class="py-xs pr-lg text-right font-label-mono text-label-mono text-xs">$0.38</td><td class="py-xs text-right font-label-mono text-label-mono text-xs">$4.56</td></tr>
-        </tbody>
-      </table>
-      <button data-tooltip="Show all parts in this order" class="mt-sm font-label-caps text-label-caps text-xs text-primary hover:underline" onclick="showToast('Full part list — coming soon.')">Show all 12 parts →</button>
-    </td>
-  </tr>
-
-          <tr class="order-row border-b border-outline-variant/40 hover:bg-surface-container-low transition-colors" data-status="shipped">
-            <td class="px-lg py-md distributor-mouser pl-[21px]"><span class="font-label-mono text-label-mono text-on-surface">#ORD-2838</span></td>
-            <td class="px-lg py-md"><span class="font-body-sm text-body-sm text-on-surface">BLDC Driver v3</span></td>
-            <td class="px-lg py-md"><span class="font-label-caps text-label-caps text-on-surface-variant">Mouser</span></td>
-            <td class="px-lg py-md"><span class="font-body-sm text-body-sm text-on-surface-variant">May 31, 2026</span></td>
-            <td class="px-lg py-md text-right"><span class="font-label-mono text-label-mono text-on-surface">33</span></td>
-            <td class="px-lg py-md text-right"><span class="font-label-mono text-label-mono text-on-surface font-bold">$2,341.60</span></td>
-            <td class="px-lg py-md"><span class="px-sm py-xs rounded-full font-label-caps text-label-caps bg-blue-50 text-blue-700">Shipped</span></td>
-            <td class="px-lg py-md"><button data-tooltip="View order details" onclick="showToast('Order details — coming soon.')" class="font-label-caps text-label-caps text-primary hover:underline">View</button></td>
-          </tr>
-  <tr class="order-expand hidden border-b border-outline-variant/40 bg-surface-container-low/40">
-    <td colspan="9" class="px-lg pt-sm pb-md">
-      <p class="font-label-caps text-[10px] text-outline uppercase tracking-wider mb-sm">Parts in this order</p>
-      <table class="w-full">
-        <thead><tr class="border-b border-outline-variant/30">
-          <th class="text-left pb-xs font-label-caps text-[10px] text-outline uppercase">MPN</th>
-          <th class="text-left pb-xs font-label-caps text-[10px] text-outline uppercase">Description</th>
-          <th class="text-right pb-xs font-label-caps text-[10px] text-outline uppercase">Qty</th>
-          <th class="text-right pb-xs font-label-caps text-[10px] text-outline uppercase">Unit $</th>
-          <th class="text-right pb-xs font-label-caps text-[10px] text-outline uppercase">Ext. $</th>
-        </tr></thead>
-        <tbody>
-<tr class="border-b border-outline-variant/20"><td class="py-xs pr-lg font-label-mono text-label-mono text-xs">IRFS7530-7PPBF</td><td class="py-xs pr-lg font-body-sm text-body-sm text-on-surface-variant text-xs">60V 240A Power MOSFET D2PAK</td><td class="py-xs pr-lg text-right font-label-mono text-label-mono text-xs">6</td><td class="py-xs pr-lg text-right font-label-mono text-label-mono text-xs">$8.40</td><td class="py-xs text-right font-label-mono text-label-mono text-xs">$50.40</td></tr>
-<tr class="border-b border-outline-variant/20"><td class="py-xs pr-lg font-label-mono text-label-mono text-xs">FAN7382MX</td><td class="py-xs pr-lg font-body-sm text-body-sm text-on-surface-variant text-xs">High/Low-Side Gate Driver</td><td class="py-xs pr-lg text-right font-label-mono text-label-mono text-xs">3</td><td class="py-xs pr-lg text-right font-label-mono text-label-mono text-xs">$1.40</td><td class="py-xs text-right font-label-mono text-label-mono text-xs">$4.20</td></tr>
-<tr class="border-b border-outline-variant/20"><td class="py-xs pr-lg font-label-mono text-label-mono text-xs">IPT015N10N5AKSA1</td><td class="py-xs pr-lg font-body-sm text-body-sm text-on-surface-variant text-xs">100V 340A OptiMOS MOSFET</td><td class="py-xs pr-lg text-right font-label-mono text-label-mono text-xs">6</td><td class="py-xs pr-lg text-right font-label-mono text-label-mono text-xs">$12.80</td><td class="py-xs text-right font-label-mono text-label-mono text-xs">$76.80</td></tr>
-<tr class="border-b border-outline-variant/20"><td class="py-xs pr-lg font-label-mono text-label-mono text-xs">ACS758LCB-050B-PFF-T</td><td class="py-xs pr-lg font-body-sm text-body-sm text-on-surface-variant text-xs">50A Current Sensor Hall</td><td class="py-xs pr-lg text-right font-label-mono text-label-mono text-xs">3</td><td class="py-xs pr-lg text-right font-label-mono text-label-mono text-xs">$7.20</td><td class="py-xs text-right font-label-mono text-label-mono text-xs">$21.60</td></tr>
-<tr class=""><td class="py-xs pr-lg font-label-mono text-label-mono text-xs">UCC27211ADRG4</td><td class="py-xs pr-lg font-body-sm text-body-sm text-on-surface-variant text-xs">4A Dual High-Side Driver</td><td class="py-xs pr-lg text-right font-label-mono text-label-mono text-xs">3</td><td class="py-xs pr-lg text-right font-label-mono text-label-mono text-xs">$3.95</td><td class="py-xs text-right font-label-mono text-label-mono text-xs">$11.85</td></tr>
-        </tbody>
-      </table>
-      <button data-tooltip="Show all parts in this order" class="mt-sm font-label-caps text-label-caps text-xs text-primary hover:underline" onclick="showToast('Full part list — coming soon.')">Show all 33 parts →</button>
-    </td>
-  </tr>
-
-          <tr class="order-row hover:bg-surface-container-low transition-colors" data-status="cancelled">
-            <td class="px-lg py-md distributor-dk pl-[21px]"><span class="font-label-mono text-label-mono text-on-surface">#ORD-2814</span></td>
-            <td class="px-lg py-md"><span class="font-body-sm text-body-sm text-on-surface">RF Frontend Board</span></td>
-            <td class="px-lg py-md"><span class="font-label-caps text-label-caps text-on-surface-variant">Digi-Key</span></td>
-            <td class="px-lg py-md"><span class="font-body-sm text-body-sm text-on-surface-variant">May 10, 2026</span></td>
-            <td class="px-lg py-md text-right"><span class="font-label-mono text-label-mono text-on-surface-variant line-through">22</span></td>
-            <td class="px-lg py-md text-right"><span class="font-label-mono text-label-mono text-on-surface-variant line-through">$1,242.60</span></td>
-            <td class="px-lg py-md"><span class="px-sm py-xs rounded-full font-label-caps text-label-caps bg-red-50 text-red-700">Cancelled</span></td>
-            <td class="px-lg py-md"><button data-tooltip="View order details" onclick="showToast('Order details — coming soon.')" class="font-label-caps text-label-caps text-primary hover:underline">View</button></td>
-          </tr>
-  <tr class="order-expand hidden border-b border-outline-variant/40 bg-surface-container-low/40">
-    <td colspan="9" class="px-lg pt-sm pb-md">
-      <p class="font-label-caps text-[10px] text-outline uppercase tracking-wider mb-sm">Parts in this order</p>
-      <table class="w-full">
-        <thead><tr class="border-b border-outline-variant/30">
-          <th class="text-left pb-xs font-label-caps text-[10px] text-outline uppercase">MPN</th>
-          <th class="text-left pb-xs font-label-caps text-[10px] text-outline uppercase">Description</th>
-          <th class="text-right pb-xs font-label-caps text-[10px] text-outline uppercase">Qty</th>
-          <th class="text-right pb-xs font-label-caps text-[10px] text-outline uppercase">Unit $</th>
-          <th class="text-right pb-xs font-label-caps text-[10px] text-outline uppercase">Ext. $</th>
-        </tr></thead>
-        <tbody>
-<tr class="border-b border-outline-variant/20"><td class="py-xs pr-lg font-label-mono text-label-mono text-xs">SKY65047-92LF</td><td class="py-xs pr-lg font-body-sm text-body-sm text-on-surface-variant text-xs">LNA 0.5dB NF 0.7-2.7GHz</td><td class="py-xs pr-lg text-right font-label-mono text-label-mono text-xs">2</td><td class="py-xs pr-lg text-right font-label-mono text-label-mono text-xs">$14.50</td><td class="py-xs text-right font-label-mono text-label-mono text-xs">$29.00</td></tr>
-<tr class="border-b border-outline-variant/20"><td class="py-xs pr-lg font-label-mono text-label-mono text-xs">ADL5201ACPZ-R7</td><td class="py-xs pr-lg font-body-sm text-body-sm text-on-surface-variant text-xs">Variable Gain Amp 6GHz</td><td class="py-xs pr-lg text-right font-label-mono text-label-mono text-xs">2</td><td class="py-xs pr-lg text-right font-label-mono text-label-mono text-xs">$12.80</td><td class="py-xs text-right font-label-mono text-label-mono text-xs">$25.60</td></tr>
-<tr class="border-b border-outline-variant/20"><td class="py-xs pr-lg font-label-mono text-label-mono text-xs">PE4312C-Z</td><td class="py-xs pr-lg font-body-sm text-body-sm text-on-surface-variant text-xs">6-Bit Digital Attenuator</td><td class="py-xs pr-lg text-right font-label-mono text-label-mono text-xs">4</td><td class="py-xs pr-lg text-right font-label-mono text-label-mono text-xs">$8.90</td><td class="py-xs text-right font-label-mono text-label-mono text-xs">$35.60</td></tr>
-<tr class="border-b border-outline-variant/20"><td class="py-xs pr-lg font-label-mono text-label-mono text-xs">1-1337543-0</td><td class="py-xs pr-lg font-body-sm text-body-sm text-on-surface-variant text-xs">SMA Edge-Launch Connector</td><td class="py-xs pr-lg text-right font-label-mono text-label-mono text-xs">8</td><td class="py-xs pr-lg text-right font-label-mono text-label-mono text-xs">$3.45</td><td class="py-xs text-right font-label-mono text-label-mono text-xs">$27.60</td></tr>
-<tr class=""><td class="py-xs pr-lg font-label-mono text-label-mono text-xs">RO4003C</td><td class="py-xs pr-lg font-body-sm text-body-sm text-on-surface-variant text-xs">Rogers 4003C PCB Laminate</td><td class="py-xs pr-lg text-right font-label-mono text-label-mono text-xs">1</td><td class="py-xs pr-lg text-right font-label-mono text-label-mono text-xs">$156.00</td><td class="py-xs text-right font-label-mono text-label-mono text-xs">$156.00</td></tr>
-        </tbody>
-      </table>
-      <button data-tooltip="Show all parts in this order" class="mt-sm font-label-caps text-label-caps text-xs text-primary hover:underline" onclick="showToast('Full part list — coming soon.')">Show all 22 parts →</button>
-    </td>
-  </tr>
-
         </tbody>
       </table>
     </div>
