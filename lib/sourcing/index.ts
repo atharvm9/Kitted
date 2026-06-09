@@ -1,4 +1,5 @@
 import type { Offer, SourcingProvider } from "./types";
+import { nexarProvider } from "./providers/nexar";
 import { oemsecretsProvider } from "./providers/oemsecrets";
 import { trustedpartsProvider } from "./providers/trustedparts";
 import { mouserProvider } from "./providers/mouser";
@@ -7,6 +8,7 @@ import { arrowProvider } from "./providers/arrow";
 import { element14Provider } from "./providers/element14";
 import { ttiProvider } from "./providers/tti";
 import { tmeProvider } from "./providers/tme";
+import { ebayProvider } from "./providers/ebay";
 // Stubs — registered but always disabled
 import { lcscProvider } from "./providers/lcsc";
 import { mcmasterProvider } from "./providers/mcmaster";
@@ -18,6 +20,7 @@ import { adafruitProvider } from "./providers/adafruit";
 export type { Offer, SourcingProvider } from "./types";
 
 const ALL_PROVIDERS: SourcingProvider[] = [
+  nexarProvider,
   oemsecretsProvider,
   trustedpartsProvider,
   mouserProvider,
@@ -26,6 +29,7 @@ const ALL_PROVIDERS: SourcingProvider[] = [
   element14Provider,
   ttiProvider,
   tmeProvider,
+  ebayProvider,
   // stubs
   lcscProvider,
   mcmasterProvider,

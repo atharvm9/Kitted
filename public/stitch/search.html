@@ -493,7 +493,32 @@ aside [data-tooltip]::after{
           SF: { name: 'SparkFun',     color: '#E53935', abbr: 'SF', url: m => `https://www.sparkfun.com/search/results?term=${encodeURIComponent(m)}` },
           AD: { name: 'Adafruit',     color: '#222222', abbr: 'AD', url: m => `https://www.adafruit.com/search?q=${encodeURIComponent(m)}` },
           RS: { name: 'RS Comp.',     color: '#CC0000', abbr: 'RS', url: m => `https://uk.rs-online.com/web/c/?searchTerm=${encodeURIComponent(m)}` },
+          NE: { name: 'Newegg',       color: '#F7A21B', abbr: 'NE', url: m => `https://www.newegg.com/p/pl?d=${encodeURIComponent(m)}` },
+          EB: { name: 'eBay',         color: '#0064D2', abbr: 'EB', url: m => `https://www.ebay.com/sch/i.html?_nkw=${encodeURIComponent(m)}` },
+          PL: { name: 'Pololu',       color: '#0C9B49', abbr: 'PL', url: m => `https://www.pololu.com/search?query=${encodeURIComponent(m)}` },
+          SE: { name: 'Seeed',        color: '#0AA1A1', abbr: 'SE', url: m => `https://www.seeedstudio.com/catalogsearch/result/?q=${encodeURIComponent(m)}` },
         };
+
+        // Storefronts shown as deep-link "search on →" tiles for every result.
+        // No live price/stock API — they always point at the vendor's own search.
+        const LINK_STORES = ['DK', 'MO', 'AR', 'NW', 'LC', 'AD', 'SF', 'NE', 'EB', 'PL', 'SE', 'AZ', 'RS'];
+
+        function renderStoreStrip(mpn) {
+          const q = encodeURIComponent(mpn);
+          const tiles = LINK_STORES.map(sid => {
+            const d = DIST_CONFIG[sid];
+            return `<a href="${d.url(mpn)}" target="_blank" rel="noopener" data-tooltip="Search ${d.name} for ${mpn}"
+              class="flex items-center gap-xs border border-outline-variant/60 px-sm py-xs rounded-full font-label-caps text-[10px] text-on-surface-variant hover:text-primary hover:border-primary transition-all">
+              <span class="w-4 h-4 flex items-center justify-center font-bold text-[8px] text-white rounded-sm" style="background:${d.color}">${d.abbr}</span>
+              ${d.name}
+              <span class="material-symbols-outlined !text-[12px]">open_in_new</span>
+            </a>`;
+          }).join('');
+          return `<div class="mt-md pt-md border-t border-outline-variant/30">
+            <p class="font-label-caps text-[10px] text-outline uppercase mb-sm">More places to buy</p>
+            <div class="flex flex-wrap gap-xs">${tiles}</div>
+          </div>`;
+        }
 
         let _specsOpen = {}, _specsIdx = 0;
 
@@ -507,8 +532,14 @@ aside [data-tooltip]::after{
         }
 
         function renderDistRow(offer, mpn) {
-          const [sid, price, stock, eta] = offer;
-          const d = DIST_CONFIG[sid] || { name: sid, color: '#666', abbr: sid, url: () => '#' };
+          const [sid, price, stock, eta, liveUrl, liveName] = offer;
+          const d = DIST_CONFIG[sid] || {
+            name: liveName || sid,
+            color: '#0d7d5c',
+            abbr: (liveName || sid).replace(/[^A-Za-z0-9]/g, '').slice(0, 2).toUpperCase(),
+            url: () => liveUrl || '#',
+          };
+          const href = liveUrl || d.url(mpn);
           return `<div class="bg-surface-container-lowest p-md flex items-center justify-between hover:bg-surface-container-low transition-colors rounded-sm border border-outline-variant/30">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-xl flex-1">
               <div class="flex items-center gap-md">
@@ -528,7 +559,7 @@ aside [data-tooltip]::after{
                 <span class="font-body-sm text-body-sm font-semibold text-on-surface">$${price.toFixed(2)}</span>
               </div>
             </div>
-            <a href="${d.url(mpn)}" target="_blank" rel="noopener" data-tooltip="View on distributor site"
+            <a href="${href}" target="_blank" rel="noopener" data-tooltip="View on distributor site"
                class="flex items-center gap-xs border border-outline-variant px-md py-xs rounded font-label-caps text-label-caps text-on-surface-variant hover:text-primary hover:border-primary transition-all ml-md">
               <span class="material-symbols-outlined !text-sm">open_in_new</span>
             </a>
@@ -573,6 +604,7 @@ aside [data-tooltip]::after{
                 <div class="flex flex-col"><span class="font-label-caps text-[10px] text-outline uppercase">Specs</span><span class="font-body-sm text-body-sm">${entry.specs}</span></div>
               </div>
             </div>
+            ${renderStoreStrip(entry.mpn)}
           </div>`;
         }
 

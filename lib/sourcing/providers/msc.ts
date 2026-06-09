@@ -5,8 +5,9 @@ export const mscProvider: SourcingProvider = {
   // Registered but always disabled — scraper not yet implemented.
   enabled: false,
 
-  // TODO: scraper, not yet implemented
+  // No public buyer API — surfaced via link-only storefront tiles in the UI.
+  // Safe no-op so the sourcing fan-out can never throw if re-enabled.
   search(_mpns: string[]): Promise<Offer[]> {
-    throw new Error("msc provider not implemented");
+    return Promise.resolve([]);
   },
 };
