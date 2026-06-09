@@ -328,8 +328,45 @@ function getParam(name) {
   return new URLSearchParams(window.location.search).get(name);
 }
 
+function renderLocalBom(bom) {
+  document.title = bom.name + ' | Kitted';
+  document.getElementById('header-name').textContent = bom.name;
+  document.getElementById('info-name').textContent = bom.name;
+  document.getElementById('info-parts').textContent = (bom.parts ? bom.parts.length : 0) + ' line items';
+  document.getElementById('info-cost').textContent = '—';
+  document.getElementById('info-dist').textContent = bom.subtitle || '—';
+  document.getElementById('info-modified').textContent = bom.date ? new Date(bom.date).toLocaleDateString('en-US', {month:'short', day:'numeric', year:'numeric'}) : '—';
+  document.getElementById('info-status').innerHTML = '<span class="status-chip" style="background:#dcfce7;color:#166534;">✓ Saved</span>';
+  const tbody = document.getElementById('parts-tbody');
+  if (tbody && bom.parts) {
+    tbody.innerHTML = bom.parts.map(function(r, i) {
+      const mpn = r[1] || '—';
+      const desc = r[2] || '—';
+      const dist = r[3] || '—';
+      const lead = r[5] || r[4] || '—';
+      const pUrl = partUrl(dist, mpn);
+      const nameCell = pUrl ? '<a href="' + pUrl + '" target="_blank" rel="noopener" class="text-primary hover:underline font-semibold">' + desc + '</a>' : '<span class="font-semibold">' + desc + '</span>';
+      return '<tr class="hover:bg-surface-container-low transition-colors part-row">' +
+        '<td class="px-md py-sm font-label-mono text-label-mono text-outline">' + (r[0] || String(i+1).padStart(2,'0')) + '</td>' +
+        '<td class="px-md py-sm font-body-sm text-body-sm">' + nameCell + '</td>' +
+        '<td class="px-md py-sm font-label-mono text-label-mono text-on-surface-variant">' + mpn + '</td>' +
+        '<td class="px-md py-sm font-body-sm text-body-sm text-on-surface-variant">—</td>' +
+        '<td class="px-md py-sm font-body-sm text-body-sm"><span class="text-on-surface-variant">' + dist + '</span></td>' +
+        '<td class="px-md py-sm font-label-mono text-label-mono text-on-surface text-right">—</td>' +
+        '<td class="px-md py-sm font-label-mono text-label-mono text-on-surface text-right">—</td>' +
+        '<td class="px-md py-sm font-label-mono text-label-mono text-primary font-semibold text-right">—</td>' +
+        '<td class="px-md py-sm font-body-sm text-body-sm">' + lead + '</td>' +
+        '</tr>';
+    }).join('');
+  }
+  updateCount();
+}
+
 function render() {
   const id = getParam('id') || 'mctrl';
+  const saved = JSON.parse(localStorage.getItem('kitted_boms') || '[]');
+  const localBom = saved.find(function(b) { return String(b.id) === String(id); });
+  if (localBom) { renderLocalBom(localBom); return; }
   const bom = BOMS[id];
   if (!bom) { document.body.innerHTML = '<p style="padding:2rem">BOM not found.</p>'; return; }
 

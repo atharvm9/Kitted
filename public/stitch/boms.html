@@ -432,6 +432,7 @@ aside [data-tooltip]::after{
       card.style.borderLeft = '3px solid ' + color;
       card.dataset.name = bom.name;
       card.innerHTML = '<div class="p-md"><div class="flex items-start justify-between mb-sm"><div><h3 class="font-headline-md text-headline-md text-on-surface">' + bom.name + '</h3><p class="font-label-caps text-[10px] text-on-surface-variant mt-xs">' + partsCount + ' PARTS &bull; ' + dateStr + '</p></div><span class="px-sm py-xs rounded-full font-label-caps text-label-caps bg-green-50 text-green-700 text-[10px]">Saved</span></div></div><div class="px-md pb-md flex gap-sm"><button onclick="deleteBomById(' + bom.id + ', this)" class="px-md py-xs border border-error/30 text-error rounded font-label-caps text-label-caps hover:bg-error/10 transition-all ml-auto">Delete</button></div>';
+      card.onclick = function(e) { if (!e.target.closest('button')) window.top.location.href = '/bom-detail?id=' + bom.id; };
       grid.appendChild(card);
       // List row
       if (tbody) {
@@ -444,6 +445,7 @@ aside [data-tooltip]::after{
         tr.dataset.modified = bom.date ? bom.date.split('T')[0] : '';
         tr.dataset.savings = '0';
         tr.innerHTML = '<td class="w-8 px-xs py-md"></td><td class="px-md py-md font-body-sm text-body-sm text-on-surface">' + bom.name + '</td><td class="px-md py-md"><span class="px-sm py-xs rounded-full font-label-caps text-label-caps bg-green-50 text-green-700 text-[10px]">Saved</span></td><td class="px-md py-md text-right font-label-mono text-label-mono">' + partsCount + '</td><td class="px-md py-md text-right font-label-mono text-label-mono">—</td><td class="px-md py-md">—</td><td class="px-md py-md font-body-sm text-body-sm text-on-surface-variant">' + dateStr + '</td><td class="px-md py-md"><button onclick="deleteBomById(' + bom.id + ', this.closest('tr'))" class="font-label-caps text-label-caps text-error hover:underline">Delete</button></td>';
+        tr.onclick = function(e) { if (!e.target.closest('button')) window.top.location.href = '/bom-detail?id=' + bom.id; };
         tbody.appendChild(tr);
       }
     });
