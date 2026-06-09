@@ -2,12 +2,33 @@ import { NextRequest, NextResponse } from "next/server";
 import { CATALOG, CatalogEntry } from "@/lib/catalog/parts";
 import { searchAll, enabledProviders, type Offer } from "@/lib/sourcing";
 
-function score(entry: CatalogEntry, terms: string[]): number {
-  if (!terms.length) return 1;
-  const text = [entry.family, entry.brand, entry.mpn, entry.mcu, entry.specs, ...entry.tags]
-    .join(" ")
-    .toLowerCase();
-  return terms.filter((t) => text.includes(t)).length / terms.length;
+/**
+ * Relevance for one catalog entry. `matched` counts how many query terms hit
+ * anywhere; `weight` favors hits in the family name over incidental hits in
+ * specs/tags so "camera module" ranks camera families above every board that
+ * merely carries a "module" tag.
+ */
+function score(entry: CatalogEntry, terms: string[]): { matched: number; weight: number } {
+  if (!terms.length) return { matched: 1, weight: 1 };
+  const family = entry.family.toLowerCase();
+  const ident = `${entry.brand} ${entry.mpn}`.toLowerCase();
+  const rest = [entry.mcu, entry.specs, ...entry.tags].join(" ").toLowerCase();
+
+  let matched = 0;
+  let weight = 0;
+  for (const t of terms) {
+    if (family.includes(t)) {
+      matched++;
+      weight += 3;
+    } else if (ident.includes(t)) {
+      matched++;
+      weight += 2;
+    } else if (rest.includes(t)) {
+      matched++;
+      weight += 1;
+    }
+  }
+  return { matched, weight };
 }
 
 /** Lowest unit price across an offer's price breaks (0 when none). */
@@ -59,10 +80,15 @@ export async function GET(req: NextRequest) {
   const terms = q.toLowerCase().split(/\s+/).filter(Boolean);
 
   // 1. Local catalog (fast, always available).
-  const scored = CATALOG.map((e) => ({ entry: e, s: score(e, terms) })).filter(
-    (x) => x.s > 0,
+  let scored = CATALOG.map((e) => ({ entry: e, ...score(e, terms) })).filter(
+    (x) => x.matched > 0,
   );
-  scored.sort((a, b) => b.s - a.s);
+  // If any entry matches every query term, partial matches are noise — drop
+  // them ("camera module" should not surface every entry tagged "module").
+  if (scored.some((x) => x.matched === terms.length)) {
+    scored = scored.filter((x) => x.matched === terms.length);
+  }
+  scored.sort((a, b) => b.weight - a.weight);
 
   const grouped = new Map<string, CatalogEntry[]>();
   for (const { entry } of scored) {
@@ -96,9 +122,18 @@ export async function GET(req: NextRequest) {
     localGroups.flatMap((g) => g.entries.map((e) => e.mpn.toLowerCase())),
   );
   // Avoid duplicating a part the local catalog already covers.
-  const dedupedLive = liveGroups.filter(
-    (g) => !g.entries.some((e) => localMpns.has(e.mpn.toLowerCase())),
-  );
+  const dedupedLive = liveGroups
+    .filter((g) => !g.entries.some((e) => localMpns.has(e.mpn.toLowerCase())))
+    // Offers only carry an MPN, so rank live groups by how many query terms
+    // appear in it; in-stock breaks ties.
+    .map((g) => {
+      const mpn = g.family.toLowerCase();
+      const hits = terms.filter((t) => mpn.includes(t)).length;
+      const stock = g.entries[0]?.offers.some((o) => (o[2] as number) > 0) ? 1 : 0;
+      return { g, hits, stock };
+    })
+    .sort((a, b) => b.hits - a.hits || b.stock - a.stock)
+    .map((x) => x.g);
 
   const groups = [...localGroups, ...dedupedLive];
   const total = groups.reduce((n, g) => n + g.entries.length, 0);
