@@ -345,6 +345,13 @@ aside [data-tooltip]::after{
           </div>
           <button data-tooltip="Export all data as JSON" onclick="showToast('Data export — coming soon.')" class="px-md py-sm border border-outline-variant rounded font-label-caps text-label-caps text-on-surface-variant hover:bg-surface-container transition-all">Export</button>
         </div>
+        <div class="flex items-center justify-between py-md border-t border-outline-variant/40">
+          <div>
+            <p class="font-body-sm text-body-sm text-on-surface font-medium">Sign Out</p>
+            <p class="font-body-sm text-body-sm text-on-surface-variant">Sign out of your account on this device</p>
+          </div>
+          <button data-tooltip="Sign out of Kitted" onclick="window.top.location.href='/signout'" class="px-md py-sm border border-outline-variant text-on-surface rounded font-label-caps text-label-caps hover:bg-surface-container transition-all">Sign Out</button>
+        </div>
         <div class="flex items-center justify-between py-md">
           <div>
             <p class="font-body-sm text-body-sm text-on-surface font-medium">Delete Account</p>
