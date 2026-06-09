@@ -252,14 +252,14 @@ aside [data-tooltip]::after{
           </div>
           <div class="flex items-center gap-md">
             <span class="font-label-caps text-label-caps text-on-surface-variant">Cost</span>
-            <input type="range" min="0" max="100" value="50" class="flex-1 accent-primary" id="strategy-slider" oninput="updateStrategy(this.value)"/>
+            <input type="range" min="0" max="100" value="50" class="flex-1 accent-primary" id="strategy-slider" oninput="updateStrategy(this.value)" data-setting="strategy"/>
             <span class="font-label-caps text-label-caps text-on-surface-variant">Speed</span>
           </div>
         </div>
         <div class="grid grid-cols-2 gap-md">
           <div>
             <label class="font-label-caps text-label-caps text-on-surface-variant uppercase block mb-xs">Default Currency</label>
-            <select class="w-full px-md py-sm bg-surface-container-low border border-outline-variant rounded font-body-sm text-body-sm focus:outline-none focus:ring-1 focus:ring-primary">
+            <select id="opt-currency" class="w-full px-md py-sm bg-surface-container-low border border-outline-variant rounded font-body-sm text-body-sm focus:outline-none focus:ring-1 focus:ring-primary">
               <option>USD — US Dollar</option>
               <option>EUR — Euro</option>
               <option>GBP — British Pound</option>
@@ -270,17 +270,17 @@ aside [data-tooltip]::after{
           <div>
             <label class="font-label-caps text-label-caps text-on-surface-variant uppercase block mb-xs">Default Markup %</label>
             <div class="flex items-center gap-sm">
-              <input type="number" value="10" min="0" max="100" class="w-full px-md py-sm bg-surface-container-low border border-outline-variant rounded font-body-sm text-body-sm focus:outline-none focus:ring-1 focus:ring-primary"/>
+              <input type="number" id="opt-markup" value="10" min="0" max="100" class="w-full px-md py-sm bg-surface-container-low border border-outline-variant rounded font-body-sm text-body-sm focus:outline-none focus:ring-1 focus:ring-primary"/>
               <span class="font-body-sm text-body-sm text-on-surface-variant">%</span>
             </div>
           </div>
           <div>
             <label class="font-label-caps text-label-caps text-on-surface-variant uppercase block mb-xs">Min Stock Threshold</label>
-            <input type="number" value="100" class="w-full px-md py-sm bg-surface-container-low border border-outline-variant rounded font-body-sm text-body-sm focus:outline-none focus:ring-1 focus:ring-primary"/>
+            <input type="number" id="opt-min-stock" value="100" class="w-full px-md py-sm bg-surface-container-low border border-outline-variant rounded font-body-sm text-body-sm focus:outline-none focus:ring-1 focus:ring-primary"/>
           </div>
           <div>
             <label class="font-label-caps text-label-caps text-on-surface-variant uppercase block mb-xs">Max Lead Time (weeks)</label>
-            <input type="number" value="8" class="w-full px-md py-sm bg-surface-container-low border border-outline-variant rounded font-body-sm text-body-sm focus:outline-none focus:ring-1 focus:ring-primary"/>
+            <input type="number" id="opt-max-lead" value="8" class="w-full px-md py-sm bg-surface-container-low border border-outline-variant rounded font-body-sm text-body-sm focus:outline-none focus:ring-1 focus:ring-primary"/>
           </div>
         </div>
       </div>
@@ -298,35 +298,35 @@ aside [data-tooltip]::after{
             <p class="font-body-sm text-body-sm text-on-surface font-medium">Email Alerts</p>
             <p class="font-body-sm text-body-sm text-on-surface-variant">Receive updates via email</p>
           </div>
-          <label class="toggle"><input type="checkbox" checked/><span class="toggle-slider"></span></label>
+          <label class="toggle"><input type="checkbox" id="notif-email" checked/><span class="toggle-slider"></span></label>
         </div>
         <div class="flex items-center justify-between py-md">
           <div>
             <p class="font-body-sm text-body-sm text-on-surface font-medium">BOM Optimization Complete</p>
             <p class="font-body-sm text-body-sm text-on-surface-variant">Notify when optimization finishes</p>
           </div>
-          <label class="toggle"><input type="checkbox" checked/><span class="toggle-slider"></span></label>
+          <label class="toggle"><input type="checkbox" id="notif-bom" checked/><span class="toggle-slider"></span></label>
         </div>
         <div class="flex items-center justify-between py-md">
           <div>
             <p class="font-body-sm text-body-sm text-on-surface font-medium">Low Stock Alerts</p>
             <p class="font-body-sm text-body-sm text-on-surface-variant">Alert when part stock falls below threshold</p>
           </div>
-          <label class="toggle"><input type="checkbox" checked/><span class="toggle-slider"></span></label>
+          <label class="toggle"><input type="checkbox" id="notif-stock" checked/><span class="toggle-slider"></span></label>
         </div>
         <div class="flex items-center justify-between py-md">
           <div>
             <p class="font-body-sm text-body-sm text-on-surface font-medium">Price Change Alerts</p>
             <p class="font-body-sm text-body-sm text-on-surface-variant">Alert on significant price movements (±15%)</p>
           </div>
-          <label class="toggle"><input type="checkbox"/><span class="toggle-slider"></span></label>
+          <label class="toggle"><input type="checkbox" id="notif-price"/><span class="toggle-slider"></span></label>
         </div>
         <div class="flex items-center justify-between py-md">
           <div>
             <p class="font-body-sm text-body-sm text-on-surface font-medium">Order Status Updates</p>
             <p class="font-body-sm text-body-sm text-on-surface-variant">Shipped, delivered, and exception notices</p>
           </div>
-          <label class="toggle"><input type="checkbox" checked/><span class="toggle-slider"></span></label>
+          <label class="toggle"><input type="checkbox" id="notif-orders" checked/><span class="toggle-slider"></span></label>
         </div>
       </div>
     </section>
@@ -426,6 +426,16 @@ aside [data-tooltip]::after{
     const settings = JSON.parse(localStorage.getItem('kitted_settings') || '{}');
     settings.org = document.getElementById('profile-org').value.trim();
     settings.role = document.getElementById('profile-role').value.trim();
+    settings.strategy = document.getElementById('strategy-slider').value;
+    settings.currency = document.getElementById('opt-currency').value;
+    settings.markup = document.getElementById('opt-markup').value;
+    settings.minStock = document.getElementById('opt-min-stock').value;
+    settings.maxLead = document.getElementById('opt-max-lead').value;
+    settings.notifEmail = document.getElementById('notif-email').checked;
+    settings.notifBom = document.getElementById('notif-bom').checked;
+    settings.notifStock = document.getElementById('notif-stock').checked;
+    settings.notifPrice = document.getElementById('notif-price').checked;
+    settings.notifOrders = document.getElementById('notif-orders').checked;
     localStorage.setItem('kitted_user', JSON.stringify(user));
     localStorage.setItem('kitted_settings', JSON.stringify(settings));
     setTimeout(() => {
@@ -453,6 +463,16 @@ aside [data-tooltip]::after{
     if (user.email) document.getElementById('profile-email').value = user.email;
     if (settings.org) document.getElementById('profile-org').value = settings.org;
     if (settings.role) document.getElementById('profile-role').value = settings.role;
+    if (settings.strategy != null) { const sl = document.getElementById('strategy-slider'); sl.value = settings.strategy; updateStrategy(settings.strategy); }
+    if (settings.currency) document.getElementById('opt-currency').value = settings.currency;
+    if (settings.markup != null) document.getElementById('opt-markup').value = settings.markup;
+    if (settings.minStock != null) document.getElementById('opt-min-stock').value = settings.minStock;
+    if (settings.maxLead != null) document.getElementById('opt-max-lead').value = settings.maxLead;
+    if (settings.notifEmail != null) document.getElementById('notif-email').checked = settings.notifEmail;
+    if (settings.notifBom != null) document.getElementById('notif-bom').checked = settings.notifBom;
+    if (settings.notifStock != null) document.getElementById('notif-stock').checked = settings.notifStock;
+    if (settings.notifPrice != null) document.getElementById('notif-price').checked = settings.notifPrice;
+    if (settings.notifOrders != null) document.getElementById('notif-orders').checked = settings.notifOrders;
 
     const keys = JSON.parse(localStorage.getItem('kitted_api_keys') || '{}');
     ['dk','mouser','arrow','newark','lcsc'].forEach(function(dist) {
