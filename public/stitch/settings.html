@@ -125,19 +125,19 @@ aside [data-tooltip]::after{
         <div class="grid grid-cols-2 gap-md">
           <div>
             <label class="font-label-caps text-label-caps text-on-surface-variant uppercase block mb-xs">Full Name</label>
-            <input type="text" value="Senior Engineer" class="w-full px-md py-sm bg-surface-container-low border border-outline-variant rounded font-body-sm text-body-sm focus:outline-none focus:ring-1 focus:ring-primary"/>
+            <input type="text" id="profile-name" value="" class="w-full px-md py-sm bg-surface-container-low border border-outline-variant rounded font-body-sm text-body-sm focus:outline-none focus:ring-1 focus:ring-primary"/>
           </div>
           <div>
             <label class="font-label-caps text-label-caps text-on-surface-variant uppercase block mb-xs">Email</label>
-            <input type="email" value="engineer@company.com" class="w-full px-md py-sm bg-surface-container-low border border-outline-variant rounded font-body-sm text-body-sm focus:outline-none focus:ring-1 focus:ring-primary"/>
+            <input type="email" id="profile-email" value="" class="w-full px-md py-sm bg-surface-container-low border border-outline-variant rounded font-body-sm text-body-sm focus:outline-none focus:ring-1 focus:ring-primary"/>
           </div>
           <div>
             <label class="font-label-caps text-label-caps text-on-surface-variant uppercase block mb-xs">Organization</label>
-            <input type="text" value="Acme Hardware Inc." class="w-full px-md py-sm bg-surface-container-low border border-outline-variant rounded font-body-sm text-body-sm focus:outline-none focus:ring-1 focus:ring-primary"/>
+            <input type="text" id="profile-org" value="" class="w-full px-md py-sm bg-surface-container-low border border-outline-variant rounded font-body-sm text-body-sm focus:outline-none focus:ring-1 focus:ring-primary"/>
           </div>
           <div>
             <label class="font-label-caps text-label-caps text-on-surface-variant uppercase block mb-xs">Role</label>
-            <input type="text" value="Senior Hardware Engineer" class="w-full px-md py-sm bg-surface-container-low border border-outline-variant rounded font-body-sm text-body-sm focus:outline-none focus:ring-1 focus:ring-primary"/>
+            <input type="text" id="profile-role" value="" class="w-full px-md py-sm bg-surface-container-low border border-outline-variant rounded font-body-sm text-body-sm focus:outline-none focus:ring-1 focus:ring-primary"/>
           </div>
         </div>
       </div>
@@ -420,6 +420,14 @@ aside [data-tooltip]::after{
   function saveSettings() {
     const btn = document.getElementById('save-btn');
     btn.textContent = 'Saving…';
+    const user = JSON.parse(localStorage.getItem('kitted_user') || '{}');
+    user.name = document.getElementById('profile-name').value.trim() || user.name || '';
+    user.email = document.getElementById('profile-email').value.trim() || user.email || '';
+    const settings = JSON.parse(localStorage.getItem('kitted_settings') || '{}');
+    settings.org = document.getElementById('profile-org').value.trim();
+    settings.role = document.getElementById('profile-role').value.trim();
+    localStorage.setItem('kitted_user', JSON.stringify(user));
+    localStorage.setItem('kitted_settings', JSON.stringify(settings));
     setTimeout(() => {
       btn.textContent = 'Save Changes';
       showToast('Settings saved.');
@@ -439,6 +447,13 @@ aside [data-tooltip]::after{
   }
 
   document.addEventListener('DOMContentLoaded', function() {
+    const user = JSON.parse(localStorage.getItem('kitted_user') || '{}');
+    const settings = JSON.parse(localStorage.getItem('kitted_settings') || '{}');
+    if (user.name) document.getElementById('profile-name').value = user.name;
+    if (user.email) document.getElementById('profile-email').value = user.email;
+    if (settings.org) document.getElementById('profile-org').value = settings.org;
+    if (settings.role) document.getElementById('profile-role').value = settings.role;
+
     const keys = JSON.parse(localStorage.getItem('kitted_api_keys') || '{}');
     ['dk','mouser','arrow','newark','lcsc'].forEach(function(dist) {
       if (!keys[dist]) return;
