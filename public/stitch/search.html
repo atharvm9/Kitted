@@ -503,11 +503,20 @@ aside [data-tooltip]::after{
         // No live price/stock API — they always point at the vendor's own search.
         const LINK_STORES = ['DK', 'MO', 'AR', 'NW', 'LC', 'AD', 'SF', 'NE', 'EB', 'PL', 'SE', 'AZ', 'RS'];
 
-        function renderStoreStrip(mpn) {
-          const q = encodeURIComponent(mpn);
+        // Marketplaces index by product name, not MPN — catalog MPNs (often
+        // pseudo, e.g. "EL-CB-001") return junk there. Search these by the
+        // human-readable name instead.
+        const NAME_SEARCH_STORES = new Set(['AZ', 'EB', 'NE', 'SF', 'AD', 'PL', 'SE']);
+
+        function storeQuery(sid, mpn, humanName) {
+          return NAME_SEARCH_STORES.has(sid) && humanName ? humanName : mpn;
+        }
+
+        function renderStoreStrip(mpn, humanName) {
           const tiles = LINK_STORES.map(sid => {
             const d = DIST_CONFIG[sid];
-            return `<a href="${d.url(mpn)}" target="_blank" rel="noopener" data-tooltip="Search ${d.name} for ${mpn}"
+            const q = storeQuery(sid, mpn, humanName);
+            return `<a href="${d.url(q)}" target="_blank" rel="noopener" data-tooltip="Search ${d.name} for ${q}"
               class="flex items-center gap-xs border border-outline-variant/60 px-sm py-xs rounded-full font-label-caps text-[10px] text-on-surface-variant hover:text-primary hover:border-primary transition-all">
               <span class="w-4 h-4 flex items-center justify-center font-bold text-[8px] text-white rounded-sm" style="background:${d.color}">${d.abbr}</span>
               ${d.name}
@@ -531,7 +540,7 @@ aside [data-tooltip]::after{
           if (ch) ch.style.transform = _specsOpen[uid] ? 'rotate(180deg)' : '';
         }
 
-        function renderDistRow(offer, mpn) {
+        function renderDistRow(offer, mpn, humanName) {
           const [sid, price, stock, eta, liveUrl, liveName] = offer;
           const d = DIST_CONFIG[sid] || {
             name: liveName || sid,
@@ -539,7 +548,7 @@ aside [data-tooltip]::after{
             abbr: (liveName || sid).replace(/[^A-Za-z0-9]/g, '').slice(0, 2).toUpperCase(),
             url: () => liveUrl || '#',
           };
-          const href = liveUrl || d.url(mpn);
+          const href = liveUrl || d.url(storeQuery(sid, mpn, humanName));
           return `<div class="bg-surface-container-lowest p-md flex items-center justify-between hover:bg-surface-container-low transition-colors rounded-sm border border-outline-variant/30">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-xl flex-1">
               <div class="flex items-center gap-md">
@@ -574,7 +583,12 @@ aside [data-tooltip]::after{
           const badge = entry.official
             ? `<span class="bg-primary text-on-primary font-label-caps text-[10px] px-sm py-0.5 rounded-full uppercase">Official</span>`
             : `<span class="bg-secondary-container text-on-secondary-container font-label-caps text-[10px] px-sm py-0.5 rounded-full uppercase">Compatible</span>`;
-          const rows = (entry.offers || []).map(o => renderDistRow(o, entry.mpn)).join('');
+          // Live distributor entries set brand to the distributor name and have
+          // no tags — for those the MPN is real, so keep searching by it.
+          const humanName = (entry.tags || []).length
+            ? [entry.brand, entry.family].filter(Boolean).join(' ')
+            : '';
+          const rows = (entry.offers || []).map(o => renderDistRow(o, entry.mpn, humanName)).join('');
           return `<div class="p-lg ${isLast ? '' : 'border-b border-outline-variant/30'}">
             <div class="flex flex-wrap items-center justify-between mb-lg">
               <div class="flex items-center gap-md">
@@ -604,7 +618,7 @@ aside [data-tooltip]::after{
                 <div class="flex flex-col"><span class="font-label-caps text-[10px] text-outline uppercase">Specs</span><span class="font-body-sm text-body-sm">${entry.specs}</span></div>
               </div>
             </div>
-            ${renderStoreStrip(entry.mpn)}
+            ${renderStoreStrip(entry.mpn, humanName)}
           </div>`;
         }
 
