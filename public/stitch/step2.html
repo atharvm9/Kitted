@@ -400,11 +400,7 @@ function iconForField(f) {
     : '<span class="material-symbols-outlined !text-[18px]" data-weight="fill">check_circle</span>';
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-  var csv = sessionStorage.getItem('kitted_bom_csv');
-  var filename = sessionStorage.getItem('kitted_bom_filename') || 'uploaded-file.csv';
-  if (!csv) return;
-
+function initWithCSV(csv, filename) {
   var lines = csv.split(/\r?\n/).filter(function(l) { return l.trim(); });
   var headers = parseCSVLine(lines[0]);
   var previewData = lines.slice(1, 4).map(parseCSVLine);
@@ -476,6 +472,25 @@ document.addEventListener('DOMContentLoaded', function() {
       window.location.href = 'step3.html';
     });
   }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  var csv = sessionStorage.getItem('kitted_bom_csv');
+  var filename = sessionStorage.getItem('kitted_bom_filename') || 'uploaded-file.csv';
+  if (csv) { initWithCSV(csv, filename); return; }
+  var importUrl = sessionStorage.getItem('kitted_import_url');
+  if (!importUrl) return;
+  var tbody = document.querySelector('table tbody');
+  if (tbody) tbody.innerHTML = '<tr><td colspan="3" class="px-md py-lg text-center text-on-surface-variant">Fetching CSV…</td></tr>';
+  fetch('/api/proxy-csv?url=' + encodeURIComponent(importUrl))
+    .then(function(res) { if (!res.ok) throw new Error('HTTP ' + res.status); return res.text(); })
+    .then(function(text) {
+      var urlFilename = importUrl.split('/').pop().split('?')[0] || 'imported.csv';
+      sessionStorage.setItem('kitted_bom_csv', text);
+      sessionStorage.setItem('kitted_bom_filename', urlFilename);
+      initWithCSV(text, urlFilename);
+    })
+    .catch(function(e) { showToast('Failed to fetch CSV: ' + e.message); });
 });
 </script>
 <div id="kitted-toast" style="position:fixed;bottom:24px;right:24px;z-index:9999;background:#2b3134;color:#ecf1f5;padding:10px 18px;border-radius:6px;font-size:13px;font-family:Geist,sans-serif;opacity:0;pointer-events:none;transition:opacity .25s;"></div>
