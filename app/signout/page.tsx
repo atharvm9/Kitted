@@ -1,12 +1,11 @@
 'use client'
 import { useEffect } from 'react'
-import { createClient } from '@/lib/supabase/client'
+import { supabase } from '@/lib/supabase/client'
 
 export default function SignOutPage() {
   useEffect(() => {
     async function doSignOut() {
       localStorage.removeItem('kitted_user')
-      const supabase = createClient()
       await supabase.auth.signOut()
       window.location.replace('/onboarding')
     }
